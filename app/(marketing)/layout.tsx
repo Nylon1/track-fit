@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-import SiteFooter from "@/components/site/SiteFooter";
+import MarketingFooter from "@/components/site/MarketingFooter";
 
 type MarketingLayoutProps = Readonly<{
   children: ReactNode;
@@ -12,7 +12,7 @@ export default function MarketingLayout({
   return (
     <>
       {children}
-      <SiteFooter />
+      <MarketingFooter />
     </>
   );
 }
