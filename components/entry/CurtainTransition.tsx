@@ -93,8 +93,8 @@ export default function CurtainTransition({
               <Image
                 src="/logos/trackfit-logo.svg"
                 alt="TrackFit"
-                width={420}
-                height={130}
+                width={300}
+                height={93}
                 priority
               />
             </motion.div>

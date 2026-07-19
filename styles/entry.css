@@ -719,3 +719,114 @@
 .tf-welcome-placeholder > p:last-child {
   color: var(--tf-text-secondary);
 }
+
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+@media (max-width: 640px) {
+  .tf-arrival {
+    width: 100%;
+    min-width: 0;
+    overflow-x: hidden;
+  }
+
+  .tf-arrival .tf-container {
+    width: 100%;
+    max-width: 100%;
+    padding-inline: 1.25rem;
+  }
+
+  .tf-arrival .tf-eyebrow {
+    max-width: 100%;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    font-size: 0.68rem;
+    line-height: 1.5;
+    letter-spacing: 0.16em;
+  }
+
+  .tf-arrival h1 {
+    max-width: 100%;
+    margin-top: 1.5rem;
+    font-size: clamp(3.6rem, 17vw, 5rem);
+    line-height: 0.9;
+    letter-spacing: -0.065em;
+    overflow-wrap: normal;
+  }
+
+  .tf-arrival h1 span {
+    display: block;
+    max-width: 100%;
+  }
+
+  .tf-arrival-copy > p,
+  .tf-arrival-hero-copy > p {
+    max-width: 100%;
+    font-size: 1rem;
+    line-height: 1.65;
+    overflow-wrap: anywhere;
+  }
+
+  .tf-postcode-card,
+  .tf-glass {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .tf-postcode-card input {
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+.tf-curtain-transition-logo {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  padding: 2rem;
+}
+
+.tf-transition-logo-frame {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  max-width: 100%;
+  margin-inline: auto;
+}
+
+.tf-transition-logo-image {
+  display: block;
+  width: min(300px, 66vw);
+  height: auto;
+  margin-inline: auto;
+}
+
+.tf-curtain-transition-logo p {
+  margin: 0.9rem 0 0;
+  text-align: center;
+}
+
+.tf-transition-track {
+  margin-inline: auto;
+}
+
+@media (max-width: 640px) {
+  .tf-transition-logo-image {
+    width: min(240px, 68vw);
+  }
+
+  .tf-curtain-transition-logo p {
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+  }
+}
