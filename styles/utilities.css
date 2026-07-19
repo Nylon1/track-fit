@@ -1,0 +1,48 @@
+.tf-container {
+  width: min(calc(100% - 4rem), var(--tf-container));
+  margin-inline: auto;
+}
+
+.tf-content {
+  width: min(calc(100% - 2rem), var(--tf-content));
+  margin-inline: auto;
+}
+
+.tf-reading-width {
+  width: min(100%, var(--tf-reading));
+}
+
+.tf-glass {
+  border: 1px solid var(--tf-border-soft);
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.085),
+      rgba(255, 255, 255, 0.025)
+    );
+  box-shadow: var(--tf-shadow-glass);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+}
+
+.tf-lime-text {
+  color: var(--tf-lime);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  padding: 0;
+  margin: -1px;
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .tf-container {
+    width: min(calc(100% - 2rem), var(--tf-container));
+  }
+}

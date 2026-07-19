@@ -1,0 +1,51 @@
+.tf-display {
+  margin: 0;
+  font-family: var(--tf-font-display);
+  font-size: clamp(3.7rem, 6.2vw, 6.9rem);
+  font-weight: 760;
+  line-height: 0.9;
+  letter-spacing: -0.055em;
+  text-wrap: balance;
+}
+
+.tf-heading {
+  margin: 0;
+  font-family: var(--tf-font-display);
+  font-size: clamp(2.25rem, 4vw, 4.25rem);
+  font-weight: 720;
+  line-height: 1;
+  letter-spacing: -0.045em;
+  text-wrap: balance;
+}
+
+.tf-subheading {
+  margin: 0;
+  font-family: var(--tf-font-display);
+  font-size: clamp(1.5rem, 2.8vw, 2.5rem);
+  font-weight: 650;
+  line-height: 1.12;
+  letter-spacing: -0.035em;
+}
+
+.tf-body-large {
+  font-size: clamp(1rem, 1.4vw, 1.3rem);
+  line-height: 1.7;
+  color: var(--tf-text-secondary);
+}
+
+.tf-eyebrow {
+  margin: 0;
+  color: var(--tf-lime);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+}
+
+.tf-tagline {
+  margin: 0;
+  color: var(--tf-text-secondary);
+  font-family: var(--tf-font-display);
+  font-size: 0.92rem;
+  letter-spacing: 0.03em;
+}

@@ -1,0 +1,74 @@
+:root {
+  /* Brand colours */
+  --tf-black: #070807;
+  --tf-black-soft: #0d100e;
+  --tf-graphite: #151916;
+
+  --tf-ivory: #f6f3eb;
+  --tf-white: #ffffff;
+
+  --tf-lime: #b8f23d;
+  --tf-lime-display: #a9df35;
+  --tf-lime-bright: #c9ff56;
+  --tf-lime-dark: #8fc925;
+
+  /* Text */
+  --tf-text-primary: #f8f6f0;
+  --tf-text-secondary: rgba(248, 246, 240, 0.72);
+  --tf-text-muted: rgba(248, 246, 240, 0.48);
+  --tf-text-dark: #10130f;
+
+  /* Surfaces */
+  --tf-surface-dark: rgba(12, 15, 13, 0.84);
+  --tf-surface-glass: rgba(255, 255, 255, 0.065);
+  --tf-surface-glass-hover: rgba(255, 255, 255, 0.09);
+  --tf-surface-light: #f6f3eb;
+
+  /* Borders */
+  --tf-border-soft: rgba(255, 255, 255, 0.1);
+  --tf-border-strong: rgba(255, 255, 255, 0.18);
+  --tf-border-dark: rgba(7, 8, 7, 0.14);
+
+  /* Semantic colours */
+  --tf-success: #65df8c;
+  --tf-warning: #f3c969;
+  --tf-error: #ff7770;
+  --tf-info: #8dbbff;
+
+  /* Fonts */
+  --tf-font-display: var(--font-manrope), Arial, sans-serif;
+  --tf-font-body: var(--font-inter), Arial, sans-serif;
+
+  /* Radius */
+  --tf-radius-sm: 0.75rem;
+  --tf-radius-md: 1.125rem;
+  --tf-radius-lg: 1.625rem;
+  --tf-radius-xl: 2.125rem;
+  --tf-radius-pill: 999px;
+
+  /* Shadows */
+  --tf-shadow-glass:
+    0 24px 70px rgba(0, 0, 0, 0.34),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+
+  --tf-shadow-lime:
+    0 14px 40px rgba(184, 242, 61, 0.2);
+
+  --tf-shadow-deep:
+    0 40px 100px rgba(0, 0, 0, 0.55);
+
+  /* Motion */
+  --tf-ease-standard: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --tf-ease-entry: cubic-bezier(0, 0, 0.2, 1);
+  --tf-ease-exit: cubic-bezier(0.4, 0, 1, 1);
+
+  --tf-duration-fast: 180ms;
+  --tf-duration-standard: 360ms;
+  --tf-duration-slow: 760ms;
+  --tf-duration-cinematic: 1200ms;
+
+  /* Layout */
+  --tf-container: 92rem;
+  --tf-content: 72rem;
+  --tf-reading: 46rem;
+}

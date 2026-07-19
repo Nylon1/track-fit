@@ -1,0 +1,721 @@
+.tf-arrival {
+  position: relative;
+  min-height: 100svh;
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--tf-black);
+  color: var(--tf-text-primary);
+}
+.tf-home-learn-more {
+  display: inline-flex;
+  min-height: 3.4rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+  margin-top: 0.85rem;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 1rem;
+  padding: 0 1.4rem;
+  color: #ffffff;
+  font-size: 0.85rem;
+  font-weight: 700;
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    background 180ms ease;
+}
+
+.tf-home-learn-more:hover {
+  transform: translateY(-2px);
+  border-color: rgba(184, 242, 61, 0.55);
+  background: rgba(184, 242, 61, 0.08);
+}
+.tf-entry-background,
+.tf-entry-poster,
+.tf-entry-video,
+.tf-entry-dark-grade,
+.tf-entry-light,
+.tf-entry-vignette,
+.tf-entry-grain {
+  position: absolute;
+  inset: 0;
+}
+
+.tf-entry-poster,
+.tf-entry-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.tf-entry-poster {
+  z-index: 0;
+  opacity: 1;
+  transition: opacity 1.2s var(--tf-ease-standard);
+}
+
+.tf-entry-poster.is-hidden {
+  opacity: 0;
+}
+
+.tf-entry-video {
+  z-index: 1;
+  min-width: 100%;
+  min-height: 100%;
+  transform: scale(1.04);
+  animation: tf-camera-drift 18s ease-in-out infinite;
+}
+
+.tf-entry-dark-grade {
+  z-index: 2;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(3, 5, 4, 0.94) 0%,
+      rgba(3, 5, 4, 0.78) 38%,
+      rgba(3, 5, 4, 0.28) 68%,
+      rgba(3, 5, 4, 0.5) 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.78) 0%,
+      transparent 30%,
+      rgba(0, 0, 0, 0.82) 100%
+    );
+}
+
+.tf-entry-light {
+  z-index: 3;
+  left: auto;
+  width: 58%;
+  background:
+    radial-gradient(
+      ellipse at 72% 28%,
+      rgba(255, 218, 164, 0.22),
+      transparent 65%
+    );
+  filter: blur(14px);
+  animation: tf-light-breathe 9s ease-in-out infinite;
+}
+
+.tf-entry-vignette {
+  z-index: 4;
+  box-shadow:
+    inset 0 0 190px 35px rgba(0, 0, 0, 0.62);
+}
+
+.tf-entry-grain {
+  z-index: 5;
+  pointer-events: none;
+  opacity: 0.04;
+  background-image: url("/images/textures/noise.png");
+  mix-blend-mode: soft-light;
+}
+
+.tf-arrival-header {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  min-height: 6.5rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tf-arrival-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.tf-arrival-mark {
+  display: grid;
+  width: 2.7rem;
+  height: 2.7rem;
+  place-items: center;
+  border: 1px solid rgba(184, 242, 61, 0.3);
+  border-radius: 0.8rem;
+  color: var(--tf-lime);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: -0.08em;
+}
+
+.tf-arrival-wordmark {
+  font-family: var(--tf-font-display);
+  font-size: 0.96rem;
+  font-weight: 750;
+  letter-spacing: 0.34em;
+}
+
+.tf-arrival-wordmark span {
+  color: var(--tf-lime);
+}
+
+.tf-arrival-header > p {
+  margin: 0;
+  color: var(--tf-text-muted);
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.tf-arrival-layout {
+  position: relative;
+  z-index: 10;
+  display: grid;
+  min-height: calc(100svh - 12rem);
+  grid-template-columns: minmax(0, 1.2fr) minmax(22rem, 0.65fr);
+  gap: clamp(3rem, 6vw, 7rem);
+  align-items: center;
+  padding-block: 2rem 7rem;
+}
+
+.tf-hero-content {
+  max-width: 54rem;
+  animation:
+    tf-rise 1.1s var(--tf-ease-standard) both;
+}
+
+.tf-hero-title {
+  margin: 1.7rem 0 0;
+  font-family: var(--tf-font-display);
+  font-size: clamp(3.8rem, 6.3vw, 6.9rem);
+  font-weight: 760;
+  line-height: 0.9;
+  letter-spacing: -0.058em;
+}
+
+.tf-hero-title span,
+.tf-hero-title strong {
+  display: block;
+}
+
+.tf-hero-title strong {
+  color: var(--tf-lime-display);
+  font-weight: inherit;
+}
+
+.tf-hero-description {
+  max-width: 43rem;
+  margin: 2rem 0 0;
+  color: var(--tf-text-secondary);
+  font-size: clamp(1rem, 1.35vw, 1.25rem);
+  line-height: 1.72;
+}
+
+.tf-postcode-card {
+  padding: 2rem;
+  border-radius: var(--tf-radius-xl);
+  animation:
+    tf-rise 1.1s var(--tf-ease-standard) 180ms both;
+}
+
+.tf-postcode-heading {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.7rem;
+}
+
+.tf-postcode-heading > span {
+  display: grid;
+  width: 2.3rem;
+  height: 2.3rem;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid rgba(184, 242, 61, 0.3);
+  border-radius: 50%;
+  color: var(--tf-lime);
+  font-size: 0.67rem;
+  font-weight: 800;
+}
+
+.tf-postcode-heading p {
+  margin: 0 0 0.25rem;
+  color: var(--tf-text-muted);
+  font-size: 0.82rem;
+}
+
+.tf-postcode-heading h2 {
+  margin: 0;
+  font-family: var(--tf-font-display);
+  font-size: clamp(1.55rem, 2vw, 2.05rem);
+  font-weight: 650;
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+}
+
+.tf-postcode-input {
+  display: flex;
+  min-height: 5rem;
+  align-items: center;
+  border: 1px solid var(--tf-border-soft);
+  border-radius: var(--tf-radius-lg);
+  background: rgba(2, 4, 3, 0.58);
+  color: var(--tf-text-muted);
+  transition:
+    border-color var(--tf-duration-standard)
+      var(--tf-ease-standard),
+    box-shadow var(--tf-duration-standard)
+      var(--tf-ease-standard);
+}
+
+.tf-postcode-input:focus-within {
+  border-color: rgba(184, 242, 61, 0.65);
+  box-shadow: 0 0 0 4px rgba(184, 242, 61, 0.09);
+  color: var(--tf-lime);
+}
+
+.tf-postcode-input svg {
+  margin-left: 1.25rem;
+  flex: 0 0 auto;
+}
+
+.tf-postcode-input input {
+  min-width: 0;
+  flex: 1;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  padding: 0 1.15rem;
+  color: var(--tf-text-primary);
+  font-size: 1.18rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.tf-postcode-input input::placeholder {
+  color: var(--tf-text-muted);
+}
+
+.tf-postcode-message {
+  min-height: 3.4rem;
+  padding: 0.85rem 0.15rem;
+  color: var(--tf-text-muted);
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+.tf-postcode-message .is-success {
+  color: var(--tf-success);
+}
+
+.tf-postcode-message .is-error {
+  color: var(--tf-error);
+}
+
+.tf-postcode-checking {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.tf-postcode-track {
+  position: relative;
+  height: 2px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.tf-postcode-track i {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3.5rem;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--tf-lime);
+  box-shadow: 0 0 13px rgba(184, 242, 61, 0.55);
+  animation:
+    tf-postcode-glider 1.25s
+    var(--tf-ease-standard) infinite;
+}
+
+.tf-postcode-button {
+  display: flex;
+  width: 100%;
+  min-height: 4.2rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  border: 0;
+  border-radius: var(--tf-radius-md);
+  background: var(--tf-lime);
+  color: var(--tf-text-dark);
+  font-weight: 750;
+  cursor: pointer;
+  box-shadow: var(--tf-shadow-lime);
+  transition:
+    transform var(--tf-duration-standard)
+      var(--tf-ease-standard),
+    background var(--tf-duration-standard)
+      var(--tf-ease-standard),
+    opacity var(--tf-duration-standard)
+      var(--tf-ease-standard);
+}
+
+.tf-postcode-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  background: var(--tf-lime-bright);
+}
+
+.tf-postcode-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.tf-arrival-footer {
+  position: absolute;
+  z-index: 10;
+  right: 0;
+  bottom: 1.7rem;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--tf-text-muted);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.tf-arrival-footer > div {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.tf-arrival-footer i {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--tf-lime);
+}
+
+.tf-arrival-footer p {
+  margin: 0;
+}
+
+@keyframes tf-postcode-glider {
+  from {
+    transform: translateX(-100%);
+  }
+
+  to {
+    transform: translateX(900%);
+  }
+}
+
+@media (max-width: 950px) {
+  .tf-arrival-layout {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    align-content: center;
+    padding-block: 3rem 8rem;
+  }
+
+  .tf-postcode-card {
+    max-width: 35rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .tf-arrival-header > p {
+    display: none;
+  }
+
+  .tf-arrival-layout {
+    min-height: calc(100svh - 7rem);
+    padding-block: 2rem 8rem;
+  }
+
+  .tf-hero-title {
+    font-size: clamp(3.1rem, 15vw, 4.8rem);
+  }
+
+  .tf-hero-description {
+    margin-top: 1.35rem;
+    font-size: 0.96rem;
+  }
+
+  .tf-postcode-card {
+    padding: 1.3rem;
+    border-radius: var(--tf-radius-lg);
+  }
+
+  .tf-arrival-footer {
+    bottom: 1rem;
+    justify-content: center;
+  }
+
+  .tf-arrival-footer > p {
+    display: none;
+  }
+
+  .tf-arrival-logo {
+  width: 190px;
+  height: auto;
+  object-fit: contain;
+}
+
+@media (max-width: 640px) {
+  .tf-arrival-logo {
+    width: 145px;
+  }
+}
+}
+
+.tf-arrival-header,
+.tf-arrival-layout,
+.tf-arrival-footer {
+  transition:
+    opacity 650ms var(--tf-ease-standard),
+    transform 850ms var(--tf-ease-standard),
+    filter 850ms var(--tf-ease-standard);
+}
+
+.tf-arrival.is-transitioning .tf-arrival-header,
+.tf-arrival.is-transitioning .tf-arrival-footer {
+  opacity: 0;
+}
+
+.tf-arrival.is-transitioning .tf-arrival-layout {
+  opacity: 0;
+  transform: scale(1.015);
+  filter: blur(8px);
+}
+
+.tf-arrival.is-transitioning .tf-entry-video,
+.tf-arrival.is-transitioning .tf-entry-poster {
+  transform: scale(1.1);
+  filter: brightness(1.18);
+  transition:
+    transform 1.5s var(--tf-ease-standard),
+    filter 1.2s var(--tf-ease-standard);
+}
+
+.tf-curtain-transition {
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  display: flex;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.tf-curtain-panel {
+  position: relative;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+  background:
+    linear-gradient(
+      90deg,
+      #050605 0%,
+      #181c19 50%,
+      #060706 100%
+    );
+  box-shadow:
+    inset 0 0 130px rgba(0, 0, 0, 0.78);
+}
+
+.tf-curtain-folds {
+  position: absolute;
+  inset: 0;
+}
+
+.tf-curtain-folds span {
+  position: absolute;
+  top: -5%;
+  bottom: -5%;
+  width: 23%;
+  border-radius: 48%;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.5),
+      rgba(255, 255, 255, 0.075),
+      rgba(0, 0, 0, 0.48)
+    );
+  filter: blur(0.5px);
+}
+
+.tf-curtain-folds span:nth-child(1) {
+  left: -7%;
+}
+
+.tf-curtain-folds span:nth-child(2) {
+  left: 12%;
+}
+
+.tf-curtain-folds span:nth-child(3) {
+  left: 31%;
+}
+
+.tf-curtain-folds span:nth-child(4) {
+  left: 50%;
+}
+
+.tf-curtain-folds span:nth-child(5) {
+  left: 69%;
+}
+
+.tf-curtain-folds span:nth-child(6) {
+  left: 88%;
+}
+
+.tf-curtain-panel-left {
+  border-right:
+    1px solid rgba(255, 255, 255, 0.025);
+}
+
+.tf-curtain-panel-right {
+  border-left:
+    1px solid rgba(255, 255, 255, 0.025);
+}
+
+.tf-curtain-panel-right .tf-curtain-folds {
+  transform: scaleX(-1);
+}
+
+.tf-curtain-transition-logo {
+  position: absolute;
+  z-index: 3;
+  top: 50%;
+  left: 50%;
+  display: flex;
+  width: min(82vw, 30rem);
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.tf-transition-logo-frame {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.tf-transition-logo-frame img {
+  display: block;
+  width: min(100%, 28rem);
+  height: auto;
+  margin-inline: auto;
+  object-fit: contain;
+}
+
+.tf-curtain-transition-logo p {
+  margin: 1.15rem 0 0;
+  color: var(--tf-text-secondary);
+  font-size: 0.7rem;
+  font-weight: 650;
+  letter-spacing: 0.2em;
+  line-height: 1.5;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.tf-transition-track {
+  position: relative;
+  width: min(100%, 16rem);
+  height: 2px;
+  margin-top: 1.5rem;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+  transform-origin: center;
+}
+
+@media (max-width: 640px) {
+  .tf-curtain-transition-logo {
+    width: min(84vw, 22rem);
+  }
+
+  .tf-transition-logo-frame img {
+    width: min(100%, 20rem);
+  }
+
+  .tf-curtain-transition-logo p {
+    font-size: 0.6rem;
+    letter-spacing: 0.16em;
+  }
+}
+
+.tf-curtain-transition-logo img {
+  width: 100%;
+  height: auto;
+}
+
+.tf-curtain-transition-logo p {
+  margin: 1rem 0 0;
+  color: var(--tf-text-secondary);
+  font-size: 0.7rem;
+  font-weight: 650;
+  letter-spacing: 0.18em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.tf-transition-track {
+  position: relative;
+  width: min(100%, 15rem);
+  height: 2px;
+  margin-top: 1.5rem;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.tf-transition-track span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3.5rem;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--tf-lime);
+  box-shadow:
+    0 0 16px rgba(184, 242, 61, 0.55);
+  animation:
+    tf-transition-glider 1.1s
+    var(--tf-ease-standard) infinite;
+}
+
+@keyframes tf-transition-glider {
+  from {
+    transform: translateX(-100%);
+  }
+
+  to {
+    transform: translateX(460%);
+  }
+}
+
+.tf-welcome-placeholder {
+  display: grid;
+  min-height: 100svh;
+  place-content: center;
+  padding: 2rem;
+  background: var(--tf-black);
+  text-align: center;
+}
+
+.tf-welcome-placeholder h1 {
+  margin: 1.5rem 0 0;
+  font-family: var(--tf-font-display);
+  font-size: clamp(2.8rem, 7vw, 6rem);
+  letter-spacing: -0.055em;
+}
+
+.tf-welcome-placeholder h1 span {
+  color: var(--tf-lime-display);
+}
+
+.tf-welcome-placeholder > p:last-child {
+  color: var(--tf-text-secondary);
+}

@@ -1,0 +1,95 @@
+@keyframes tf-fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes tf-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes tf-camera-drift {
+  0% {
+    transform: scale(1.03) translate3d(0, 0, 0);
+  }
+
+  50% {
+    transform: scale(1.055) translate3d(-0.4%, -0.25%, 0);
+  }
+
+  100% {
+    transform: scale(1.03) translate3d(0, 0, 0);
+  }
+}
+
+@keyframes tf-light-breathe {
+  0%,
+  100% {
+    opacity: 0.65;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.92;
+    transform: scale(1.04);
+  }
+}
+
+@keyframes tf-glider {
+  0% {
+    transform: translateX(0);
+  }
+
+  50% {
+    transform: translateX(4px);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.tf-fade-in {
+  animation: tf-fade-in var(--tf-duration-cinematic)
+    var(--tf-ease-entry) both;
+}
+
+.tf-rise {
+  animation: tf-rise var(--tf-duration-cinematic)
+    var(--tf-ease-standard) both;
+}
+
+.tf-camera-drift {
+  animation: tf-camera-drift 18s ease-in-out infinite;
+}
+
+.tf-light-breathe {
+  animation: tf-light-breathe 8s ease-in-out infinite;
+}
+
+.tf-glider-motion {
+  animation: tf-glider 1.4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
