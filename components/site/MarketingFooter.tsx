@@ -4,13 +4,21 @@ import { usePathname } from "next/navigation";
 
 import SiteFooter from "@/components/site/SiteFooter";
 
+const hiddenFooterRoutes = [
+  "/",
+  "/welcome",
+  "/quote",
+];
+
 export default function MarketingFooter() {
   const pathname = usePathname();
 
-  if (
-    pathname === "/quote" ||
-    pathname.startsWith("/quote/")
-  ) {
+  const shouldHideFooter =
+    hiddenFooterRoutes.includes(pathname) ||
+    pathname.startsWith("/quote/") ||
+    pathname.startsWith("/welcome/");
+
+  if (shouldHideFooter) {
     return null;
   }
 
