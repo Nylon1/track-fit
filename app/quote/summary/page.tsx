@@ -1,9 +1,19 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
+import {
+  AnimatePresence,
+  motion,
+  type Variants,
+} from "framer-motion";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import {
+  useEffect,
+  useMemo,
+  useState,
+  type CSSProperties,
+  type ReactNode,
+} from "react";
 
 import QuoteProgress from "@/components/quote/QuoteProgress";
 
@@ -39,6 +49,15 @@ type SubmissionResult = {
   photoLinksCreated?: number;
 };
 
+type SubmissionStatus =
+  | "idle"
+  | "validating"
+  | "securing"
+  | "sending"
+  | "reference"
+  | "success"
+  | "error";
+
 const propertyLabels: Record<string, string> = {
   house: "House",
   apartment: "Apartment",
@@ -56,18 +75,112 @@ const trackLabels: Record<string, string> = {
   unsure: "Advice required",
 };
 
+const cinematicEase = [
+  0.22,
+  1,
+  0.36,
+  1,
+] as const;
+
+const pageVariants: Variants = {
+  hidden: {
+    opacity: 0,
+  },
+
+  visible: {
+    opacity: 1,
+
+    transition: {
+      delayChildren: 0.08,
+      staggerChildren: 0.12,
+    },
+  },
+};
+
+const revealVariants: Variants = {
+  hidden: {
+    opacity: 0,
+    y: 30,
+    scale: 0.985,
+    filter: "blur(10px)",
+  },
+
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    filter: "blur(0px)",
+
+    transition: {
+      duration: 0.72,
+      ease: cinematicEase,
+    },
+  },
+};
+
+const rowContainerVariants: Variants = {
+  hidden: {},
+
+  visible: {
+    transition: {
+      delayChildren: 0.12,
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const rowVariants: Variants = {
+  hidden: {
+    opacity: 0,
+    x: -24,
+    scale: 0.98,
+    filter: "blur(7px)",
+  },
+
+  visible: {
+    opacity: 1,
+    x: 0,
+    scale: 1,
+    filter: "blur(0px)",
+
+    transition: {
+      duration: 0.55,
+      ease: cinematicEase,
+    },
+  },
+};
+
+const assuranceVariants: Variants = {
+  hidden: {
+    opacity: 0,
+    y: 14,
+  },
+
+  visible: {
+    opacity: 1,
+    y: 0,
+
+    transition: {
+      duration: 0.45,
+      ease: cinematicEase,
+    },
+  },
+};
+
 export default function SummaryPage() {
   const router = useRouter();
 
   const [summary, setSummary] =
     useState<QuoteSummary | null>(null);
 
-  const [status, setStatus] = useState<
-    "idle" | "submitting" | "success" | "error"
-  >("idle");
+  const [status, setStatus] =
+    useState<SubmissionStatus>("idle");
 
   const [submitError, setSubmitError] =
     useState("");
+
+  const [validationStep, setValidationStep] =
+    useState(0);
 
   useEffect(() => {
     const savedContact =
@@ -145,18 +258,53 @@ export default function SummaryPage() {
     });
   }, []);
 
+  useEffect(() => {
+    if (!summary) {
+      return;
+    }
+
+    const timers = [0, 1, 2, 3, 4].map(
+      (step) =>
+        window.setTimeout(() => {
+          setValidationStep(step + 1);
+        }, 850 + step * 390)
+    );
+
+    return () => {
+      timers.forEach((timer) =>
+        window.clearTimeout(timer)
+      );
+    };
+  }, [summary]);
+
+  const validationItems = useMemo(
+    () => [
+      "Location confirmed",
+      "Property details verified",
+      "Track configuration prepared",
+      summary?.photos.length
+        ? "Project photos secured"
+        : "Photo review marked optional",
+      "Contact details complete",
+    ],
+    [summary]
+  );
+
   async function submitRequest() {
     if (
       !summary ||
       !summary.contact ||
-      status === "submitting" ||
+      status === "validating" ||
+      status === "securing" ||
+      status === "sending" ||
+      status === "reference" ||
       status === "success"
     ) {
       return;
     }
 
-    setStatus("submitting");
     setSubmitError("");
+    setStatus("validating");
 
     const reference = createReference();
     const submittedAt = new Date().toISOString();
@@ -169,6 +317,12 @@ export default function SummaryPage() {
     };
 
     try {
+      await wait(500);
+      setStatus("securing");
+
+      await wait(550);
+      setStatus("sending");
+
       const response = await fetch(
         "/api/quote-enquiry",
         {
@@ -202,6 +356,8 @@ export default function SummaryPage() {
         );
       }
 
+      setStatus("reference");
+
       window.sessionStorage.setItem(
         "trackfit-reference",
         reference
@@ -217,9 +373,11 @@ export default function SummaryPage() {
         })
       );
 
+      await wait(650);
+
       setStatus("success");
 
-      await wait(850);
+      await wait(1050);
 
       router.push("/quote/complete");
     } catch (error) {
@@ -238,27 +396,157 @@ export default function SummaryPage() {
     }
   }
 
+  function saveAndExit() {
+    router.push("/services");
+  }
+
   if (!summary) {
     return (
-      <main className="tf-quote-page">
-        <div className="tf-summary-loading">
+      <main className="tf-quote-page tf-summary-loading-page">
+        <motion.div
+          className="tf-summary-loading"
+          initial={{
+            opacity: 0,
+            scale: 0.96,
+          }}
+          animate={{
+            opacity: 1,
+            scale: 1,
+          }}
+          transition={{
+            duration: 0.5,
+            ease: cinematicEase,
+          }}
+        >
+          <motion.span
+            className="tf-summary-loading-ring"
+            animate={{
+              rotate: 360,
+            }}
+            transition={{
+              duration: 0.9,
+              repeat: Infinity,
+              ease: "linear",
+            }}
+          />
+
           Preparing your request…
-        </div>
+        </motion.div>
       </main>
     );
   }
 
+  const isSubmitting = [
+    "validating",
+    "securing",
+    "sending",
+    "reference",
+  ].includes(status);
+
   return (
-    <main className="tf-quote-page">
+    <main className="tf-quote-page tf-quote-page-cinematic tf-summary-page-cinematic">
       <div
         className="tf-quote-atmosphere"
         aria-hidden="true"
       >
-        <div className="tf-quote-light" />
+        <motion.div
+          className="tf-quote-light"
+          animate={{
+            x: [-48, 58, -48],
+            y: [16, -30, 16],
+            scale: [1, 1.16, 1],
+            opacity: [0.5, 0.9, 0.5],
+          }}
+          transition={{
+            duration: 9,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+
+        <motion.div
+          className="tf-quote-light tf-quote-light-secondary"
+          animate={{
+            x: [40, -56, 40],
+            y: [-20, 36, -20],
+            scale: [1.08, 0.92, 1.08],
+            opacity: [0.2, 0.5, 0.2],
+          }}
+          transition={{
+            duration: 11,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+
+        <motion.div
+          className="tf-quote-impact-line"
+          initial={{
+            opacity: 0,
+            scaleX: 0,
+          }}
+          animate={{
+            opacity: [0, 1, 0.48],
+            scaleX: 1,
+          }}
+          transition={{
+            duration: 1.05,
+            delay: 0.42,
+            ease: cinematicEase,
+          }}
+        />
+
+        <motion.div
+          className="tf-summary-impact-ring"
+          initial={{
+            opacity: 0,
+            scale: 0.4,
+          }}
+          animate={{
+            opacity: [0, 0.65, 0],
+            scale: [0.4, 1.15, 1.55],
+          }}
+          transition={{
+            duration: 1.5,
+            delay: 0.55,
+            ease: cinematicEase,
+          }}
+        />
+
+        <div className="tf-quote-particles">
+          {Array.from({
+            length: 16,
+          }).map((_, index) => (
+            <span
+              key={index}
+              style={
+                {
+                  "--quote-particle":
+                    index,
+                } as CSSProperties
+              }
+            />
+          ))}
+        </div>
+
         <div className="tf-quote-grain" />
       </div>
 
-      <header className="tf-quote-header tf-container">
+      <motion.header
+        className="tf-quote-header tf-container"
+        initial={{
+          opacity: 0,
+          y: -18,
+        }}
+        animate={{
+          opacity: 1,
+          y: 0,
+        }}
+        transition={{
+          duration: 0.65,
+          ease: cinematicEase,
+        }}
+      >
         <button
           type="button"
           className="tf-quote-logo-button"
@@ -275,76 +563,132 @@ export default function SummaryPage() {
           />
         </button>
 
-        <button
+        <motion.button
           type="button"
           className="tf-quote-exit"
-          onClick={() => router.push("/")}
+          onClick={saveAndExit}
+          whileHover={{
+            y: -2,
+          }}
+          whileTap={{
+            scale: 0.97,
+          }}
         >
           Save and exit
-        </button>
-      </header>
+        </motion.button>
+      </motion.header>
 
-      <section className="tf-quote-shell tf-container">
-        <QuoteProgress
-          currentStep={6}
-          totalSteps={7}
-          label="Review"
-        />
+      <motion.section
+        className="tf-quote-shell tf-container"
+        variants={pageVariants}
+        initial="hidden"
+        animate="visible"
+      >
+        <motion.div variants={revealVariants}>
+          <QuoteProgress
+            currentStep={6}
+            totalSteps={7}
+            label="Review"
+          />
+        </motion.div>
 
         <motion.div
           className="tf-quote-heading"
-          initial={{
-            opacity: 0,
-            y: 24,
-          }}
-          animate={{
-            opacity: 1,
-            y: 0,
-          }}
-          transition={{
-            duration: 0.8,
-            ease: [0.22, 1, 0.36, 1],
-          }}
+          variants={revealVariants}
         >
-          <p className="tf-eyebrow">
-            Final review
-          </p>
-
-          <h1>
-            Review your installation request.
-          </h1>
-
-          <p>
-            Check the details below before sending
-            your request to the TrackFit team.
-          </p>
-        </motion.div>
-
-        <div className="tf-summary-layout">
-          <motion.section
-            className="tf-summary-card tf-glass"
+          <motion.p
+            className="tf-eyebrow"
             initial={{
               opacity: 0,
-              x: -24,
+              letterSpacing: "0.46em",
             }}
             animate={{
               opacity: 1,
-              x: 0,
+              letterSpacing: "0.24em",
             }}
             transition={{
-              duration: 0.75,
-              delay: 0.1,
-              ease: [0.22, 1, 0.36, 1],
+              duration: 0.8,
+              delay: 0.18,
+              ease: cinematicEase,
             }}
           >
-            <div className="tf-summary-card-heading">
+            Final review
+          </motion.p>
+
+          <h1>
+            Your installation request is{" "}
+            <span className="tf-quote-heading-accent">
+              ready.
+            </span>
+          </h1>
+
+          <p>
+            Review the project information below,
+            then submit it securely to the TrackFit
+            installation team.
+          </p>
+
+          <motion.div
+            className="tf-quote-heading-track"
+            initial={{
+              opacity: 0,
+              scaleX: 0,
+            }}
+            animate={{
+              opacity: 1,
+              scaleX: 1,
+            }}
+            transition={{
+              duration: 0.85,
+              delay: 0.55,
+              ease: cinematicEase,
+            }}
+            aria-hidden="true"
+          >
+            <span />
+            <i />
+            <i />
+            <i />
+            <i />
+            <i />
+          </motion.div>
+        </motion.div>
+
+        <motion.div
+          className="tf-summary-layout"
+          variants={revealVariants}
+        >
+          <motion.section
+            className="tf-summary-card tf-glass tf-summary-card-cinematic"
+            variants={rowContainerVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            <motion.div
+              className="tf-summary-card-heading"
+              variants={rowVariants}
+            >
               <div>
                 <p>Installation request</p>
                 <h2>Project summary</h2>
               </div>
 
-              <span>Ready</span>
-            </div>
+              <motion.span
+                animate={{
+                  boxShadow: [
+                    "0 0 0 rgba(184,242,61,0)",
+                    "0 0 24px rgba(184,242,61,0.24)",
+                    "0 0 0 rgba(184,242,61,0)",
+                  ],
+                }}
+                transition={{
+                  duration: 2.2,
+                  repeat: Infinity,
+                }}
+              >
+                Ready
+              </motion.span>
+            </motion.div>
 
             <SummaryRow
               label="Postcode"
@@ -394,40 +738,65 @@ export default function SummaryPage() {
               }
             />
 
-            {summary.photos.length > 0 && (
-              <div className="tf-summary-photo-files">
-                <p>Uploaded files</p>
+            <AnimatePresence>
+              {summary.photos.length > 0 && (
+                <motion.div
+                  className="tf-summary-photo-files"
+                  variants={rowVariants}
+                  initial="hidden"
+                  animate="visible"
+                  exit="hidden"
+                >
+                  <p>Uploaded files</p>
 
-                <ul>
-                  {summary.photos.map(
-                    (photo, index) => (
-                      <li key={photo.path}>
-                        <span>
-                          {String(index + 1).padStart(
-                            2,
-                            "0"
-                          )}
-                        </span>
-
-                        <div>
-                          <strong>
-                            {photo.fileName}
-                          </strong>
-
-                          <small>
-                            {formatFileSize(
-                              photo.size
+                  <motion.ul
+                    variants={rowContainerVariants}
+                    initial="hidden"
+                    animate="visible"
+                  >
+                    {summary.photos.map(
+                      (photo, index) => (
+                        <motion.li
+                          key={photo.path}
+                          variants={rowVariants}
+                          whileHover={{
+                            x: 4,
+                          }}
+                        >
+                          <span>
+                            {String(
+                              index + 1
+                            ).padStart(
+                              2,
+                              "0"
                             )}
-                          </small>
-                        </div>
-                      </li>
-                    )
-                  )}
-                </ul>
-              </div>
-            )}
+                          </span>
 
-            <div className="tf-summary-contact">
+                          <div>
+                            <strong>
+                              {photo.fileName}
+                            </strong>
+
+                            <small>
+                              {formatFileSize(
+                                photo.size
+                              )}
+                            </small>
+                          </div>
+
+                          <i>Secured</i>
+                        </motion.li>
+                      )
+                    )}
+                  </motion.ul>
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+            <motion.div
+              className="tf-summary-contact"
+              variants={rowVariants}
+            >
               <div className="tf-summary-contact-heading">
                 <div>
                   <p>Contact details</p>
@@ -438,20 +807,27 @@ export default function SummaryPage() {
                   </h3>
                 </div>
 
-                <button
+                <motion.button
                   type="button"
                   onClick={() =>
-                    router.push("/quote/contact")
+                    router.push(
+                      "/quote/contact"
+                    )
                   }
+                  whileHover={{
+                    y: -2,
+                  }}
+                  whileTap={{
+                    scale: 0.96,
+                  }}
                 >
                   Edit
-                </button>
+                </motion.button>
               </div>
 
               <dl>
                 <div>
                   <dt>Email</dt>
-
                   <dd>
                     {summary.contact?.email ||
                       "Not provided"}
@@ -460,7 +836,6 @@ export default function SummaryPage() {
 
                 <div>
                   <dt>Telephone</dt>
-
                   <dd>
                     {summary.contact?.phone ||
                       "Not provided"}
@@ -469,7 +844,6 @@ export default function SummaryPage() {
 
                 <div>
                   <dt>Preferred contact</dt>
-
                   <dd>
                     {formatPreferredContact(
                       summary.contact
@@ -488,36 +862,95 @@ export default function SummaryPage() {
                   </span>
                 </div>
               )}
-            </div>
+            </motion.div>
           </motion.section>
 
           <motion.aside
-            className="tf-summary-confirmation"
-            initial={{
-              opacity: 0,
-              x: 24,
-            }}
-            animate={{
-              opacity: 1,
-              x: 0,
-            }}
-            transition={{
-              duration: 0.75,
-              delay: 0.18,
-              ease: [0.22, 1, 0.36, 1],
-            }}
+            className="tf-summary-confirmation tf-summary-analysis-panel"
+            variants={revealVariants}
           >
             <p className="tf-eyebrow">
-              Your request is ready
+              Project analysis
             </p>
 
-            <h2>Everything looks good.</h2>
+            <h2>
+              Everything is ready.
+            </h2>
 
             <p>
-              Our installation specialists will
-              review your project and contact you to
-              discuss the next steps.
+              TrackFit has prepared your project
+              information for specialist review.
             </p>
+
+            <div className="tf-summary-validation">
+              {validationItems.map(
+                (item, index) => {
+                  const isComplete =
+                    validationStep >
+                    index;
+
+                  return (
+                    <motion.div
+                      key={item}
+                      className={
+                        isComplete
+                          ? "is-complete"
+                          : ""
+                      }
+                      initial={{
+                        opacity: 0,
+                        x: 18,
+                      }}
+                      animate={{
+                        opacity: 1,
+                        x: 0,
+                      }}
+                      transition={{
+                        duration: 0.45,
+                        delay:
+                          0.65 +
+                          index * 0.12,
+                        ease:
+                          cinematicEase,
+                      }}
+                    >
+                      <motion.span
+                        animate={
+                          isComplete
+                            ? {
+                                scale: [
+                                  0.8,
+                                  1.18,
+                                  1,
+                                ],
+                                rotate: [
+                                  -12,
+                                  5,
+                                  0,
+                                ],
+                              }
+                            : {
+                                scale: 1,
+                                rotate: 0,
+                              }
+                        }
+                        transition={{
+                          duration: 0.4,
+                          ease:
+                            cinematicEase,
+                        }}
+                      >
+                        {isComplete
+                          ? "✓"
+                          : "·"}
+                      </motion.span>
+
+                      <p>{item}</p>
+                    </motion.div>
+                  );
+                }
+              )}
+            </div>
 
             {!summary.contact && (
               <p
@@ -530,7 +963,7 @@ export default function SummaryPage() {
               </p>
             )}
 
-            <button
+            <motion.button
               type="button"
               className={[
                 "tf-summary-submit",
@@ -540,55 +973,118 @@ export default function SummaryPage() {
                 status === "error"
                   ? "has-error"
                   : "",
+                isSubmitting
+                  ? "is-submitting"
+                  : "",
               ]
                 .filter(Boolean)
                 .join(" ")}
               disabled={
                 !summary.contact ||
-                status === "submitting" ||
+                isSubmitting ||
                 status === "success"
               }
               onClick={submitRequest}
+              whileHover={
+                status === "idle" ||
+                status === "error"
+                  ? {
+                      y: -4,
+                      scale: 1.012,
+                    }
+                  : undefined
+              }
+              whileTap={
+                status === "idle" ||
+                status === "error"
+                  ? {
+                      scale: 0.98,
+                    }
+                  : undefined
+              }
+              animate={
+                status === "idle" ||
+                status === "error"
+                  ? {
+                      boxShadow: [
+                        "0 0 0 rgba(184,242,61,0)",
+                        "0 0 48px rgba(184,242,61,0.3)",
+                        "0 0 24px rgba(184,242,61,0.14)",
+                      ],
+                    }
+                  : undefined
+              }
+              transition={{
+                boxShadow: {
+                  duration: 1.4,
+                  delay: 1.2,
+                },
+              }}
             >
-              {status === "idle" && (
-                <>
-                  Submit installation request
-                  <ArrowIcon />
-                </>
+              <AnimatePresence mode="wait">
+                <motion.span
+                  key={status}
+                  className="tf-summary-submit-content"
+                  initial={{
+                    opacity: 0,
+                    y: 8,
+                    filter: "blur(5px)",
+                  }}
+                  animate={{
+                    opacity: 1,
+                    y: 0,
+                    filter: "blur(0px)",
+                  }}
+                  exit={{
+                    opacity: 0,
+                    y: -8,
+                    filter: "blur(5px)",
+                  }}
+                  transition={{
+                    duration: 0.25,
+                  }}
+                >
+                  {getSubmissionContent(status)}
+                </motion.span>
+              </AnimatePresence>
+
+              <span
+                className="tf-summary-submit-shine"
+                aria-hidden="true"
+              />
+            </motion.button>
+
+            <AnimatePresence>
+              {submitError && (
+                <motion.p
+                  className="tf-summary-submit-error"
+                  role="alert"
+                  initial={{
+                    opacity: 0,
+                    y: -8,
+                    filter: "blur(5px)",
+                  }}
+                  animate={{
+                    opacity: 1,
+                    y: 0,
+                    filter: "blur(0px)",
+                  }}
+                  exit={{
+                    opacity: 0,
+                    y: -6,
+                  }}
+                >
+                  {submitError}
+                </motion.p>
               )}
+            </AnimatePresence>
 
-              {status === "submitting" && (
-                <>
-                  <span className="tf-submit-loader" />
-                  Sending securely
-                </>
-              )}
-
-              {status === "success" && (
-                <>
-                  <CheckIcon />
-                  Request received
-                </>
-              )}
-
-              {status === "error" && (
-                <>
-                  Try sending again
-                  <ArrowIcon />
-                </>
-              )}
-            </button>
-
-            {submitError && (
-              <p
-                className="tf-summary-submit-error"
-                role="alert"
-              >
-                {submitError}
-              </p>
-            )}
-
-            <div className="tf-summary-assurances">
+            <motion.div
+              className="tf-summary-assurances"
+              variants={rowContainerVariants}
+              initial="hidden"
+              animate="visible"
+            >
               <AssuranceItem>
                 No payment required
               </AssuranceItem>
@@ -604,22 +1100,88 @@ export default function SummaryPage() {
               <AssuranceItem>
                 Private photo links
               </AssuranceItem>
-            </div>
+            </motion.div>
           </motion.aside>
-        </div>
+        </motion.div>
 
-        <div className="tf-summary-back">
-          <button
+        <motion.div
+          className="tf-summary-back"
+          variants={revealVariants}
+        >
+          <motion.button
             type="button"
             className="tf-quote-back"
             onClick={() =>
               router.push("/quote/contact")
             }
+            whileHover={{
+              x: -3,
+            }}
+            whileTap={{
+              scale: 0.97,
+            }}
           >
             ← Back to contact details
-          </button>
-        </div>
-      </section>
+          </motion.button>
+        </motion.div>
+      </motion.section>
+
+      <AnimatePresence>
+        {status === "success" && (
+          <motion.div
+            className="tf-summary-success-transition"
+            initial={{
+              opacity: 0,
+            }}
+            animate={{
+              opacity: 1,
+            }}
+            exit={{
+              opacity: 0,
+            }}
+          >
+            <motion.div
+              className="tf-summary-success-line"
+              initial={{
+                scaleX: 0,
+              }}
+              animate={{
+                scaleX: 1,
+              }}
+              transition={{
+                duration: 0.7,
+                ease: cinematicEase,
+              }}
+            />
+
+            <motion.div
+              initial={{
+                opacity: 0,
+                y: 18,
+                scale: 0.96,
+              }}
+              animate={{
+                opacity: 1,
+                y: 0,
+                scale: 1,
+              }}
+              transition={{
+                duration: 0.55,
+                delay: 0.2,
+                ease: cinematicEase,
+              }}
+            >
+              <span>✓</span>
+              <strong>
+                Installation request secured
+              </strong>
+              <p>
+                Preparing your project reference…
+              </p>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </main>
   );
 }
@@ -636,36 +1198,163 @@ function SummaryRow({
   onEdit,
 }: SummaryRowProps) {
   return (
-    <div className="tf-summary-row">
-      <span className="tf-summary-row-check">
+    <motion.div
+      className="tf-summary-row"
+      variants={rowVariants}
+      whileHover={{
+        x: 4,
+      }}
+    >
+      <motion.span
+        className="tf-summary-row-check"
+        initial={{
+          scale: 0,
+          rotate: -18,
+        }}
+        animate={{
+          scale: 1,
+          rotate: 0,
+        }}
+        transition={{
+          type: "spring",
+          stiffness: 360,
+          damping: 20,
+        }}
+      >
         ✓
-      </span>
+      </motion.span>
 
       <div>
         <p>{label}</p>
         <strong>{value}</strong>
       </div>
 
-      <button
+      <motion.button
         type="button"
         onClick={onEdit}
+        whileHover={{
+          y: -2,
+        }}
+        whileTap={{
+          scale: 0.96,
+        }}
       >
         Edit
-      </button>
-    </div>
+      </motion.button>
+    </motion.div>
   );
 }
 
 function AssuranceItem({
   children,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
   return (
-    <div className="tf-assurance-item">
-      <span>✓</span>
+    <motion.div
+      className="tf-assurance-item"
+      variants={assuranceVariants}
+    >
+      <motion.span
+        initial={{
+          scale: 0,
+        }}
+        animate={{
+          scale: 1,
+        }}
+        transition={{
+          type: "spring",
+          stiffness: 350,
+          damping: 19,
+        }}
+      >
+        ✓
+      </motion.span>
+
       <p>{children}</p>
-    </div>
+    </motion.div>
+  );
+}
+
+function getSubmissionContent(
+  status: SubmissionStatus
+) {
+  if (status === "validating") {
+    return (
+      <>
+        <SubmitSpinner />
+        Validating project…
+      </>
+    );
+  }
+
+  if (status === "securing") {
+    return (
+      <>
+        <SubmitSpinner />
+        Securing project photos…
+      </>
+    );
+  }
+
+  if (status === "sending") {
+    return (
+      <>
+        <SubmitSpinner />
+        Sending to TrackFit…
+      </>
+    );
+  }
+
+  if (status === "reference") {
+    return (
+      <>
+        <SubmitSpinner />
+        Creating project reference…
+      </>
+    );
+  }
+
+  if (status === "success") {
+    return (
+      <>
+        <CheckIcon />
+        Request received
+      </>
+    );
+  }
+
+  if (status === "error") {
+    return (
+      <>
+        Try sending again
+        <ArrowIcon />
+      </>
+    );
+  }
+
+  return (
+    <>
+      Submit installation request
+      <ArrowIcon />
+    </>
+  );
+}
+
+function SubmitSpinner() {
+  return (
+    <motion.span
+      className="tf-submit-loader"
+      animate={{
+        rotate: 360,
+      }}
+      transition={{
+        duration: 0.8,
+        repeat: Infinity,
+        ease: "linear",
+      }}
+      aria-hidden="true"
+    />
   );
 }
 
