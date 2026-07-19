@@ -50,11 +50,8 @@ const services = [
     description:
       "Measured and shaped systems designed around angled, curved or unusual window layouts.",
   },
-  {
-    title: "Motorised tracks",
-    description:
-      "Installation planning for powered curtain systems, access, controls and electrical requirements.",
-  },
+  
+  
   {
     title: "Commercial systems",
     description:

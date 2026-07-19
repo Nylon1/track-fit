@@ -27,7 +27,7 @@ export const siteConfig = {
     "curtain track fitting",
     "wave curtain track installation",
     "bay window curtain tracks",
-    "motorised curtain tracks",
+   
     "commercial curtain track installation",
     "UK curtain track installers",
   ],

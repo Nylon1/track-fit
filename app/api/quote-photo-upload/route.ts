@@ -16,32 +16,65 @@ type UploadRequest = {
   contentType?: string;
 };
 
-function safeFileName(fileName: string) {
+function cleanEnvironmentValue(
+  value: string | undefined
+) {
+  return value
+    ?.trim()
+    .replace(/^["']|["']$/g, "")
+    .replace(/\/+$/, "");
+}
+
+function createSafeFileName(fileName: string) {
   const extension =
     fileName.split(".").pop()?.toLowerCase() || "jpg";
 
-  const safeExtension = ["jpg", "jpeg", "png", "webp"].includes(
-    extension
-  )
+  const safeExtension = [
+    "jpg",
+    "jpeg",
+    "png",
+    "webp",
+  ].includes(extension)
     ? extension
     : "jpg";
 
   return `${crypto.randomUUID()}.${safeExtension}`;
 }
 
+function isValidSupabaseUrl(value: string) {
+  try {
+    const url = new URL(value);
+
+    return (
+      url.protocol === "https:" &&
+      url.hostname.endsWith(".supabase.co")
+    );
+  } catch {
+    return false;
+  }
+}
+
 export async function POST(request: Request) {
   try {
-    const supabaseUrl =
-      process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const supabaseUrl = cleanEnvironmentValue(
+      process.env.NEXT_PUBLIC_SUPABASE_URL
+    );
 
     const serviceRoleKey =
-      process.env.SUPABASE_SERVICE_ROLE_KEY;
+      process.env.SUPABASE_SERVICE_ROLE_KEY
+        ?.trim()
+        .replace(/^["']|["']$/g, "");
 
     if (!supabaseUrl || !serviceRoleKey) {
+      console.error(
+        "Supabase photo storage credentials are missing."
+      );
+
       return NextResponse.json(
         {
           success: false,
-          error: "Photo storage is not configured.",
+          error:
+            "Photo storage is not configured.",
         },
         {
           status: 500,
@@ -49,7 +82,26 @@ export async function POST(request: Request) {
       );
     }
 
-    const body = (await request.json()) as UploadRequest;
+    if (!isValidSupabaseUrl(supabaseUrl)) {
+      console.error(
+        "Invalid NEXT_PUBLIC_SUPABASE_URL:",
+        supabaseUrl
+      );
+
+      return NextResponse.json(
+        {
+          success: false,
+          error:
+            "The Supabase project URL is invalid.",
+        },
+        {
+          status: 500,
+        }
+      );
+    }
+
+    const body =
+      (await request.json()) as UploadRequest;
 
     if (
       !body.fileName ||
@@ -59,7 +111,8 @@ export async function POST(request: Request) {
       return NextResponse.json(
         {
           success: false,
-          error: "Unsupported image file.",
+          error:
+            "Only JPG, PNG and WebP images are supported.",
         },
         {
           status: 400,
@@ -79,26 +132,37 @@ export async function POST(request: Request) {
       }
     );
 
-    const date = new Date();
+    const now = new Date();
+
     const folder = [
-      date.getUTCFullYear(),
-      String(date.getUTCMonth() + 1).padStart(2, "0"),
-      String(date.getUTCDate()).padStart(2, "0"),
+      now.getUTCFullYear(),
+      String(now.getUTCMonth() + 1).padStart(
+        2,
+        "0"
+      ),
+      String(now.getUTCDate()).padStart(
+        2,
+        "0"
+      ),
       crypto.randomUUID(),
     ].join("/");
 
-    const path = `${folder}/${safeFileName(
+    const path = `${folder}/${createSafeFileName(
       body.fileName
     )}`;
 
-    const { data, error } = await supabase.storage
-      .from(bucketName)
-      .createSignedUploadUrl(path);
+    const { data, error } =
+      await supabase.storage
+        .from(bucketName)
+        .createSignedUploadUrl(path);
 
-    if (error || !data) {
+    if (error || !data?.token) {
       console.error(
         "Unable to create signed upload URL:",
-        error
+        {
+          path,
+          error,
+        }
       );
 
       return NextResponse.json(

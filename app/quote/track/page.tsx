@@ -14,7 +14,7 @@ type TrackType =
   | "wave"
   | "bay"
   | "curved"
-  | "motorised"
+   
   | "commercial"
   | "unsure";
 
@@ -54,12 +54,7 @@ const options: Array<{
     description: "For rounded, arched or shaped installations.",
     icon: <CurvedTrackIcon />,
   },
-  {
-    id: "motorised",
-    title: "Motorised track",
-    description: "Automated curtain operation with powered movement.",
-    icon: <MotorisedTrackIcon />,
-  },
+ 
   {
     id: "commercial",
     title: "Commercial system",
