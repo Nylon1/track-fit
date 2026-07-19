@@ -14,7 +14,7 @@ import {
   getSupabaseBrowserClient,
 } from "@/lib/supabase/client";
 
-const supabase = getSupabaseBrowserClient();
+
 
 type StoredPhoto = {
   path: string;
@@ -114,7 +114,7 @@ export default function PhotosPage() {
               `Unable to prepare ${photo.file.name} for upload.`
           );
         }
-
+const supabase = getSupabaseBrowserClient();
         const { error } = await supabase.storage
           .from(bucketName)
           .uploadToSignedUrl(
