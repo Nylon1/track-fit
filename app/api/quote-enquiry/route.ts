@@ -369,7 +369,7 @@ export async function POST(request: Request) {
     const { data, error } =
       await resend.emails.send({
         from:
-          "TrackFit Enquiries <onboarding@resend.com>",
+          "TrackFit Enquiries <onboarding@resend.dev>",
 
         to: [
           "hmaliks924@gmail.com",
