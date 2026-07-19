@@ -53,65 +53,7 @@ export default function CurtainTransition({
             <CurtainFolds />
           </motion.div>
 
-          <motion.div
-            className="tf-curtain-transition-logo"
-            initial={{
-              opacity: 0,
-              scale: 0.82,
-              y: 24,
-              filter: "blur(10px)",
-            }}
-            animate={{
-              opacity: 1,
-              scale: 1,
-              y: 0,
-              filter: "blur(0px)",
-            }}
-            transition={{
-              duration: 0.9,
-              delay: 0.65,
-              ease: curtainEase,
-            }}
-          >
-           
-
-            <motion.p
-              initial={{
-                opacity: 0,
-                y: 10,
-              }}
-              animate={{
-                opacity: 1,
-                y: 0,
-              }}
-              transition={{
-                duration: 0.55,
-                delay: 1.05,
-                ease: curtainEase,
-              }}
-            >
-              Where precision meets design.
-            </motion.p>
-
-            <motion.div
-              className="tf-transition-track"
-              initial={{
-                opacity: 0,
-                scaleX: 0.35,
-              }}
-              animate={{
-                opacity: 1,
-                scaleX: 1,
-              }}
-              transition={{
-                duration: 0.6,
-                delay: 1.2,
-                ease: curtainEase,
-              }}
-            >
-              <span />
-            </motion.div>
-          </motion.div>
+         
         </motion.div>
       )}
     </AnimatePresence>
