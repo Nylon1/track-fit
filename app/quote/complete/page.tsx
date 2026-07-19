@@ -135,9 +135,9 @@ export default function CompletePage() {
         <button
           type="button"
           className="tf-complete-home"
-          onClick={() => router.push("/")}
+          onClick={() => router.push("/services")}
         >
-          Return to TrackFit
+          Explore Trackfit Services
 
           <ArrowIcon />
         </button>
