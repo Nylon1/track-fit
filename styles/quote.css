@@ -1830,3 +1830,889 @@ cursor:not-allowed;
 .tf-summary-submit.has-error {
   border-color: rgba(255, 180, 180, 0.45);
 }
+
+.tf-quote-page-cinematic {
+  position: relative;
+  min-height: 100svh;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.tf-quote-page-cinematic .tf-quote-atmosphere {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.tf-quote-light-secondary {
+  top: auto;
+  right: -10%;
+  bottom: -20%;
+  left: auto;
+  width: min(38rem, 70vw);
+  height: min(38rem, 70vw);
+  opacity: 0.35;
+  background:
+    radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0.08),
+      rgba(184, 242, 61, 0.035) 42%,
+      transparent 72%
+    );
+  filter: blur(30px);
+}
+
+.tf-quote-impact-line {
+  position: absolute;
+  top: 39%;
+  left: 50%;
+  width: min(70rem, 88vw);
+  height: 2px;
+  transform: translateX(-50%);
+  transform-origin: center;
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.22),
+      var(--tf-lime),
+      rgba(255, 255, 255, 0.22),
+      transparent
+    );
+  box-shadow:
+    0 0 1.5rem rgba(184, 242, 61, 0.45),
+    0 0 4rem rgba(184, 242, 61, 0.12);
+}
+
+.tf-quote-particles {
+  position: absolute;
+  inset: 0;
+}
+
+.tf-quote-particles span {
+  --angle:
+    calc(
+      var(--quote-particle) *
+      25.7deg
+    );
+
+  position: absolute;
+  top: 43%;
+  left: 50%;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: rgba(213, 255, 122, 0.72);
+  box-shadow:
+    0 0 0.8rem rgba(184, 242, 61, 0.8);
+  transform:
+    rotate(var(--angle))
+    translateX(
+      calc(
+        11rem +
+        var(--quote-particle) *
+        1.7rem
+      )
+    );
+  animation:
+    tf-quote-particle-float
+    calc(
+      5s +
+      var(--quote-particle) *
+      0.25s
+    )
+    ease-in-out infinite alternate;
+}
+
+.tf-quote-logo-button {
+  display: inline-flex;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.tf-quote-heading-accent {
+  color: var(--tf-lime);
+  text-shadow:
+    0 0 2rem rgba(184, 242, 61, 0.2);
+}
+
+.tf-quote-heading-track {
+  position: relative;
+  display: flex;
+  width: min(22rem, 68vw);
+  height: 1.8rem;
+  align-items: flex-start;
+  justify-content: space-around;
+  margin-top: 1.6rem;
+  transform-origin: left center;
+}
+
+.tf-quote-heading-track::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 2px;
+  border-radius: 999px;
+  background:
+    linear-gradient(
+      90deg,
+      var(--tf-lime),
+      rgba(255, 255, 255, 0.55),
+      transparent
+    );
+  box-shadow:
+    0 0 1rem rgba(184, 242, 61, 0.45);
+}
+
+.tf-quote-heading-track > span {
+  position: absolute;
+  top: -4px;
+  left: 0;
+  width: 0.65rem;
+  height: 0.65rem;
+  border-radius: 50%;
+  background: var(--tf-lime);
+  box-shadow:
+    0 0 1.2rem rgba(184, 242, 61, 0.85);
+}
+
+.tf-quote-heading-track i {
+  width: 1px;
+  height: 0.9rem;
+  margin-top: 2px;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.6),
+      transparent
+    );
+}
+
+.tf-property-card-motion {
+  position: relative;
+  perspective: 900px;
+  will-change: transform;
+}
+
+.tf-property-card-motion.is-selected {
+  z-index: 2;
+}
+
+.tf-property-card-number {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 3;
+  color: rgba(255, 255, 255, 0.22);
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  pointer-events: none;
+}
+
+.tf-property-selected-glow {
+  position: absolute;
+  inset: -1px;
+  z-index: -1;
+  border-radius: inherit;
+  background:
+    radial-gradient(
+      circle at 50% 100%,
+      rgba(184, 242, 61, 0.25),
+      transparent 65%
+    );
+  filter: blur(18px);
+  pointer-events: none;
+}
+
+.tf-quote-selection-confirmed {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+@keyframes tf-quote-particle-float {
+  from {
+    opacity: 0.1;
+    margin-top: -1rem;
+  }
+
+  to {
+    opacity: 0.72;
+    margin-top: 1.6rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .tf-quote-impact-line {
+    top: 34%;
+    width: 94vw;
+  }
+
+  .tf-quote-heading-track {
+    width: min(18rem, 72vw);
+  }
+
+  .tf-quote-particles span {
+    transform:
+      rotate(var(--angle))
+      translateX(
+        calc(
+          6rem +
+          var(--quote-particle) *
+          0.8rem
+        )
+      );
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tf-quote-page-cinematic *,
+  .tf-quote-page-cinematic::before,
+  .tf-quote-page-cinematic::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+.tf-quantity-card {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.tf-quantity-card-index {
+  position: absolute;
+  top: 0.9rem;
+  right: 1rem;
+  z-index: 3;
+  color: rgba(255, 255, 255, 0.22);
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  pointer-events: none;
+}
+
+.tf-quantity-card-glow {
+  position: absolute;
+  inset: -1px;
+  z-index: -1;
+  border-radius: inherit;
+  background:
+    radial-gradient(
+      circle at 50% 100%,
+      rgba(184, 242, 61, 0.3),
+      transparent 66%
+    );
+  filter: blur(16px);
+  pointer-events: none;
+}
+
+.tf-quantity-summary {
+  position: relative;
+  overflow: hidden;
+}
+
+.tf-quantity-summary::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -35%;
+  width: 28%;
+  height: 100%;
+  transform: skewX(-18deg);
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.08),
+      transparent
+    );
+  animation:
+    tf-quantity-summary-shine
+    2.6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes tf-quantity-summary-shine {
+  0%,
+  55% {
+    left: -35%;
+  }
+
+  100% {
+    left: 125%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tf-quantity-summary::after {
+    display: none;
+  }
+}
+
+.tf-complete-page-cinematic {
+  position: relative;
+  min-height: 100svh;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.tf-complete-page-cinematic
+  .tf-complete-atmosphere {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.tf-complete-glow-secondary {
+  top: auto;
+  right: -12%;
+  bottom: -18%;
+  left: auto;
+  width: min(40rem, 72vw);
+  height: min(40rem, 72vw);
+  background:
+    radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0.08),
+      rgba(184, 242, 61, 0.04) 42%,
+      transparent 72%
+    );
+  filter: blur(34px);
+}
+
+.tf-complete-impact-ring {
+  position: absolute;
+  top: 32%;
+  left: 50%;
+  width: min(30rem, 70vw);
+  aspect-ratio: 1;
+  border:
+    1px solid
+    rgba(184, 242, 61, 0.48);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow:
+    0 0 3rem
+      rgba(184, 242, 61, 0.18),
+    inset 0 0 3rem
+      rgba(184, 242, 61, 0.1);
+}
+
+.tf-complete-impact-line {
+  position: absolute;
+  top: 37%;
+  left: 50%;
+  width: min(68rem, 88vw);
+  height: 2px;
+  transform: translateX(-50%);
+  transform-origin: center;
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.3),
+      var(--tf-lime),
+      rgba(255, 255, 255, 0.3),
+      transparent
+    );
+  box-shadow:
+    0 0 1.5rem
+      rgba(184, 242, 61, 0.55),
+    0 0 4rem
+      rgba(184, 242, 61, 0.16);
+}
+
+.tf-complete-particles {
+  position: absolute;
+  inset: 0;
+}
+
+.tf-complete-particles span {
+  --angle:
+    calc(
+      var(--complete-particle) *
+      18deg
+    );
+
+  position: absolute;
+  top: 34%;
+  left: 50%;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background:
+    rgba(219, 255, 139, 0.82);
+  box-shadow:
+    0 0 0.9rem
+      rgba(184, 242, 61, 0.9);
+  transform:
+    rotate(var(--angle))
+    translateX(
+      calc(
+        6rem +
+        var(--complete-particle) *
+        1.25rem
+      )
+    );
+  animation:
+    tf-complete-particle-float
+    calc(
+      4.8s +
+      var(--complete-particle) *
+      0.2s
+    )
+    ease-in-out infinite alternate;
+}
+
+.tf-complete-content {
+  position: relative;
+}
+
+.tf-complete-check-wrap {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: fit-content;
+  margin-inline: auto;
+}
+
+.tf-complete-check-pulse {
+  position: absolute;
+  width: 6.5rem;
+  height: 6.5rem;
+  border:
+    1px solid
+    rgba(184, 242, 61, 0.6);
+  border-radius: 50%;
+  box-shadow:
+    0 0 2rem
+      rgba(184, 242, 61, 0.22);
+}
+
+.tf-complete-check {
+  position: relative;
+  z-index: 2;
+  box-shadow:
+    0 0 2.5rem
+      rgba(184, 242, 61, 0.25);
+}
+
+.tf-complete-heading-accent {
+  color: var(--tf-lime);
+  text-shadow:
+    0 0 2.4rem
+      rgba(184, 242, 61, 0.22);
+}
+
+.tf-complete-reference {
+  position: relative;
+  overflow: hidden;
+}
+
+.tf-complete-reference-scan {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 22%;
+  transform: skewX(-18deg);
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.16),
+      transparent
+    );
+  pointer-events: none;
+}
+
+.tf-complete-status-item {
+  position: relative;
+  overflow: hidden;
+  will-change:
+    transform,
+    opacity,
+    filter;
+}
+
+.tf-complete-status-glow {
+  position: absolute;
+  inset: -1px;
+  z-index: -1;
+  border-radius: inherit;
+  background:
+    radial-gradient(
+      circle at 0 50%,
+      rgba(184, 242, 61, 0.2),
+      transparent 62%
+    );
+  filter: blur(16px);
+  pointer-events: none;
+}
+
+.tf-complete-home > span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@keyframes tf-complete-particle-float {
+  from {
+    opacity: 0.12;
+    margin-top: -1.2rem;
+  }
+
+  to {
+    opacity: 0.85;
+    margin-top: 1.8rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .tf-complete-impact-ring {
+    top: 29%;
+    width: 82vw;
+  }
+
+  .tf-complete-impact-line {
+    top: 34%;
+    width: 94vw;
+  }
+
+  .tf-complete-particles span {
+    transform:
+      rotate(var(--angle))
+      translateX(
+        calc(
+          4rem +
+          var(--complete-particle) *
+          0.65rem
+        )
+      );
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tf-complete-page-cinematic *,
+  .tf-complete-page-cinematic::before,
+  .tf-complete-page-cinematic::after {
+    animation-duration:
+      0.01ms !important;
+    animation-iteration-count:
+      1 !important;
+    transition-duration:
+      0.01ms !important;
+  }
+}
+
+.tf-contact-form-cinematic {
+  position: relative;
+  overflow: hidden;
+}
+
+.tf-contact-form-cinematic::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -35%;
+  z-index: 0;
+  width: 24%;
+  height: 100%;
+  transform: skewX(-18deg);
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.045),
+      transparent
+    );
+  animation:
+    tf-contact-form-shine
+    4.8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.tf-contact-form-cinematic > * {
+  position: relative;
+  z-index: 1;
+}
+
+.tf-contact-field {
+  will-change:
+    transform,
+    opacity,
+    filter;
+}
+
+.tf-contact-control {
+  position: relative;
+  overflow: hidden;
+}
+
+.tf-contact-control::after {
+  content: "";
+  position: absolute;
+  right: 50%;
+  bottom: 0;
+  left: 50%;
+  height: 2px;
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      var(--tf-lime),
+      transparent
+    );
+  box-shadow:
+    0 0 1rem rgba(184, 242, 61, 0.5);
+  transition:
+    right 0.3s ease,
+    left 0.3s ease;
+  pointer-events: none;
+}
+
+.tf-contact-field:focus-within
+  .tf-contact-control::after {
+  right: 0.75rem;
+  left: 0.75rem;
+}
+
+.tf-contact-field:focus-within
+  .tf-contact-label {
+  color: var(--tf-lime);
+}
+
+.tf-contact-option {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.tf-contact-option-glow {
+  position: absolute;
+  inset: -1px;
+  z-index: -1;
+  border-radius: inherit;
+  background:
+    radial-gradient(
+      circle at 50% 100%,
+      rgba(184, 242, 61, 0.26),
+      transparent 68%
+    );
+  filter: blur(14px);
+  pointer-events: none;
+}
+
+.tf-contact-shield-wrap {
+  display: grid;
+  flex: 0 0 auto;
+  width: 2.6rem;
+  height: 2.6rem;
+  place-items: center;
+  border:
+    1px solid
+    rgba(184, 242, 61, 0.22);
+  border-radius: 50%;
+  color: var(--tf-lime);
+}
+
+.tf-contact-privacy {
+  position: relative;
+  overflow: hidden;
+}
+
+.tf-contact-privacy::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -25%;
+  width: 18%;
+  transform: skewX(-18deg);
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(184, 242, 61, 0.08),
+      transparent
+    );
+  animation:
+    tf-contact-privacy-scan
+    3.4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.tf-quote-continue > span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@keyframes tf-contact-form-shine {
+  0%,
+  68% {
+    left: -35%;
+  }
+
+  100% {
+    left: 125%;
+  }
+}
+
+@keyframes tf-contact-privacy-scan {
+  0%,
+  58% {
+    left: -25%;
+  }
+
+  100% {
+    left: 118%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tf-contact-form-cinematic::before,
+  .tf-contact-privacy::after {
+    display: none;
+  }
+}
+
+.tf-photos-page-cinematic {
+  position: relative;
+}
+
+.tf-photo-focus-ring {
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  width: min(38rem, 76vw);
+  aspect-ratio: 1;
+  border: 1px solid
+    rgba(184, 242, 61, 0.38);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow:
+    0 0 3rem rgba(184, 242, 61, 0.14),
+    inset 0 0 3rem rgba(184, 242, 61, 0.08);
+}
+
+.tf-photo-uploader-reveal {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.5rem;
+  will-change:
+    transform,
+    opacity,
+    filter;
+}
+
+.tf-photo-uploader-scan {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 5;
+  width: 20%;
+  transform: skewX(-18deg);
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(184, 242, 61, 0.1),
+      rgba(255, 255, 255, 0.1),
+      transparent
+    );
+  pointer-events: none;
+}
+
+.tf-photo-ready-banner {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+  border: 1px solid
+    rgba(184, 242, 61, 0.24);
+  border-radius: 1rem;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(184, 242, 61, 0.09),
+      rgba(255, 255, 255, 0.025)
+    );
+  padding: 1rem 1.1rem;
+  box-shadow:
+    0 1rem 2.5rem
+      rgba(0, 0, 0, 0.18);
+}
+
+.tf-photo-ready-banner > span {
+  display: grid;
+  flex: 0 0 auto;
+  width: 2.5rem;
+  height: 2.5rem;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--tf-lime);
+  color: #101410;
+  font-weight: 900;
+  box-shadow:
+    0 0 1.5rem
+      rgba(184, 242, 61, 0.28);
+}
+
+.tf-photo-ready-banner strong {
+  display: block;
+  color: #ffffff;
+  font-size: 0.95rem;
+}
+
+.tf-photo-ready-banner p {
+  margin: 0.25rem 0 0;
+  color: rgba(255, 255, 255, 0.58);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.tf-photo-upload-spinner {
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid
+    rgba(15, 20, 15, 0.28);
+  border-top-color: currentColor;
+  border-radius: 50%;
+}
+
+.tf-quote-continue > span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 640px) {
+  .tf-photo-focus-ring {
+    top: 43%;
+    width: 92vw;
+  }
+
+  .tf-photo-ready-banner {
+    align-items: flex-start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tf-photo-focus-ring,
+  .tf-photo-uploader-scan {
+    display: none;
+  }
+}

@@ -1,9 +1,17 @@
 "use client";
 
 import Image from "next/image";
-import { FormEvent, useState } from "react";
-import { motion } from "framer-motion";
+import {
+  AnimatePresence,
+  motion,
+  type Variants,
+} from "framer-motion";
 import { useRouter } from "next/navigation";
+import {
+  FormEvent,
+  useState,
+  type ReactNode,
+} from "react";
 
 import QuoteProgress from "@/components/quote/QuoteProgress";
 
@@ -19,12 +27,90 @@ type ContactErrors = Partial<
   Record<keyof ContactForm, string>
 >;
 
+type ContactPreference =
+  ContactForm["preferredContact"];
+
 const initialForm: ContactForm = {
   fullName: "",
   email: "",
   phone: "",
   preferredContact: "either",
   notes: "",
+};
+
+const cinematicEase = [
+  0.22,
+  1,
+  0.36,
+  1,
+] as const;
+
+const pageVariants: Variants = {
+  hidden: {
+    opacity: 0,
+  },
+
+  visible: {
+    opacity: 1,
+
+    transition: {
+      delayChildren: 0.08,
+      staggerChildren: 0.12,
+    },
+  },
+};
+
+const revealVariants: Variants = {
+  hidden: {
+    opacity: 0,
+    y: 30,
+    scale: 0.985,
+    filter: "blur(10px)",
+  },
+
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    filter: "blur(0px)",
+
+    transition: {
+      duration: 0.72,
+      ease: cinematicEase,
+    },
+  },
+};
+
+const formVariants: Variants = {
+  hidden: {},
+
+  visible: {
+    transition: {
+      delayChildren: 0.08,
+      staggerChildren: 0.09,
+    },
+  },
+};
+
+const fieldVariants: Variants = {
+  hidden: {
+    opacity: 0,
+    y: 24,
+    scale: 0.98,
+    filter: "blur(8px)",
+  },
+
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    filter: "blur(0px)",
+
+    transition: {
+      duration: 0.58,
+      ease: cinematicEase,
+    },
+  },
 };
 
 export default function ContactPage() {
@@ -108,17 +194,96 @@ export default function ContactPage() {
     router.push("/quote/summary");
   }
 
+  function saveAndExit() {
+    router.push("/services");
+  }
+
   return (
-    <main className="tf-quote-page">
+    <main className="tf-quote-page tf-quote-page-cinematic tf-contact-page-cinematic">
       <div
         className="tf-quote-atmosphere"
         aria-hidden="true"
       >
-        <div className="tf-quote-light" />
+        <motion.div
+          className="tf-quote-light"
+          animate={{
+            x: [-46, 56, -46],
+            y: [16, -30, 16],
+            scale: [1, 1.16, 1],
+            opacity: [0.5, 0.88, 0.5],
+          }}
+          transition={{
+            duration: 9,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+
+        <motion.div
+          className="tf-quote-light tf-quote-light-secondary"
+          animate={{
+            x: [38, -56, 38],
+            y: [-20, 36, -20],
+            scale: [1.08, 0.92, 1.08],
+            opacity: [0.2, 0.5, 0.2],
+          }}
+          transition={{
+            duration: 11,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+
+        <motion.div
+          className="tf-quote-impact-line"
+          initial={{
+            opacity: 0,
+            scaleX: 0,
+          }}
+          animate={{
+            opacity: [0, 1, 0.48],
+            scaleX: 1,
+          }}
+          transition={{
+            duration: 1.05,
+            delay: 0.42,
+            ease: cinematicEase,
+          }}
+        />
+
+        <div className="tf-quote-particles">
+          {Array.from({
+            length: 14,
+          }).map((_, index) => (
+            <span
+              key={index}
+              style={
+                {
+                  "--quote-particle": index,
+                } as React.CSSProperties
+              }
+            />
+          ))}
+        </div>
+
         <div className="tf-quote-grain" />
       </div>
 
-      <header className="tf-quote-header tf-container">
+      <motion.header
+        className="tf-quote-header tf-container"
+        initial={{
+          opacity: 0,
+          y: -18,
+        }}
+        animate={{
+          opacity: 1,
+          y: 0,
+        }}
+        transition={{
+          duration: 0.65,
+          ease: cinematicEase,
+        }}
+      >
         <button
           type="button"
           className="tf-quote-logo-button"
@@ -135,71 +300,106 @@ export default function ContactPage() {
           />
         </button>
 
-        <button
+        <motion.button
           type="button"
           className="tf-quote-exit"
-          onClick={() => router.push("/")}
+          onClick={saveAndExit}
+          whileHover={{
+            y: -2,
+          }}
+          whileTap={{
+            scale: 0.97,
+          }}
         >
           Save and exit
-        </button>
-      </header>
+        </motion.button>
+      </motion.header>
 
-      <section className="tf-quote-shell tf-container">
-        <QuoteProgress
-          currentStep={5}
-          totalSteps={7}
-          label="Contact details"
-        />
+      <motion.section
+        className="tf-quote-shell tf-container"
+        variants={pageVariants}
+        initial="hidden"
+        animate="visible"
+      >
+        <motion.div variants={revealVariants}>
+          <QuoteProgress
+            currentStep={5}
+            totalSteps={7}
+            label="Contact details"
+          />
+        </motion.div>
 
         <motion.div
           className="tf-quote-heading"
-          initial={{
-            opacity: 0,
-            y: 24,
-          }}
-          animate={{
-            opacity: 1,
-            y: 0,
-          }}
-          transition={{
-            duration: 0.8,
-            ease: [0.22, 1, 0.36, 1],
-          }}
+          variants={revealVariants}
         >
-          <p className="tf-eyebrow">
+          <motion.p
+            className="tf-eyebrow"
+            initial={{
+              opacity: 0,
+              letterSpacing: "0.45em",
+            }}
+            animate={{
+              opacity: 1,
+              letterSpacing: "0.24em",
+            }}
+            transition={{
+              duration: 0.8,
+              delay: 0.18,
+              ease: cinematicEase,
+            }}
+          >
             Your details
-          </p>
+          </motion.p>
 
           <h1>
-            How should our installation team contact
-            you?
+            How should our installation team{" "}
+            <span className="tf-quote-heading-accent">
+              contact you?
+            </span>
           </h1>
 
           <p>
             We will use these details to discuss your
             requirements and prepare your quotation.
           </p>
+
+          <motion.div
+            className="tf-quote-heading-track"
+            initial={{
+              opacity: 0,
+              scaleX: 0,
+            }}
+            animate={{
+              opacity: 1,
+              scaleX: 1,
+            }}
+            transition={{
+              duration: 0.85,
+              delay: 0.55,
+              ease: cinematicEase,
+            }}
+            aria-hidden="true"
+          >
+            <span />
+            <i />
+            <i />
+            <i />
+            <i />
+            <i />
+          </motion.div>
         </motion.div>
 
         <motion.form
-          className="tf-contact-form"
+          className="tf-contact-form tf-contact-form-cinematic"
           onSubmit={handleSubmit}
           noValidate
-          initial={{
-            opacity: 0,
-            y: 28,
-          }}
-          animate={{
-            opacity: 1,
-            y: 0,
-          }}
-          transition={{
-            duration: 0.8,
-            delay: 0.12,
-            ease: [0.22, 1, 0.36, 1],
-          }}
+          variants={formVariants}
         >
-          <div className="tf-contact-grid">
+          <motion.div
+            className="tf-contact-grid"
+            variants={formVariants}
+          >
             <FormField
               label="Full name"
               error={errors.fullName}
@@ -261,9 +461,12 @@ export default function ContactPage() {
                 aria-invalid={Boolean(errors.email)}
               />
             </FormField>
-          </div>
+          </motion.div>
 
-          <fieldset className="tf-contact-preference">
+          <motion.fieldset
+            className="tf-contact-preference"
+            variants={fieldVariants}
+          >
             <legend>
               How would you prefer us to contact you?
             </legend>
@@ -308,7 +511,7 @@ export default function ContactPage() {
                 }
               />
             </div>
-          </fieldset>
+          </motion.fieldset>
 
           <FormField
             label="Anything else we should know?"
@@ -328,38 +531,100 @@ export default function ContactPage() {
             />
           </FormField>
 
-          <div className="tf-contact-privacy">
-            <ShieldIcon />
+          <motion.div
+            className="tf-contact-privacy"
+            variants={fieldVariants}
+            whileHover={{
+              y: -2,
+            }}
+          >
+            <motion.div
+              className="tf-contact-shield-wrap"
+              animate={{
+                boxShadow: [
+                  "0 0 0 rgba(184,242,61,0)",
+                  "0 0 22px rgba(184,242,61,0.22)",
+                  "0 0 0 rgba(184,242,61,0)",
+                ],
+              }}
+              transition={{
+                duration: 2.4,
+                repeat: Infinity,
+                repeatDelay: 1,
+              }}
+            >
+              <ShieldIcon />
+            </motion.div>
 
             <p>
               Your details are used only to assess and
               respond to this TrackFit installation
               request.
             </p>
-          </div>
+          </motion.div>
 
-          <div className="tf-quote-actions">
-            <button
+          <motion.div
+            className="tf-quote-actions"
+            variants={fieldVariants}
+          >
+            <motion.button
               type="button"
               className="tf-quote-back"
               onClick={() =>
                 router.push("/quote/photos")
               }
+              whileHover={{
+                x: -3,
+              }}
+              whileTap={{
+                scale: 0.97,
+              }}
             >
               ← Back
-            </button>
+            </motion.button>
 
-            <button
+            <motion.button
               type="submit"
               className="tf-quote-continue"
+              whileHover={{
+                y: -3,
+                scale: 1.012,
+              }}
+              whileTap={{
+                scale: 0.98,
+              }}
+              animate={{
+                boxShadow: [
+                  "0 0 0 rgba(184,242,61,0)",
+                  "0 0 42px rgba(184,242,61,0.25)",
+                  "0 0 20px rgba(184,242,61,0.12)",
+                ],
+              }}
+              transition={{
+                boxShadow: {
+                  duration: 1.3,
+                  delay: 1.25,
+                },
+              }}
             >
               Review request
 
-              <ArrowIcon />
-            </button>
-          </div>
+              <motion.span
+                animate={{
+                  x: [0, 4, 0],
+                }}
+                transition={{
+                  duration: 1.2,
+                  repeat: Infinity,
+                  repeatDelay: 1.4,
+                }}
+              >
+                <ArrowIcon />
+              </motion.span>
+            </motion.button>
+          </motion.div>
         </motion.form>
-      </section>
+      </motion.section>
     </main>
   );
 }
@@ -369,7 +634,7 @@ type FormFieldProps = {
   error?: string;
   optional?: boolean;
   wide?: boolean;
-  children: React.ReactNode;
+  children: ReactNode;
 };
 
 function FormField({
@@ -380,15 +645,16 @@ function FormField({
   children,
 }: FormFieldProps) {
   return (
-    <label
-      className={[
-        "tf-contact-field",
-        wide ? "is-wide" : "",
-        error ? "has-error" : "",
-      ]
-        .filter(Boolean)
-        .join(" ")}
-    >
+    <motion.label
+  className={[
+    "tf-contact-field",
+    wide ? "is-wide" : "",
+    error ? "has-error" : "",
+  ]
+    .filter(Boolean)
+    .join(" ")}
+  variants={fieldVariants}
+>
       <span className="tf-contact-label">
         {label}
 
@@ -399,15 +665,35 @@ function FormField({
         {children}
       </span>
 
-      {error && (
-        <span
-          className="tf-contact-error"
-          role="alert"
-        >
-          {error}
-        </span>
-      )}
-    </label>
+      <AnimatePresence mode="wait">
+        {error && (
+          <motion.span
+            key={error}
+            className="tf-contact-error"
+            role="alert"
+            initial={{
+              opacity: 0,
+              y: -6,
+              filter: "blur(4px)",
+            }}
+            animate={{
+              opacity: 1,
+              y: 0,
+              filter: "blur(0px)",
+            }}
+            exit={{
+              opacity: 0,
+              y: -4,
+            }}
+            transition={{
+              duration: 0.25,
+            }}
+          >
+            {error}
+          </motion.span>
+        )}
+      </AnimatePresence>
+    </motion.label>
   );
 }
 
@@ -423,7 +709,7 @@ function ContactOption({
   onSelect,
 }: ContactOptionProps) {
   return (
-    <button
+    <motion.button
       type="button"
       className={[
         "tf-contact-option",
@@ -433,13 +719,78 @@ function ContactOption({
         .join(" ")}
       onClick={onSelect}
       aria-pressed={selected}
+      whileHover={{
+        y: -4,
+        scale: 1.012,
+      }}
+      whileTap={{
+        scale: 0.97,
+      }}
+      animate={
+        selected
+          ? {
+              y: -2,
+              boxShadow:
+                "0 0 30px rgba(184,242,61,0.18)",
+            }
+          : {
+              y: 0,
+              boxShadow:
+                "0 0 0 rgba(184,242,61,0)",
+            }
+      }
+      transition={{
+        duration: 0.3,
+        ease: cinematicEase,
+      }}
     >
-      <span className="tf-contact-option-indicator">
+      <motion.span
+        className="tf-contact-option-indicator"
+        animate={
+          selected
+            ? {
+                scale: [0.85, 1.18, 1],
+                rotate: [-12, 4, 0],
+              }
+            : {
+                scale: 1,
+                rotate: 0,
+              }
+        }
+        transition={{
+          duration: 0.4,
+          ease: cinematicEase,
+        }}
+      >
         {selected && "✓"}
-      </span>
+      </motion.span>
 
       {label}
-    </button>
+
+      <AnimatePresence>
+        {selected && (
+          <motion.span
+            className="tf-contact-option-glow"
+            initial={{
+              opacity: 0,
+              scale: 0.7,
+            }}
+            animate={{
+              opacity: 1,
+              scale: 1,
+            }}
+            exit={{
+              opacity: 0,
+              scale: 0.8,
+            }}
+            transition={{
+              duration: 0.35,
+            }}
+            aria-hidden="true"
+          />
+        )}
+      </AnimatePresence>
+    </motion.button>
   );
 }
 
