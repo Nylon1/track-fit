@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-
+import Image from "next/image";
 export default function WelcomePage() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -11,6 +11,15 @@ export default function WelcomePage() {
 
   return (
     <main className="tf-welcome-placeholder">
+      <div className="tf-welcome-page-logo">
+  <Image
+    src="/logos/trackfit-logo.svg"
+    alt="TrackFit"
+    width={300}
+    height={93}
+    priority
+  />
+</div>
       <p className="tf-eyebrow">
         Welcome to TrackFit
       </p>

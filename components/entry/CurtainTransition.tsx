@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import {
   AnimatePresence,
   motion,
@@ -74,30 +73,7 @@ export default function CurtainTransition({
               ease: curtainEase,
             }}
           >
-            <motion.div
-              className="tf-transition-logo-frame"
-              initial={{
-                opacity: 0,
-                scale: 0.94,
-              }}
-              animate={{
-                opacity: 1,
-                scale: 1,
-              }}
-              transition={{
-                duration: 0.65,
-                delay: 0.82,
-                ease: curtainEase,
-              }}
-            >
-              <Image
-                src="/logos/trackfit-logo.svg"
-                alt="TrackFit"
-                width={300}
-                height={93}
-                priority
-              />
-            </motion.div>
+           
 
             <motion.p
               initial={{

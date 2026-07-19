@@ -830,3 +830,26 @@ body {
     letter-spacing: 0.14em;
   }
 }
+
+.tf-welcome-page-logo {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.tf-welcome-page-logo img {
+  width: min(240px, 62vw);
+  height: auto;
+  display: block;
+}
+
+@media (max-width: 640px) {
+  .tf-welcome-page-logo {
+    margin-bottom: 1.6rem;
+  }
+
+  .tf-welcome-page-logo img {
+    width: min(210px, 58vw);
+  }
+}
