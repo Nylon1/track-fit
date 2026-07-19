@@ -4,7 +4,7 @@ import { Inter, Manrope } from "next/font/google";
 
 import SiteSchema from "@/components/seo/SiteSchema";
 import { siteConfig } from "@/lib/seo/site-config";
-
+import { GoogleTagManager } from "@next/third-parties/google";
 import "./globals.css";
 
 const inter = Inter({
@@ -137,6 +137,7 @@ export default function RootLayout({
         <SiteSchema />
 
         {children}
+        <GoogleTagManager gtmId="GTM-MTXLWHKL" />
       </body>
     </html>
   );
