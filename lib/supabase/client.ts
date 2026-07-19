@@ -1,44 +1,72 @@
-import { createClient } from "@supabase/supabase-js";
+import {
+  createClient,
+  type SupabaseClient,
+} from "@supabase/supabase-js";
 
-const rawSupabaseUrl =
-  process.env.NEXT_PUBLIC_SUPABASE_URL;
+let browserClient: SupabaseClient | null = null;
 
-const supabaseAnonKey =
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-
-const supabaseUrl = rawSupabaseUrl
-  ?.trim()
-  .replace(/^["']|["']$/g, "")
-  .replace(/\/$/, "");
-
-if (!supabaseUrl) {
-  throw new Error(
-    "NEXT_PUBLIC_SUPABASE_URL is missing."
-  );
+function cleanEnvironmentValue(
+  value: string | undefined
+) {
+  return value
+    ?.trim()
+    .replace(/^["']|["']$/g, "")
+    .replace(/\/+$/, "");
 }
 
-if (!/^https:\/\/[a-z0-9-]+\.supabase\.co$/i.test(
-  supabaseUrl
-)) {
-  throw new Error(
-    "NEXT_PUBLIC_SUPABASE_URL is invalid."
-  );
-}
-
-if (!supabaseAnonKey?.trim()) {
-  throw new Error(
-    "NEXT_PUBLIC_SUPABASE_ANON_KEY is missing."
-  );
-}
-
-export const supabase = createClient(
-  supabaseUrl,
-  supabaseAnonKey.trim(),
-  {
-    auth: {
-      persistSession: false,
-      autoRefreshToken: false,
-      detectSessionInUrl: false,
-    },
+export function getSupabaseBrowserClient() {
+  if (browserClient) {
+    return browserClient;
   }
-);
+
+  const supabaseUrl = cleanEnvironmentValue(
+    process.env.NEXT_PUBLIC_SUPABASE_URL
+  );
+
+  const supabaseAnonKey = cleanEnvironmentValue(
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  );
+
+  if (!supabaseUrl) {
+    throw new Error(
+      "NEXT_PUBLIC_SUPABASE_URL is missing."
+    );
+  }
+
+  try {
+    const parsedUrl = new URL(supabaseUrl);
+
+    if (
+      parsedUrl.protocol !== "https:" ||
+      !parsedUrl.hostname.endsWith(
+        ".supabase.co"
+      )
+    ) {
+      throw new Error();
+    }
+  } catch {
+    throw new Error(
+      "NEXT_PUBLIC_SUPABASE_URL must look like https://your-project-ref.supabase.co"
+    );
+  }
+
+  if (!supabaseAnonKey) {
+    throw new Error(
+      "NEXT_PUBLIC_SUPABASE_ANON_KEY is missing."
+    );
+  }
+
+  browserClient = createClient(
+    supabaseUrl,
+    supabaseAnonKey,
+    {
+      auth: {
+        persistSession: false,
+        autoRefreshToken: false,
+        detectSessionInUrl: false,
+      },
+    }
+  );
+
+  return browserClient;
+}

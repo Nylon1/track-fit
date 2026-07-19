@@ -10,7 +10,11 @@ import PhotoUploader, {
 } from "@/components/quote/PhotoUploader";
 
 import QuoteProgress from "@/components/quote/QuoteProgress";
-import { supabase } from "@/lib/supabase/client";
+import {
+  getSupabaseBrowserClient,
+} from "@/lib/supabase/client";
+
+const supabase = getSupabaseBrowserClient();
 
 type StoredPhoto = {
   path: string;
