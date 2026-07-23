@@ -8,6 +8,7 @@ import {
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
+
 const cinematicEase = [
   0.22,
   1,
@@ -90,15 +91,42 @@ export default function CompletePage() {
     useState("Preparing reference");
 
   useEffect(() => {
-    const savedReference =
-      window.sessionStorage.getItem(
-        "trackfit-reference"
-      );
+  const savedReference =
+    window.sessionStorage.getItem("trackfit-reference");
 
-    if (savedReference) {
-      setReference(savedReference);
-    }
-  }, []);
+  if (!savedReference) {
+    return;
+  }
+
+  setReference(savedReference);
+
+  const trackedKey =
+    `trackfit-conversion-tracked:${savedReference}`;
+
+  const alreadyTracked =
+    window.sessionStorage.getItem(trackedKey);
+
+  if (alreadyTracked) {
+    return;
+  }
+
+  const typedWindow = window as Window & {
+    dataLayer?: Array<Record<string, unknown>>;
+  };
+
+  typedWindow.dataLayer =
+    typedWindow.dataLayer ?? [];
+
+  typedWindow.dataLayer.push({
+    event: "trackfit_quote_submitted",
+    quote_reference: savedReference,
+  });
+
+  window.sessionStorage.setItem(
+    trackedKey,
+    "true"
+  );
+}, []);
 
   return (
     <main className="tf-complete-page tf-complete-page-cinematic">
