@@ -2,13 +2,18 @@ import type { MetadataRoute } from "next";
 
 import { guides } from "@/lib/guides/data";
 import { absoluteUrl } from "@/lib/seo/site-config";
-
+import { tools } from "@/lib/tools/data";
 const routes = [
   {
     path: "/",
     priority: 1,
     changeFrequency: "weekly" as const,
   },
+  {
+  path: "/tools",
+  priority: 0.85,
+  changeFrequency: "weekly" as const,
+},
   {
     path: "/services",
     priority: 0.9,
@@ -100,6 +105,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: "monthly",
     priority: 0.7,
   }));
+const toolPages: MetadataRoute.Sitemap = tools
+    .filter((tool) => tool.status === "live")
+    .map((tool) => ({
+      url: absoluteUrl(`/tools/${tool.slug}`),
+      lastModified: new Date("2026-07-25"),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    }));
 
-  return [...staticPages, ...guidePages];
+  return [...staticPages, ...guidePages, ...toolPages];
 }

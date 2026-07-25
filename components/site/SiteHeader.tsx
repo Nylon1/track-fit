@@ -18,6 +18,10 @@ const navigationLinks = [
     href: "/services/commercial-curtain-track-installation",
   },
    {
+    label: "Tools",
+    href: "/tools",
+  },
+   {
     label: "TrackFitGuide",
     href: "/guides",
   },
