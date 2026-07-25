@@ -7,6 +7,8 @@ import {
   areas,
   areaServicePages,
 } from "@/lib/areas/data";
+import { tradeSectors } from "@/lib/trade/data";
+
 const routes = [
   {
     path: "/",
@@ -134,5 +136,12 @@ const toolPages: MetadataRoute.Sitemap = tools
       priority: 0.8,
     }));
 
-  return [...staticPages, ...guidePages, ...toolPages, ...areaPages];
+  const tradePages: MetadataRoute.Sitemap = tradeSectors.map((sector) => ({
+    url: absoluteUrl(`/trade/${sector.slug}`),
+    lastModified: new Date(),
+    changeFrequency: "monthly",
+    priority: 0.75,
+  }));
+
+  return [...staticPages, ...guidePages, ...toolPages, ...areaPages, ...tradePages];
 }

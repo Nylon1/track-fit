@@ -33,6 +33,10 @@ const navigationLinks = [
     label: "Local Installers",
     href: "/areas",
   },
+  {
+    label: "Trade",
+    href: "/trade",
+  },
 ];
 
 export default function SiteHeader() {
