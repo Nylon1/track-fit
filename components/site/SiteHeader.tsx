@@ -29,6 +29,10 @@ const navigationLinks = [
     label: "About",
     href: "/about",
   },
+  {
+    label: "Local Installers",
+    href: "/areas",
+  },
 ];
 
 export default function SiteHeader() {

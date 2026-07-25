@@ -3,6 +3,10 @@ import type { MetadataRoute } from "next";
 import { guides } from "@/lib/guides/data";
 import { absoluteUrl } from "@/lib/seo/site-config";
 import { tools } from "@/lib/tools/data";
+import {
+  areas,
+  areaServicePages,
+} from "@/lib/areas/data";
 const routes = [
   {
     path: "/",
@@ -98,12 +102,28 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: route.changeFrequency,
     priority: route.priority,
   }));
+const areaPages: MetadataRoute.Sitemap = areas.map((area) => ({
+  url: absoluteUrl(`/areas/${area.slug}`),
+  lastModified: new Date(),
+  changeFrequency: "monthly",
+  priority: 0.75,
+}));
 
   const guidePages: MetadataRoute.Sitemap = guides.map((guide) => ({
     url: absoluteUrl(`/guides/${guide.slug}`),
     lastModified: new Date("2026-07-25"),
     changeFrequency: "monthly",
     priority: 0.7,
+  }));
+  
+const areaServiceEntries: MetadataRoute.Sitemap =
+  areaServicePages.map((page) => ({
+    url: absoluteUrl(
+      `/areas/${page.citySlug}/${page.serviceSlug}`,
+    ),
+    lastModified: new Date(),
+    changeFrequency: "monthly",
+    priority: 0.72,
   }));
 const toolPages: MetadataRoute.Sitemap = tools
     .filter((tool) => tool.status === "live")
@@ -114,5 +134,5 @@ const toolPages: MetadataRoute.Sitemap = tools
       priority: 0.8,
     }));
 
-  return [...staticPages, ...guidePages, ...toolPages];
+  return [...staticPages, ...guidePages, ...toolPages, ...areaPages];
 }
