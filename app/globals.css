@@ -67,3 +67,45 @@ svg {
   outline: 3px solid rgba(184, 242, 61, 0.42);
   outline-offset: 4px;
 }
+
+@media print {
+  @page {
+    size: A4;
+    margin: 16mm;
+  }
+
+  html,
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  header,
+  footer,
+  nav,
+  button,
+  input,
+  select,
+  textarea,
+  .print-hidden {
+    display: none !important;
+  }
+
+  main {
+    min-height: auto !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  .tool-result-card,
+  .tool-result-actions {
+    break-inside: avoid;
+    box-shadow: none !important;
+  }
+
+  .tool-result-card {
+    border: 1px solid rgba(0, 0, 0, 0.16) !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+}

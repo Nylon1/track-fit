@@ -34,6 +34,14 @@ export const tools: ToolDefinition[] = [
   duration: "45 seconds",
   status: "live",
 },
+{
+  slug: "curtain-drop-calculator",
+  title: "Curtain Drop Calculator",
+  description: "Calculate finished curtain drop from the measurement, finish style and heading.",
+  category: "measure",
+  duration: "45 seconds",
+  status: "live",
+},
   {
     slug: "track-selector",
     title: "Curtain Track Selector",
@@ -43,11 +51,66 @@ export const tools: ToolDefinition[] = [
     status: "coming-soon",
   },
   {
-    slug: "bracket-spacing-calculator",
-    title: "Bracket Spacing Calculator",
-    description: "Estimate support positions before checking the manufacturer's guidance.",
-    category: "plan",
-    duration: "45 seconds",
-    status: "coming-soon",
-  },
+  slug: "curtain-fabric-calculator",
+  title  : "Curtain Fabric Calculator",
+  description:
+    "Estimate fabric metres from the track width, drop, fullness and fabric width.",
+  category: "measure",
+  duration: "1 minute",
+  status: "live",
+},
+{
+  slug: "bracket-placement-calculator",
+  title: "Bracket Placement Calculator",
+  description:
+    "Calculate the number and exact positions of curtain-track brackets.",
+  category: "plan",
+  duration: "1 minute",
+  status: "live",
+},
+{
+  slug: "curtain-track-fixing-finder",
+  title: "Curtain Track Fixing Finder",
+  description:
+    "Identify a practical fixing approach for the mounting surface and curtain load.",
+  category: "choose",
+  duration: "45 seconds",
+  status: "live",
+},
+{
+  slug: "curtain-track-cutting-planner",
+  title: "Curtain Track Cutting Planner",
+  description:
+    "Create an efficient cutting plan from standard or custom track stock lengths.",
+  category: "plan",
+  duration: "1 minute",
+  status: "live",
+},
+{
+  slug: "curtain-track-type-finder",
+  title: "Curtain Track Type Finder",
+  description:
+    "Choose a practical track type for the opening, curtain heading and installation.",
+  category: "choose",
+  duration: "1 minute",
+  status: "live",
+},
+{
+  slug: "double-curtain-track-spacing-calculator",
+  title: "Double Curtain Track Spacing Calculator",
+  description:
+    "Estimate the spacing required between rear and front curtain tracks.",
+  category: "plan",
+  duration: "45 seconds",
+  status: "live",
+},
+{
+  slug: "curtain-track-projection-calculator",
+  title: "Curtain Track Projection Calculator",
+  description:
+    "Estimate how far a curtain track should sit from the wall to clear obstructions.",
+  category: "plan",
+  duration: "45 seconds",
+  status: "live",
+},
 ];
