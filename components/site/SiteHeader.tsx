@@ -29,6 +29,10 @@ const navigationLinks = [
     label: "About",
     href: "/about",
   },
+   {
+    label: "Brands",
+    href: "/brands",
+  },
   {
     label: "Local Installers",
     href: "/areas",

@@ -9,6 +9,8 @@ import {
 } from "@/lib/areas/data";
 import { tradeSectors } from "@/lib/trade/data";
 
+import { brandContent } from "@/lib/brands/data";
+
 const routes = [
   {
     path: "/",
@@ -143,5 +145,23 @@ const toolPages: MetadataRoute.Sitemap = tools
     priority: 0.75,
   }));
 
-  return [...staticPages, ...guidePages, ...toolPages, ...areaPages, ...tradePages];
+ const brandPages: MetadataRoute.Sitemap =
+  brandContent.brands.map((brand) => ({
+    url: absoluteUrl(`/brands/${brand.slug}`),
+    lastModified: new Date(),
+    changeFrequency: "monthly",
+    priority: 0.76,
+  }));
+
+const brandSystemPages: MetadataRoute.Sitemap =
+  brandContent.systems.map((system) => ({
+    url: absoluteUrl(
+      `/brands/${system.brandSlug}/${system.slug}`,
+    ),
+    lastModified: new Date(),
+    changeFrequency: "monthly",
+    priority: 0.72,
+  }));
+  return [...staticPages, ...guidePages, ...toolPages, ...areaPages, ...tradePages, ...brandPages, ...brandSystemPages];
 }
+
