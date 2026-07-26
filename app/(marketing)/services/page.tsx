@@ -135,6 +135,13 @@ const tools = [
       "Understand the fixing considerations for plasterboard, timber, brick and concrete.",
     href: "/tools/curtain-track-fixing-finder",
   },
+  {
+  title: "Healthcare Curtain Track Specification Checker",
+  description:
+    "Plan track layout, quantities, ceiling requirements, system direction and missing healthcare project information.",
+  href: "/tools/healthcare-curtain-track-specification-checker",
+  label: "Healthcare",
+},
 ];
 
 const brands = [

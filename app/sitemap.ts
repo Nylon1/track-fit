@@ -154,6 +154,12 @@ const routes = [
   changeFrequency: "monthly" as const,
 },
 
+{
+  path: "/tools/healthcare-curtain-track-specification-checker",
+  priority: 0.9,
+  changeFrequency: "monthly" as const,
+},
+
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
