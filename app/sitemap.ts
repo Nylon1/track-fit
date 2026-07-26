@@ -10,7 +10,7 @@ import {
 import { tradeSectors } from "@/lib/trade/data";
 
 import { brandContent } from "@/lib/brands/data";
-
+import { getVerifiedCaseStudies } from "@/lib/case-studies/data";
 const routes = [
   {
     path: "/",
@@ -164,4 +164,12 @@ const brandSystemPages: MetadataRoute.Sitemap =
   }));
   return [...staticPages, ...guidePages, ...toolPages, ...areaPages, ...tradePages, ...brandPages, ...brandSystemPages];
 }
+
+const caseStudyPages: MetadataRoute.Sitemap =
+  getVerifiedCaseStudies().map((study) => ({
+    url: absoluteUrl(`/case-studies/${study.slug}`),
+    lastModified: new Date(),
+    changeFrequency: "monthly",
+    priority: 0.78,
+  }));
 
