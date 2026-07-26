@@ -89,6 +89,13 @@ const services = [
     href: "/services/double-curtain-tracks",
     label: "Layered curtains",
   },
+  {
+  title: "Healthcare Curtain Track Installation",
+  description:
+    "Medical, privacy and separation-track installation for hospitals, clinics, treatment rooms and care environments.",
+  href: "/services/healthcare-curtain-track-installation",
+  label: "Healthcare",
+},
 ];
 
 const tools = [

@@ -143,7 +143,16 @@ const routes = [
   
 },
 
-
+{
+  path: "/services/healthcare-curtain-track-installation",
+  priority: 0.86,
+  changeFrequency: "monthly" as const,
+},
+{
+  path: "/trade/healthcare",
+  priority: 0.78,
+  changeFrequency: "monthly" as const,
+},
 
 ];
 
