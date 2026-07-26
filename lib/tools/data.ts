@@ -113,4 +113,15 @@ export const tools: ToolDefinition[] = [
   duration: "45 seconds",
   status: "live",
 },
+
+{
+  slug: "healthcare-curtain-track-specification-checker",
+  title: "Healthcare Curtain Track Specification Checker",
+  description:
+    "Plan hospital, clinic and care-home curtain-track layouts, quantities, ceiling requirements and missing project information.",
+  category: "plan",
+  duration: "2 minutes",
+  status: "live",
+},
 ];
+
