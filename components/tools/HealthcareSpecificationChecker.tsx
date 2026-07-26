@@ -942,12 +942,14 @@ export default function HealthcareSpecificationChecker() {
                 Print or save as PDF
               </button>
 
-              <Link
-                href="/quote/postcode"
-                className="inline-flex min-h-12 items-center rounded-full border border-[#B8F23D]/35 px-6 font-semibold text-[#B8F23D]"
-              >
-                Send to TrackFit →
-              </Link>
+              <a
+  href={`mailto:enquiries@curtaintrackfitters.com?subject=${encodeURIComponent(
+    "Healthcare curtain-track specification enquiry",
+  )}&body=${encodeURIComponent(summaryText)}`}
+  className="inline-flex min-h-12 items-center rounded-full border border-[#B8F23D]/35 px-6 font-semibold text-[#B8F23D] transition hover:bg-[#B8F23D]/10"
+>
+  Open in email →
+</a>
             </div>
 
             <p className="mt-6 text-xs leading-6 text-white/40">
