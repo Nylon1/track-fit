@@ -176,6 +176,77 @@ export const tradeSectors: TradeSector[] = [
       { question: "Do you install over bifold doors?", answer: "Yes. We can plan wide-span tracks, projection and stack-back for bifold openings." }
     ],
   },
+
+  {
+  slug: "healthcare",
+  name: "Healthcare",
+  title: "Healthcare Curtain Track Installation",
+  description:
+    "Specialist curtain-track installation for hospitals, clinics, treatment rooms, care homes and other healthcare environments requiring privacy, separation or window-curtain systems.",
+  intro:
+    "Healthcare curtain-track projects need more than basic fitting. TrackFit can review the proposed layout, fixing route, ceiling structure, curtain load and access requirements before installing suitable manual medical, privacy and contract track systems.",
+  projects: [
+    "Hospital bed-bay privacy tracks",
+    "Clinic and treatment-room curtain tracks",
+    "Care-home and nursing-home installations",
+    "Changing, sanitary and rehabilitation spaces",
+    "Healthcare window-curtain tracks",
+    "Forest MTS medical track installations"
+  ],
+  challenges: [
+    "Suspended ceilings with no confirmed structural fixing route",
+    "Coordination with lighting, sprinklers, ventilation and medical services",
+    "Curved or connected cubicle layouts with shared divider tracks",
+    "Fire, hygiene and infection-control requirements",
+    "Maintaining access for cleaning, inspection and curtain replacement",
+    "Phased installation around occupied rooms and clinical programmes"
+  ],
+  workflow: [
+    "Review drawings, room schedules and the intended privacy layout",
+    "Check ceiling construction, structural support and suspension requirements",
+    "Confirm curtain weight, operation and suitable track-system family",
+    "Coordinate access, installation phasing and site restrictions",
+    "Install, align and test the complete track route",
+    "Record outstanding specification or compliance information for handover"
+  ],
+  keywords: [
+    "healthcare curtain track installation",
+    "hospital curtain track installer",
+    "medical curtain track systems",
+    "hospital cubicle curtain tracks",
+    "care home curtain track installation",
+    "clinic privacy curtain tracks",
+    "Forest MTS medical track installer"
+  ],
+  faqs: [
+    {
+      question: "Do you install hospital privacy curtain tracks?",
+      answer:
+        "Yes. TrackFit can assess and install suitable manual privacy and separation-track systems for hospital wards, treatment rooms and other healthcare environments."
+    },
+    {
+      question: "Do you install Forest MTS medical tracks?",
+      answer:
+        "Yes. Forest MTS can be considered for suitable medical privacy and separation layouts, subject to the exact project specification, ceiling structure and installation requirements."
+    },
+    {
+      question: "Are the tracks NHS approved?",
+      answer:
+        "TrackFit does not make a general NHS-approved claim. Final suitability must be confirmed against the project specification, structural requirements, fire strategy, infection-control requirements and relevant healthcare-estates guidance."
+    },
+    {
+      question: "Can adjoining cubicles share divider tracks?",
+      answer:
+        "Yes. In connected cubicle rows, internal divider tracks are normally shared between adjoining spaces, so the layout and quantity calculation should avoid counting those middle sections twice."
+    },
+    {
+      question: "Can you work with contractors and estates teams?",
+      answer:
+        "Yes. TrackFit can support contractors, healthcare estates teams, architects, facilities managers and specialist suppliers with project review, surveys, installation planning and fitting."
+    }
+  ],
+},
+
   {
     slug: "main-contractors",
     name: "Main Contractors",
