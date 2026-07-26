@@ -162,7 +162,7 @@ const brandSystemPages: MetadataRoute.Sitemap =
     changeFrequency: "monthly",
     priority: 0.72,
   }));
-  return [...staticPages, ...guidePages, ...toolPages, ...areaPages, ...tradePages, ...brandPages, ...brandSystemPages];
+  return [...staticPages, ...guidePages, ...toolPages, ...areaPages, ...tradePages, ...brandPages, ...brandSystemPages, ...areaServiceEntries, ...caseStudyPages];
 }
 
 const caseStudyPages: MetadataRoute.Sitemap =
