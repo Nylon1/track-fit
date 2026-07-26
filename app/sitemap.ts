@@ -112,6 +112,39 @@ const routes = [
   priority: 0.91,
   changeFrequency: "weekly" as const,
 },
+
+{
+  path: "/brands",
+  priority: 0.86,
+  changeFrequency: "weekly" as const,
+},
+
+{
+  path: "/trade",
+  priority: 0.81,
+  changeFrequency: "weekly" as const,
+},
+
+{
+  path: "/tools",
+  priority: 0.91,
+  changeFrequency: "weekly" as const,
+},{
+  path: "/services/residential-curtain-track-installation",
+  priority: 0.81,
+  changeFrequency: "weekly" as const,
+},
+
+{
+  path: "/services/commercial-curtain-track-installation",
+  priority: 0.85,
+  changeFrequency: "weekly" as const,
+
+  
+},
+
+
+
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
