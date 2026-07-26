@@ -4,7 +4,7 @@ import Link from "next/link";
 import SiteHeader from "@/components/site/SiteHeader";
 import { brandContent } from "@/lib/brands/data";
 import { absoluteUrl } from "@/lib/seo/site-config";
-
+import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 export const metadata: Metadata = {
   title: "Curtain Track Brand Centre | TrackFit",
   description:
@@ -13,9 +13,17 @@ export const metadata: Metadata = {
 };
 
 export default function BrandsPage() {
-  return (
-    <>
-      <SiteHeader />
+ return (
+  <>
+    <BreadcrumbSchema
+      items={[
+        { name: "Home", path: "/" },
+        { name: "Brands", path: "/brands" },
+        
+      ]}
+    />
+
+    <SiteHeader />
       <main className="min-h-screen bg-[#080A09] text-[#F4F1E8]">
         <section className="border-b border-white/10">
           <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:px-10 lg:py-24">

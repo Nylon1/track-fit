@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-
+import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 import SiteHeader from "@/components/site/SiteHeader";
 import {
   brandContent,
@@ -62,10 +62,24 @@ export default async function SystemPage({ params }: Props) {
       },
     })),
   };
+return (
+  <>
+    <BreadcrumbSchema
+      items={[
+        { name: "Home", path: "/" },
+        { name: "Brands", path: "/brands" },
+        {
+          name: brandItem.name,
+          path: `/brands/${brandItem.slug}`,
+        },
+        {
+          name: item.name,
+          path: `/brands/${brandItem.slug}/${item.slug}`,
+        },
+      ]}
+    />
 
-  return (
-    <>
-      <SiteHeader />
+    <SiteHeader />
 
       <main className="min-h-screen bg-[#080A09] text-[#F4F1E8]">
         <script

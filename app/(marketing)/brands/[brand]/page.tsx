@@ -31,7 +31,7 @@ export async function generateMetadata({
   if (!item) return {};
 
   return {
-    title: `${item.title} | TrackFit`,
+    title: item.title,
     description: item.description,
     alternates: {
       canonical: absoluteUrl(`/brands/${item.slug}`),
