@@ -22,6 +22,8 @@ const manrope = Manrope({
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
 
+
+  
   title: {
     default:
       "TrackFit | Professional Curtain Track Installation UK",
@@ -85,17 +87,20 @@ export const metadata: Metadata = {
   },
 
   icons: {
-    icon: [
-      {
-        url: "/logos/trackfit-logo.svg",
-        type: "image/svg+xml",
-      },
-    ],
-
-    shortcut: "/logos/trackfit-logo.svg",
-
-    apple: "/logos/trackfit-logo.svg",
-  },
+  icon: [
+    {
+      url: "/favicon.ico",
+      sizes: "any",
+    },
+    {
+      url: "/icon.png",
+      type: "image/png",
+      sizes: "512x512",
+    },
+  ],
+  shortcut: "/favicon.ico",
+  apple: "/icon.png",
+},
 
   manifest: "/manifest.webmanifest",
 
@@ -142,3 +147,4 @@ export default function RootLayout({
     </html>
   );
 }
+
