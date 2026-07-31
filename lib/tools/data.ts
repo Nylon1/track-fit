@@ -123,5 +123,16 @@ export const tools: ToolDefinition[] = [
   duration: "2 minutes",
   status: "live",
 },
+
+{
+  slug: "curtain-weight-motor-selector",
+  title: "Curtain Weight & Motor Selector",
+  description:
+    "Estimate finished curtain weight from dimensions, fullness, fabric GSM, lining and interlining, then identify a suitable Forest Shuttle motor range.",
+  category: "choose",
+  duration: "2 minutes",
+  status: "live",
+},
+
 ];
 
