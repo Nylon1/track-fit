@@ -75,6 +75,13 @@ const services = [
     href: "/services/wall-mounted-curtain-track-installation",
     label: "Wall fixed",
   },
+   {
+    title: "Motorised Curtain Track Installation",
+    description:
+      "Professional installation for battery-operated and smart-home controlled curtain systems.",
+    href: "/motorised-curtain-tracks",
+    label: "Motorised",
+  },
   {
     title: "Commercial Curtain Track Installation",
     description:
