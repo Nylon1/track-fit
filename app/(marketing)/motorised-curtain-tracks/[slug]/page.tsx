@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -10,6 +11,50 @@ import { absoluteUrl } from "@/lib/seo/site-config";
 
 type Props = { params: Promise<{ slug: string }> };
 
+type GuideImage = { src: string; alt: string; objectClass?: string };
+
+const defaultImage: GuideImage = {
+  src: "/images/motorised/forest/shuttle-motor-range.png",
+  alt: "Forest Shuttle motor range for motorised curtain tracks",
+};
+
+const guideImages: Record<string, GuideImage> = {
+  motors: defaultImage,
+  "shuttle-go": defaultImage,
+  "shuttle-ion": defaultImage,
+  "shuttle-l": defaultImage,
+  "shuttle-ac": defaultImage,
+  "shuttle-m": defaultImage,
+  "track-systems": {
+    src: "/images/motorised/forest/fms-track-colours.png",
+    alt: "Forest FMS motorised curtain track profiles in white and matt black",
+  },
+  fms: {
+    src: "/images/motorised/forest/fms-track-colours.png",
+    alt: "Forest FMS motorised curtain track profiles in white and matt black",
+  },
+  "fms-plus": {
+    src: "/images/motorised/forest/fms-plus.webp",
+    alt: "Forest FMS Plus motorised curtain track system",
+  },
+  "recessed-tracks": {
+    src: "/images/motorised/forest/fms-plus-recess.webp",
+    alt: "Forest FMS Plus Recess concealed motorised curtain track",
+  },
+  "new-builds": {
+    src: "/images/motorised/forest/fms-plus-recess.webp",
+    alt: "Forest recessed motorised curtain track for new-build ceilings",
+  },
+  "hotel-blackout": {
+    src: "/images/motorised/forest/fms-dual.png",
+    alt: "Forest FMS Dual two-channel motorised curtain track system",
+  },
+};
+
+function getGuideImage(slug: string): GuideImage {
+  return guideImages[slug] ?? defaultImage;
+}
+
 export function generateStaticParams() {
   return motorisedPages.map((page) => ({ slug: page.slug }));
 }
@@ -20,12 +65,30 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const page = getMotorisedPage(slug);
   if (!page) return {};
+
+  const image = getGuideImage(slug);
+  const imageUrl = absoluteUrl(image.src);
+  const pageUrl = absoluteUrl(`/motorised-curtain-tracks/${page.slug}`);
+
   return {
     title: `${page.title} | TrackFit`,
     description: page.description,
     keywords: page.keywords,
-    alternates: { canonical: absoluteUrl(`/motorised-curtain-tracks/${page.slug}`) },
-    openGraph: { title: page.title, description: page.description, url: absoluteUrl(`/motorised-curtain-tracks/${page.slug}`), type: "website" },
+    alternates: { canonical: pageUrl },
+    openGraph: {
+      title: page.title,
+      description: page.description,
+      url: pageUrl,
+      type: "website",
+      siteName: "TrackFit",
+      images: [{ url: imageUrl, alt: image.alt }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: page.title,
+      description: page.description,
+      images: [imageUrl],
+    },
   };
 }
 
@@ -34,8 +97,10 @@ export default async function MotorisedGuidePage({ params }: Props) {
   const page = getMotorisedPage(slug);
   if (!page) notFound();
 
+  const image = getGuideImage(page.slug);
   const relatedPages = page.related.map((item) => getMotorisedPage(item)).filter(Boolean);
   const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", mainEntity: page.faqs.map((faq) => ({ "@type": "Question", name: faq.question, acceptedAnswer: { "@type": "Answer", text: faq.answer } })) };
+  const imageSchema = { "@context": "https://schema.org", "@type": "ImageObject", contentUrl: absoluteUrl(image.src), caption: image.alt, creditText: "Forest Group" };
 
   return (
     <>
@@ -43,23 +108,28 @@ export default async function MotorisedGuidePage({ params }: Props) {
       <SiteHeader />
       <main className="min-h-screen bg-[#080A09] text-[#F4F1E8]">
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(imageSchema) }} />
 
         <section className="relative overflow-hidden border-b border-white/10">
           <div aria-hidden="true" className="pointer-events-none absolute right-[-12%] top-[-45%] h-[650px] w-[650px] rounded-full bg-[#B8F23D]/10 blur-[150px]" />
-          <div className="relative mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:px-10 lg:py-24">
-            <nav className="text-sm text-white/45"><Link href="/motorised-curtain-tracks" className="hover:text-white">Motorised curtain tracks</Link><span className="mx-2">/</span><span className="text-[#B8F23D]">{page.title}</span></nav>
-            <p className="mt-10 text-xs font-bold uppercase tracking-[0.24em] text-[#B8F23D]">{page.eyebrow}</p>
-            <h1 className="mt-5 max-w-5xl text-5xl font-semibold leading-[0.97] tracking-[-0.05em] sm:text-6xl lg:text-7xl">{page.title}</h1>
-            <p className="mt-7 max-w-4xl text-lg leading-8 text-[#C8C8C1] sm:text-xl">{page.description}</p>
-            <div className="mt-9 flex flex-wrap gap-3"><Link href="/quote/postcode" className="inline-flex min-h-12 items-center rounded-full bg-[#B8F23D] px-7 font-bold text-[#080A09]">Request a system review →</Link><Link href="/tools/curtain-weight-motor-selector" className="inline-flex min-h-12 items-center rounded-full border border-white/15 px-7 font-semibold">Calculate curtain weight</Link></div>
+          <div className="relative mx-auto grid max-w-7xl gap-10 px-5 py-16 sm:px-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:px-10 lg:py-24">
+            <div>
+              <nav className="text-sm text-white/45"><Link href="/motorised-curtain-tracks" className="hover:text-white">Motorised curtain tracks</Link><span className="mx-2">/</span><span className="text-[#B8F23D]">{page.title}</span></nav>
+              <p className="mt-10 text-xs font-bold uppercase tracking-[0.24em] text-[#B8F23D]">{page.eyebrow}</p>
+              <h1 className="mt-5 max-w-5xl text-5xl font-semibold leading-[0.97] tracking-[-0.05em] sm:text-6xl lg:text-7xl">{page.title}</h1>
+              <p className="mt-7 max-w-4xl text-lg leading-8 text-[#C8C8C1] sm:text-xl">{page.description}</p>
+              <div className="mt-9 flex flex-wrap gap-3"><Link href="/quote/postcode" className="inline-flex min-h-12 items-center rounded-full bg-[#B8F23D] px-7 font-bold text-[#080A09]">Request a system review →</Link><Link href="/tools/curtain-weight-motor-selector" className="inline-flex min-h-12 items-center rounded-full border border-white/15 px-7 font-semibold">Calculate curtain weight</Link></div>
+            </div>
+            <figure className="overflow-hidden rounded-[32px] border border-white/10 bg-white p-5 sm:p-8">
+              <div className="relative aspect-[4/3]">
+                <Image src={image.src} alt={image.alt} fill priority sizes="(min-width: 1024px) 42vw, 92vw" className={`object-contain ${image.objectClass ?? ""}`} />
+              </div>
+              <figcaption className="mt-4 text-right text-xs text-black/45">Product imagery courtesy of Forest Group.</figcaption>
+            </figure>
           </div>
         </section>
 
-        {page.slug === "motors" && (
-          <section className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:px-10 lg:py-24">
-            <MotorComparisonExplorer />
-          </section>
-        )}
+        {page.slug === "motors" && <section className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:px-10 lg:py-24"><MotorComparisonExplorer /></section>}
 
         <section className={page.slug === "motors" ? "border-t border-white/10" : ""}>
           <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:px-10 lg:py-24"><div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]"><div><p className="text-xs font-bold uppercase tracking-[0.2em] text-[#B8F23D]">System overview</p><h2 className="mt-4 text-4xl font-semibold tracking-[-0.04em]">What this means for your project.</h2><p className="mt-5 leading-8 text-[#AAACA4]">{page.intro}</p></div><div className="grid gap-5 sm:grid-cols-2">{page.highlights.map((item, index) => <article key={item.title} className="rounded-[28px] border border-white/10 bg-white/[0.035] p-6"><span className="text-sm font-bold text-[#B8F23D]">{String(index + 1).padStart(2, "0")}</span><h3 className="mt-6 text-2xl font-semibold">{item.title.replace(" — ", " ")}</h3><p className="mt-4 leading-7 text-[#AAACA4]">{item.text}</p></article>)}</div></div></div>
