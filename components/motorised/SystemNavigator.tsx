@@ -4,14 +4,62 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 
 const goals = [
-  { id: "standard", label: "Standard motorised curtains", href: "/motorised-curtain-tracks/shuttle-go", answer: "Start with Shuttle Go and the standard FMS track, subject to curtain weight and survey." },
-  { id: "battery", label: "No nearby power point", href: "/motorised-curtain-tracks/shuttle-ion", answer: "Explore Shuttle iOn, the rechargeable option for suitable curtains up to 25 kg." },
-  { id: "heavy", label: "Heavy curtains", href: "/motorised-curtain-tracks/heavy-curtains", answer: "Calculate the complete moving load and investigate Shuttle M where higher capacity is required." },
-  { id: "curve", label: "Curved or bay window", href: "/motorised-curtain-tracks/curved-tracks", answer: "Plan every bend, bend radius and fixing position before selecting the motor." },
-  { id: "recess", label: "Concealed ceiling track", href: "/motorised-curtain-tracks/recessed-tracks", answer: "Coordinate FMS Plus Recess, structural support and power before the ceiling is completed." },
-  { id: "smart", label: "Smart-home control", href: "/motorised-curtain-tracks/control-selector", answer: "Use the interactive compatibility checker to match your app, voice, Z-Wave or automation goal to a suitable motor pathway." },
-  { id: "hotel", label: "Hotel blackout", href: "/motorised-curtain-tracks/hotel-blackout", answer: "Explore FMS Dual for a two-channel system with an adjustable overlap." },
-  { id: "commercial", label: "Commercial automation", href: "/motorised-curtain-tracks/control-selector", answer: "Use the control checker to plan BMS, relay or professional automation before selecting the motor and accessories." },
+  {
+    id: "standard",
+    label: "Choose the track system",
+    href: "/motorised-curtain-tracks/track-selector",
+    answer:
+      "Use the interactive track selector to compare FMS, FMS Plus, FMS Plus Recess and FMS Dual for your room and curtain arrangement.",
+  },
+  {
+    id: "battery",
+    label: "No nearby power point",
+    href: "/motorised-curtain-tracks/shuttle-ion",
+    answer:
+      "Explore Shuttle iOn, the rechargeable option for suitable curtains up to 25 kg.",
+  },
+  {
+    id: "heavy",
+    label: "Heavy curtains",
+    href: "/motorised-curtain-tracks/heavy-curtains",
+    answer:
+      "Calculate the complete moving load and investigate Shuttle M where higher capacity is required.",
+  },
+  {
+    id: "curve",
+    label: "Curved or bay window",
+    href: "/motorised-curtain-tracks/curved-tracks",
+    answer:
+      "Plan every bend, bend radius and fixing position before selecting the motor.",
+  },
+  {
+    id: "recess",
+    label: "Concealed ceiling track",
+    href: "/motorised-curtain-tracks/recessed-tracks",
+    answer:
+      "Coordinate FMS Plus Recess, structural support and power before the ceiling is completed.",
+  },
+  {
+    id: "smart",
+    label: "Smart-home control",
+    href: "/motorised-curtain-tracks/control-selector",
+    answer:
+      "Use the interactive compatibility checker to match your app, voice, Z-Wave or automation goal to a suitable motor pathway.",
+  },
+  {
+    id: "hotel",
+    label: "Hotel blackout",
+    href: "/motorised-curtain-tracks/hotel-blackout",
+    answer:
+      "Explore FMS Dual for a two-channel system with an adjustable overlap.",
+  },
+  {
+    id: "commercial",
+    label: "Commercial automation",
+    href: "/motorised-curtain-tracks/control-selector",
+    answer:
+      "Use the control checker to plan BMS, relay or professional automation before selecting the motor and accessories.",
+  },
 ] as const;
 
 type GoalId = (typeof goals)[number]["id"];
@@ -60,13 +108,9 @@ export default function SystemNavigator() {
             Recommended starting point
           </p>
 
-          <h3 className="mt-4 text-3xl font-semibold">
-            {result.label}
-          </h3>
+          <h3 className="mt-4 text-3xl font-semibold">{result.label}</h3>
 
-          <p className="mt-4 leading-8 text-[#C8C8C1]">
-            {result.answer}
-          </p>
+          <p className="mt-4 leading-8 text-[#C8C8C1]">{result.answer}</p>
 
           <Link
             href={result.href}
