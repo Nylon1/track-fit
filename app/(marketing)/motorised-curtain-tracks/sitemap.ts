@@ -20,6 +20,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
+      url: absoluteUrl("/motorised-curtain-tracks/track-selector"),
+      lastModified: updated,
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    {
       url: absoluteUrl("/motorised-curtain-tracks/faqs"),
       lastModified: updated,
       changeFrequency: "monthly",
@@ -29,7 +35,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: absoluteUrl(`/motorised-curtain-tracks/${page.slug}`),
       lastModified: updated,
       changeFrequency: "monthly" as const,
-      priority: page.slug === "installation" || page.slug === "motors" || page.slug === "track-systems" ? 0.88 : 0.8,
+      priority:
+        page.slug === "installation" ||
+        page.slug === "motors" ||
+        page.slug === "track-systems"
+          ? 0.88
+          : 0.8,
     })),
     ...motorisedArticles.map(([slug]) => ({
       url: absoluteUrl(`/articles/motorised-curtain-tracks/${slug}`),
