@@ -89,13 +89,7 @@ const services = [
     href: "/services/commercial-curtain-track-installation",
     label: "Commercial",
   },
-  {
-    title: "Double Curtain Track Installation",
-    description:
-      "Separate tracks for voile, blackout and decorative curtain layers with properly planned spacing.",
-    href: "/services/double-curtain-tracks",
-    label: "Layered curtains",
-  },
+
   {
   title: "Healthcare Curtain Track Installation",
   description:
