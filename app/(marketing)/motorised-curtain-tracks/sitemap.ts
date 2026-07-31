@@ -14,6 +14,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.95,
     },
     {
+      url: absoluteUrl("/motorised-curtain-tracks/control-selector"),
+      lastModified: updated,
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    {
       url: absoluteUrl("/motorised-curtain-tracks/faqs"),
       lastModified: updated,
       changeFrequency: "monthly",
