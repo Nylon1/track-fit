@@ -9,9 +9,9 @@ const goals = [
   { id: "heavy", label: "Heavy curtains", href: "/motorised-curtain-tracks/heavy-curtains", answer: "Calculate the complete moving load and investigate Shuttle M where higher capacity is required." },
   { id: "curve", label: "Curved or bay window", href: "/motorised-curtain-tracks/curved-tracks", answer: "Plan every bend, bend radius and fixing position before selecting the motor." },
   { id: "recess", label: "Concealed ceiling track", href: "/motorised-curtain-tracks/recessed-tracks", answer: "Coordinate FMS Plus Recess, structural support and power before the ceiling is completed." },
-  { id: "smart", label: "Smart-home control", href: "/motorised-curtain-tracks/smart-home", answer: "Choose the control ecosystem first, then match the motor and required connector." },
+  { id: "smart", label: "Smart-home control", href: "/motorised-curtain-tracks/control-selector", answer: "Use the interactive compatibility checker to match your app, voice, Z-Wave or automation goal to a suitable motor pathway." },
   { id: "hotel", label: "Hotel blackout", href: "/motorised-curtain-tracks/hotel-blackout", answer: "Explore FMS Dual for a two-channel system with an adjustable overlap." },
-  { id: "commercial", label: "Commercial automation", href: "/motorised-curtain-tracks/commercial", answer: "Coordinate motor load, operating frequency and BMS or relay controls as one specification." },
+  { id: "commercial", label: "Commercial automation", href: "/motorised-curtain-tracks/control-selector", answer: "Use the control checker to plan BMS, relay or professional automation before selecting the motor and accessories." },
 ] as const;
 
 export default function SystemNavigator() {
