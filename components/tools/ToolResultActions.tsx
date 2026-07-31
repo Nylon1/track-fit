@@ -111,7 +111,7 @@ export function ToolResultActions({
 
   const emailResult = () => {
     const subject = encodeURIComponent(
-      `${toolName} result — ${resultValue}`,
+      `${toolName} result- ${resultValue}`,
     );
 
     const body = encodeURIComponent(

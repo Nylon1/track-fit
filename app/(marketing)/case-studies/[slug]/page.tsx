@@ -145,7 +145,7 @@ export default async function CaseStudyPage({
             {!study.verified && (
               <div className="mt-8 rounded-[22px] border border-amber-300/25 bg-amber-200/[0.07] p-5">
                 <p className="font-semibold text-amber-100">
-                  Draft project record — not currently
+                  Draft project record- not currently
                   indexable
                 </p>
 

@@ -378,7 +378,7 @@ export async function POST(request: Request) {
         replyTo: body.contact.email,
 
         subject:
-          `${body.reference} — New TrackFit enquiry from ${body.contact.fullName}`,
+          `${body.reference}- New TrackFit enquiry from ${body.contact.fullName}`,
 
         html: `
           <!doctype html>

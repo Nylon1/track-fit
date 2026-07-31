@@ -34,7 +34,7 @@ const commonFaqs = [
 export const motorisedPages: MotorisedPage[] = [
   {
     slug: "motors", title: "Forest Shuttle Motor Comparison", eyebrow: "Choose the motor", description: "Compare Forest Shuttle Go, iOn, L, AC and M curtain motors by load, power and control requirements.", keywords: ["Forest Shuttle motor comparison", "electric curtain motor", "motorised curtain motor"], intro: "The right motor depends on more than curtain weight. Power availability, bends, track length, control method and building integration all affect the final choice.",
-    highlights: motors.map((motor) => ({ title: `${motor.name} — ${motor.load}`, text: `${motor.bestFor}. ${motor.detail}` })), related: ["controls", "curved-tracks", "heavy-curtains"], faqs: commonFaqs,
+    highlights: motors.map((motor) => ({ title: `${motor.name}- ${motor.load}`, text: `${motor.bestFor}. ${motor.detail}` })), related: ["controls", "curved-tracks", "heavy-curtains"], faqs: commonFaqs,
   },
   {
     slug: "track-systems", title: "Motorised Curtain Track Systems", eyebrow: "Choose the track", description: "Explore Forest FMS, FMS Plus, recessed and dual motorised curtain-track systems.", keywords: ["motorised curtain track systems", "Forest FMS", "recessed electric curtain track"], intro: "The motor provides movement; the track determines how the curtain is supported, drawn, curved and integrated into the room.", highlights: trackSystems.map((system) => ({ title: system.name, text: `${system.bestFor}. ${system.detail}` })), related: ["fms", "recessed-tracks", "hotel-blackout"], faqs: commonFaqs,

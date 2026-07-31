@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 
 import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 import ServicesExperience from "@/components/services/ServicesExperience";
 import SiteHeader from "@/components/site/SiteHeader";
 import { createMetadata } from "@/lib/seo/metadata";
+import Image from "next/image";
 
 const pageTitle = "Curtain Track Installation Services UK";
 const pageDescription = "Explore TrackFit residential, commercial, healthcare, specialist and motorised curtain-track installation services, planning tools, brands and nationwide coverage.";
