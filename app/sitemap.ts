@@ -81,7 +81,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: absoluteUrl(`/trade/${sector.slug}`),
     lastModified: updated,
     changeFrequency: "monthly",
-    priority: 0.75,
+    priority: 0.85,
   }));
 
   const brandPages: MetadataRoute.Sitemap = brandContent.brands.map((brand) => ({
