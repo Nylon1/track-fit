@@ -3,16 +3,14 @@ import Link from "next/link";
 
 import SiteHeader from "@/components/site/SiteHeader";
 import { BayWindowCalculator } from "@/components/tools/BayWindowCalculator";
-import { absoluteUrl } from "@/lib/seo/site-config";
+import { createMetadata } from "@/lib/seo/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createMetadata({
   title: "Bay Window Curtain Track Calculator | TrackFit",
   description:
     "Add each bay-window section and side extension to estimate the total curtain track run.",
-  alternates: {
-    canonical: absoluteUrl("/tools/bay-window-calculator"),
-  },
-};
+  path: "/tools/bay-window-calculator",
+});
 
 const faqs = [
   {

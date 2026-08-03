@@ -7,6 +7,7 @@ import MotorComparisonExplorer from "@/components/motorised/MotorComparisonExplo
 import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 import SiteHeader from "@/components/site/SiteHeader";
 import { getMotorisedPage, motorisedPages } from "@/lib/motorised/data";
+import { createMetadata } from "@/lib/seo/metadata";
 import { absoluteUrl } from "@/lib/seo/site-config";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -67,29 +68,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!page) return {};
 
   const image = getGuideImage(slug);
-  const imageUrl = absoluteUrl(image.src);
-  const pageUrl = absoluteUrl(`/motorised-curtain-tracks/${page.slug}`);
 
-  return {
+  return createMetadata({
     title: `${page.title} | TrackFit`,
     description: page.description,
     keywords: page.keywords,
-    alternates: { canonical: pageUrl },
-    openGraph: {
-      title: page.title,
-      description: page.description,
-      url: pageUrl,
-      type: "website",
-      siteName: "TrackFit",
-      images: [{ url: imageUrl, alt: image.alt }],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: page.title,
-      description: page.description,
-      images: [imageUrl],
-    },
-  };
+    path: `/motorised-curtain-tracks/${page.slug}`,
+    image: image.src,
+  });
 }
 
 export default async function MotorisedGuidePage({ params }: Props) {

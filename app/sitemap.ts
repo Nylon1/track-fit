@@ -5,7 +5,7 @@ import { brandContent } from "@/lib/brands/data";
 import { getVerifiedCaseStudies } from "@/lib/case-studies/data";
 import { guides } from "@/lib/guides/data";
 import { motorisedArticles, motorisedPages } from "@/lib/motorised/data";
-import { absoluteUrl } from "@/lib/seo/site-config";
+import { absoluteUrl, siteConfig } from "@/lib/seo/site-config";
 import { tools } from "@/lib/tools/data";
 import { tradeSectors } from "@/lib/trade/data";
 
@@ -14,8 +14,6 @@ const updated = new Date("2026-07-31");
 const routes = [
   { path: "/", priority: 1, changeFrequency: "weekly" as const },
   { path: "/services", priority: 0.9, changeFrequency: "weekly" as const },
-  { path: "/commercial", priority: 0.85, changeFrequency: "weekly" as const },
-  { path: "/gallery", priority: 0.75, changeFrequency: "weekly" as const },
   { path: "/about", priority: 0.65, changeFrequency: "monthly" as const },
   { path: "/contact", priority: 0.7, changeFrequency: "monthly" as const },
   { path: "/guides", priority: 0.91, changeFrequency: "weekly" as const },
@@ -35,9 +33,6 @@ const routes = [
   { path: "/services/wall-mounted-curtain-track-installation", priority: 0.86, changeFrequency: "weekly" as const },
   { path: "/services/double-curtain-tracks", priority: 0.88, changeFrequency: "weekly" as const },
   { path: "/services/healthcare-curtain-track-installation", priority: 0.86, changeFrequency: "monthly" as const },
-  { path: "/trade/healthcare", priority: 0.78, changeFrequency: "monthly" as const },
-  { path: "/tools/healthcare-curtain-track-specification-checker", priority: 0.9, changeFrequency: "monthly" as const },
-  { path: "/tools/curtain-weight-motor-selector", priority: 0.9, changeFrequency: "monthly" as const },
   { path: "/motorised-curtain-tracks", priority: 0.95, changeFrequency: "weekly" as const },
   { path: "/motorised-curtain-tracks/control-selector", priority: 0.9, changeFrequency: "monthly" as const },
   { path: "/motorised-curtain-tracks/track-selector", priority: 0.9, changeFrequency: "monthly" as const },
@@ -46,7 +41,7 @@ const routes = [
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages: MetadataRoute.Sitemap = routes.map((route) => ({
-    url: absoluteUrl(route.path),
+    url: route.path === "/" ? siteConfig.url : absoluteUrl(route.path),
     lastModified: updated,
     changeFrequency: route.changeFrequency,
     priority: route.priority,

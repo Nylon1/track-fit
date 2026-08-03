@@ -491,7 +491,7 @@ export function DoubleTrackSpacingCalculator() {
             <p className="mt-3 text-sm leading-6 text-amber-50">
               Curtain depth varies with fullness, lining and how the
               curtains are dressed. Check the actual heading depth and
-              the double-track manufacturer's minimum spacing before
+              the double-track manufacturer&apos;s minimum spacing before
               drilling.
             </p>
           </section>

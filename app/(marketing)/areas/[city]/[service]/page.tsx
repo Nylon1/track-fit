@@ -8,7 +8,7 @@ import {
   getArea,
   getAreaServicePage,
 } from "@/lib/areas/data";
-import { absoluteUrl } from "@/lib/seo/site-config";
+import { createMetadata } from "@/lib/seo/metadata";
 
 type PageProps = {
   params: Promise<{
@@ -34,15 +34,11 @@ export async function generateMetadata({
     return {};
   }
 
-  return {
-    title: `${page.title} | TrackFit`,
+  return createMetadata({
+    title: `${page.title} Service | TrackFit`,
     description: page.description,
-    alternates: {
-      canonical: absoluteUrl(
-        `/areas/${page.citySlug}/${page.serviceSlug}`,
-      ),
-    },
-  };
+    path: `/areas/${page.citySlug}/${page.serviceSlug}`,
+  });
 }
 
 export default async function AreaServicePage({

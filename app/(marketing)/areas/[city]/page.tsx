@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 
 import SiteHeader from "@/components/site/SiteHeader";
 import { areaServicePages, areas, getArea } from "@/lib/areas/data";
+import { createMetadata } from "@/lib/seo/metadata";
 import { absoluteUrl } from "@/lib/seo/site-config";
 
 type PageProps = {
@@ -28,13 +29,11 @@ export async function generateMetadata({
     return {};
   }
 
-  return {
+  return createMetadata({
     title: `Curtain Track Installation in ${area.name} | TrackFit`,
     description: area.intro,
-    alternates: {
-      canonical: absoluteUrl(`/areas/${area.slug}`),
-    },
-  };
+    path: `/areas/${area.slug}`,
+  });
 }
 
 export default async function AreaPage({ params }: PageProps) {

@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 
 import SiteHeader from "@/components/site/SiteHeader";
 import { getTradeSector, tradeSectors } from "@/lib/trade/data";
+import { createMetadata } from "@/lib/seo/metadata";
 import { absoluteUrl } from "@/lib/seo/site-config";
 
 type PageProps = {
@@ -28,14 +29,15 @@ export async function generateMetadata({
     return {};
   }
 
-  return {
-    title: item.title,
+  return createMetadata({
+    title:
+      item.slug === "hotels"
+        ? `${item.title} for Trade Projects`
+        : item.title,
     description: item.description,
     keywords: item.keywords,
-    alternates: {
-      canonical: absoluteUrl(`/trade/${item.slug}`),
-    },
-  };
+    path: `/trade/${item.slug}`,
+  });
 }
 
 export default async function TradeSectorPage({

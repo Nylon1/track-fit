@@ -7,7 +7,7 @@ type GuideCTAProps = {
 
 export function GuideCTA({
   serviceLabel = "Explore our installation service",
-  serviceHref = "/residential",
+  serviceHref = "/services/residential-curtain-track-installation",
 }: GuideCTAProps) {
   return (
     <section className="relative overflow-hidden rounded-[34px] border border-[#B8F23D]/30 bg-[#B8F23D] px-6 py-10 text-[#080A09] sm:px-10 lg:px-14 lg:py-14">

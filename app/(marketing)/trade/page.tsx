@@ -2,17 +2,15 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import SiteHeader from "@/components/site/SiteHeader";
+import { createMetadata } from "@/lib/seo/metadata";
 import { tradeSectors } from "@/lib/trade/data";
-import { absoluteUrl } from "@/lib/seo/site-config";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createMetadata({
   title: "Trade Curtain Track Installation | TrackFit",
   description:
     "Nationwide curtain-track installation for designers, workrooms, developers, contractors, hotels, care homes and commercial property teams.",
-  alternates: {
-    canonical: absoluteUrl("/trade"),
-  },
-};
+  path: "/trade",
+});
 
 export default function TradePage() {
   return (
@@ -45,7 +43,7 @@ export default function TradePage() {
               </Link>
 
               <Link
-                href="/commercial"
+                href="/services/commercial-curtain-track-installation"
                 className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/15 px-6 font-semibold"
               >
                 View commercial services

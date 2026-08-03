@@ -3,16 +3,14 @@ import Link from "next/link";
 
 import SiteHeader from "@/components/site/SiteHeader";
 import { CurtainFabricCalculator } from "@/components/tools/CurtainFabricCalculator";
-import { absoluteUrl } from "@/lib/seo/site-config";
+import { createMetadata } from "@/lib/seo/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createMetadata({
   title: "Curtain Fabric Calculator | TrackFit",
   description:
     "Estimate how many metres of curtain fabric you may need from the track width, finished drop, fullness and fabric width.",
-  alternates: {
-    canonical: absoluteUrl("/tools/curtain-fabric-calculator"),
-  },
-};
+  path: "/tools/curtain-fabric-calculator",
+});
 
 const faqs = [
   {

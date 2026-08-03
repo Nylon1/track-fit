@@ -3,16 +3,14 @@ import Link from "next/link";
 
 import SiteHeader from "@/components/site/SiteHeader";
 import { FixingFinder } from "@/components/tools/FixingFinder";
-import { absoluteUrl } from "@/lib/seo/site-config";
+import { createMetadata } from "@/lib/seo/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createMetadata({
   title: "Curtain Track Fixing Finder | TrackFit",
   description:
     "Identify a suitable curtain-track fixing approach for timber, masonry, concrete or plasterboard.",
-  alternates: {
-    canonical: absoluteUrl("/tools/curtain-track-fixing-finder"),
-  },
-};
+  path: "/tools/curtain-track-fixing-finder",
+});
 
 const faqs = [
   {

@@ -44,7 +44,7 @@ export default function TFArrival() {
       <EntryBackground />
 
       <header className="tf-arrival-header tf-container">
-        <a
+        <Link
           href="/"
           className="tf-arrival-brand"
           aria-label="TrackFit home"
@@ -57,7 +57,7 @@ export default function TFArrival() {
             priority
             className="tf-arrival-logo"
           />
-        </a>
+        </Link>
 
         <p>UK curtain track installation specialists</p>
       </header>

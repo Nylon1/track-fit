@@ -8,7 +8,7 @@ import {
   getBrand,
   getSystem,
 } from "@/lib/brands/data";
-import { absoluteUrl } from "@/lib/seo/site-config";
+import { createMetadata } from "@/lib/seo/metadata";
 
 type Props = {
   params: Promise<{
@@ -34,13 +34,11 @@ export async function generateMetadata({
 
   if (!item) return {};
 
-  return {
+  return createMetadata({
     title: `${item.name} Installation Guide | TrackFit`,
     description: item.description,
-    alternates: {
-      canonical: absoluteUrl(`/brands/${brand}/${system}`),
-    },
-  };
+    path: `/brands/${brand}/${system}`,
+  });
 }
 
 export default async function SystemPage({ params }: Props) {

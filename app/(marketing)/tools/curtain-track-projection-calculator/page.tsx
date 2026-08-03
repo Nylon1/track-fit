@@ -3,18 +3,14 @@ import Link from "next/link";
 
 import SiteHeader from "@/components/site/SiteHeader";
 import { TrackProjectionCalculator } from "@/components/tools/TrackProjectionCalculator";
-import { absoluteUrl } from "@/lib/seo/site-config";
+import { createMetadata } from "@/lib/seo/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createMetadata({
   title: "Curtain Track Projection Calculator | TrackFit",
   description:
     "Estimate how far a curtain track should sit from the wall to clear handles, sills and radiators.",
-  alternates: {
-    canonical: absoluteUrl(
-      "/tools/curtain-track-projection-calculator",
-    ),
-  },
-};
+  path: "/tools/curtain-track-projection-calculator",
+});
 
 const faqs = [
   {

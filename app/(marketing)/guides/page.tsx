@@ -3,24 +3,15 @@ import Link from "next/link";
 import { GuideCTA } from "@/components/guides/GuideCTA";
 import { GuideExplorer } from "@/components/guides/GuideExplorer";
 import { guideCategories, guides } from "@/lib/guides/data";
-import { absoluteUrl } from "@/lib/seo/absolute-url";
+import { createMetadata } from "@/lib/seo/metadata";
 import SiteHeader from "@/components/site/SiteHeader";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createMetadata({
   title: "Curtain Track Guides & Expert Advice | TrackFit",
   description:
     "Practical curtain track guides covering choosing, measuring, installation, bay windows, bifold doors, repairs and commercial fitting.",
-  alternates: {
-    canonical: absoluteUrl("/guides"),
-  },
-  openGraph: {
-    title: "Curtain Track Guides & Expert Advice | TrackFit",
-    description:
-      "Clear answers about choosing, measuring, fitting and repairing curtain tracks.",
-    type: "website",
-    url: absoluteUrl("/guides"),
-  },
-};
+  path: "/guides",
+});
 
 export default function GuidesPage() {
   return (

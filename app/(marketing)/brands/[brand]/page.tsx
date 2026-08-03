@@ -8,7 +8,7 @@ import {
   getBrand,
   getBrandSystems,
 } from "@/lib/brands/data";
-import { absoluteUrl } from "@/lib/seo/site-config";
+import { createMetadata } from "@/lib/seo/metadata";
 
 type Props = {
   params: Promise<{ brand: string }>;
@@ -30,13 +30,11 @@ export async function generateMetadata({
 
   if (!item) return {};
 
-  return {
+  return createMetadata({
     title: item.title,
     description: item.description,
-    alternates: {
-      canonical: absoluteUrl(`/brands/${item.slug}`),
-    },
-  };
+    path: `/brands/${item.slug}`,
+  });
 }
 
 export default async function BrandPage({ params }: Props) {

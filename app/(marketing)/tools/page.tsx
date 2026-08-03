@@ -3,13 +3,13 @@ import Link from "next/link";
 import SiteHeader from "@/components/site/SiteHeader";
 import { ToolCard } from "@/components/tools/ToolCard";
 import { tools } from "@/lib/tools/data";
-import { absoluteUrl } from "@/lib/seo/site-config";
+import { createMetadata } from "@/lib/seo/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createMetadata({
   title: "Free Curtain Track Tools & Calculators | TrackFit",
   description: "Free tools to measure, choose and plan curtain tracks for windows and doors.",
-  alternates: { canonical: absoluteUrl("/tools") },
-};
+  path: "/tools",
+});
 
 const groups = [
   { slug: "measure", title: "Measure", description: "Work out lengths, dimensions and curtain stack requirements." },

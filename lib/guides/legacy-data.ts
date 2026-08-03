@@ -191,7 +191,7 @@ export const guides: Guide[] = [
     ],
     serviceLink: {
       label: "Residential track installation",
-      href: "/residential",
+      href: "/services/residential-curtain-track-installation",
     },
   },
   {
@@ -278,7 +278,7 @@ export const guides: Guide[] = [
     ],
     serviceLink: {
       label: "Explore residential installation",
-      href: "/residential",
+      href: "/services/residential-curtain-track-installation",
     },
   },
   {
@@ -507,7 +507,7 @@ export const guides: Guide[] = [
     ],
     serviceLink: {
       label: "Residential bay track fitting",
-      href: "/residential",
+      href: "/services/residential-curtain-track-installation",
     },
   },
   {

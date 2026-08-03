@@ -3,13 +3,13 @@ import Link from "next/link";
 import SiteHeader from "@/components/site/SiteHeader";
 import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 import { caseStudies } from "@/lib/case-studies/data";
-import { absoluteUrl } from "@/lib/seo/site-config";
+import { createMetadata } from "@/lib/seo/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createMetadata({
   title: "Curtain Track Installation Case Studies",
   description: "TrackFit project studies covering homes, hotels, apartments, bays, wave curtains, recessed tracks and commercial installations across England.",
-  alternates: { canonical: absoluteUrl("/case-studies") },
-};
+  path: "/case-studies",
+});
 
 export default function CaseStudiesPage() {
   const regions = Array.from(new Set(caseStudies.map((study) => study.region)));

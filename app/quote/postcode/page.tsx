@@ -1,5 +1,5 @@
-import { redirect } from "next/navigation";
+import TFArrival from "@/components/entry/TFArrival";
 
 export default function Page() {
-  redirect("/");
+  return <TFArrival />;
 }

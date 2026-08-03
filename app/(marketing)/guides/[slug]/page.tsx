@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { absoluteUrl } from "@/lib/seo/absolute-url";
+import { createMetadata } from "@/lib/seo/metadata";
 import { FAQAccordion } from "@/components/guides/FAQAccordion";
 import { InstallerInsight } from "@/components/guides/InstallerInsight";
 import { GuideHeroVisual } from "@/components/guides/GuideHeroVisual";
@@ -32,19 +33,12 @@ export async function generateMetadata({
 
   if (!guide) return {};
 
-  return {
+  return createMetadata({
     title: guide.metaTitle,
     description: guide.metaDescription,
-    alternates: {
-      canonical: absoluteUrl(`/guides/${guide.slug}`),
-    },
-    openGraph: {
-      title: guide.metaTitle,
-      description: guide.metaDescription,
-      type: "article",
-      url: absoluteUrl(`/guides/${guide.slug}`),
-    },
-  };
+    path: `/guides/${guide.slug}`,
+    type: "article",
+  });
 }
 
 export default async function GuidePage({ params }: PageProps) {

@@ -3,16 +3,14 @@ import Link from "next/link";
 
 import SiteHeader from "@/components/site/SiteHeader";
 import { BracketPlacementCalculator } from "@/components/tools/BracketPlacementCalculator";
-import { absoluteUrl } from "@/lib/seo/site-config";
+import { createMetadata } from "@/lib/seo/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createMetadata({
   title: "Curtain Track Bracket Placement Calculator | TrackFit",
   description:
     "Calculate an even curtain-track bracket layout and view each recommended bracket position.",
-  alternates: {
-    canonical: absoluteUrl("/tools/bracket-placement-calculator"),
-  },
-};
+  path: "/tools/bracket-placement-calculator",
+});
 
 const faqs = [
   {

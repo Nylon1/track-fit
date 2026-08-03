@@ -3,16 +3,14 @@ import Link from "next/link";
 
 import SiteHeader from "@/components/site/SiteHeader";
 import { CurtainStackCalculator } from "@/components/tools/CurtainStackCalculator";
-import { absoluteUrl } from "@/lib/seo/site-config";
+import { createMetadata } from "@/lib/seo/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createMetadata({
   title: "Curtain Stack-Back Calculator | TrackFit",
   description:
     "Estimate how much track or wall space curtains may occupy when fully open.",
-  alternates: {
-    canonical: absoluteUrl("/tools/curtain-stack-calculator"),
-  },
-};
+  path: "/tools/curtain-stack-calculator",
+});
 
 const faqs = [
   {

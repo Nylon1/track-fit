@@ -3,16 +3,14 @@ import Link from "next/link";
 
 import SiteHeader from "@/components/site/SiteHeader";
 import { TrackCuttingPlanner } from "@/components/tools/TrackCuttingPlanner";
-import { absoluteUrl } from "@/lib/seo/site-config";
+import { createMetadata } from "@/lib/seo/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createMetadata({
   title: "Curtain Track Cutting Planner | TrackFit",
   description:
     "Plan curtain-track cuts from 3 metre, 5 metre or custom stock lengths and reduce waste.",
-  alternates: {
-    canonical: absoluteUrl("/tools/curtain-track-cutting-planner"),
-  },
-};
+  path: "/tools/curtain-track-cutting-planner",
+});
 
 const faqs = [
   {

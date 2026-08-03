@@ -6,6 +6,7 @@ import SystemNavigator from "@/components/motorised/SystemNavigator";
 import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 import SiteHeader from "@/components/site/SiteHeader";
 import { motors, motorisedArticles } from "@/lib/motorised/data";
+import { createMetadata } from "@/lib/seo/metadata";
 import { absoluteUrl } from "@/lib/seo/site-config";
 
 const pagePath = "/motorised-curtain-tracks";
@@ -13,26 +14,13 @@ const pageTitle = "Motorised Curtain Tracks | Supply, Specification & Installati
 const pageDescription = "Explore Forest Shuttle motors, FMS track systems, smart controls, curved tracks, recessed installations and professional TrackFit installation across the UK.";
 const heroImage = "/images/motorised/forest/shuttle-motor-range.png";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createMetadata({
   title: pageTitle,
   description: pageDescription,
   keywords: ["motorised curtain tracks", "electric curtain tracks", "smart curtain tracks", "motorised curtain track installation", "Forest Shuttle", "Forest FMS"],
-  alternates: { canonical: absoluteUrl(pagePath) },
-  openGraph: {
-    title: pageTitle,
-    description: pageDescription,
-    url: absoluteUrl(pagePath),
-    type: "website",
-    siteName: "TrackFit",
-    images: [{ url: absoluteUrl(heroImage), alt: "Forest Shuttle motor range for motorised curtain tracks" }],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: pageTitle,
-    description: pageDescription,
-    images: [absoluteUrl(heroImage)],
-  },
-};
+  path: pagePath,
+  image: heroImage,
+});
 
 const routes = [
   ["Compare motors", "/motorised-curtain-tracks/motors", "A guided comparison of Shuttle Go, iOn, L, AC and M."],

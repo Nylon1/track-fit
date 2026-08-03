@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   title: {
     default:
       "TrackFit | Professional Curtain Track Installation UK",
-    template: "%s | TrackFit",
+    template: "%s",
   },
 
   description: siteConfig.description,
@@ -147,4 +147,3 @@ export default function RootLayout({
     </html>
   );
 }
-

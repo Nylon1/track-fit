@@ -447,7 +447,7 @@ export function BracketPlacementCalculator() {
             </p>
 
             <p className="mt-3 text-sm leading-6 text-amber-50">
-              Use the track manufacturer's maximum spacing and fixing
+              Use the track manufacturer&apos;s maximum spacing and fixing
               instructions. Heavy curtains, bends, joins and weak
               substrates may require additional support.
             </p>

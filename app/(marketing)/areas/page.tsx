@@ -3,16 +3,14 @@ import Link from "next/link";
 
 import SiteHeader from "@/components/site/SiteHeader";
 import { areas } from "@/lib/areas/data";
-import { absoluteUrl } from "@/lib/seo/site-config";
+import { createMetadata } from "@/lib/seo/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createMetadata({
   title: "Curtain Track Installation Areas | TrackFit",
   description:
     "Explore TrackFit curtain-track installation coverage across major cities in England.",
-  alternates: {
-    canonical: absoluteUrl("/areas"),
-  },
-};
+  path: "/areas",
+});
 
 export default function AreasPage() {
   return (

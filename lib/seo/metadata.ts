@@ -12,7 +12,14 @@ type CreateMetadataOptions = {
   keywords?: string[];
   image?: string;
   noIndex?: boolean;
+  type?: "website" | "article";
 };
+
+function withTrackFitBrand(title: string) {
+  return title.includes(siteConfig.name)
+    ? title
+    : `${title} | ${siteConfig.name}`;
+}
 
 export function createMetadata({
   title,
@@ -21,11 +28,13 @@ export function createMetadata({
   keywords = [],
   image = "/opengraph-image",
   noIndex = false,
+  type = "website",
 }: CreateMetadataOptions): Metadata {
   const canonicalUrl = absoluteUrl(path);
+  const brandedTitle = withTrackFitBrand(title);
 
   return {
-    title,
+    title: brandedTitle,
     description,
 
     keywords: [
@@ -40,8 +49,12 @@ export function createMetadata({
     robots: noIndex
       ? {
           index: false,
-          follow: false,
-          noarchive: true,
+          follow: true,
+
+          googleBot: {
+            index: false,
+            follow: true,
+          },
         }
       : {
           index: true,
@@ -57,11 +70,11 @@ export function createMetadata({
         },
 
     openGraph: {
-      type: "website",
+      type,
       locale: siteConfig.locale,
       url: canonicalUrl,
       siteName: siteConfig.name,
-      title,
+      title: brandedTitle,
       description,
 
       images: [
@@ -69,14 +82,14 @@ export function createMetadata({
           url: image,
           width: 1200,
           height: 630,
-          alt: title,
+          alt: brandedTitle,
         },
       ],
     },
 
     twitter: {
       card: "summary_large_image",
-      title,
+      title: brandedTitle,
       description,
       images: [image],
     },

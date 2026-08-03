@@ -90,6 +90,6 @@ export const StageAndTheatreCurtainTracksGuide: Guide = {
   relatedGuides: [],
   serviceLink: {
     label: "Explore commercial installation",
-    href: "/commercial"
+    href: "/services/commercial-curtain-track-installation"
   }
 };

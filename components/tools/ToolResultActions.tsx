@@ -82,6 +82,8 @@ export function ToolResultActions({
       ? `${window.location.origin}${sharePath}`
       : window.location.href;
 
+    // URL and saved state are browser-only values populated after hydration.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setCurrentUrl(url);
 
     const storageKey = `trackfit-tool-result:${toolName}`;

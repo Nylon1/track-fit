@@ -3,18 +3,14 @@ import Link from "next/link";
 
 import SiteHeader from "@/components/site/SiteHeader";
 import { DoubleTrackSpacingCalculator } from "@/components/tools/DoubleTrackSpacingCalculator";
-import { absoluteUrl } from "@/lib/seo/site-config";
+import { createMetadata } from "@/lib/seo/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createMetadata({
   title: "Double Curtain Track Spacing Calculator | TrackFit",
   description:
     "Estimate the spacing needed between double curtain tracks for voile, blackout and main curtains.",
-  alternates: {
-    canonical: absoluteUrl(
-      "/tools/double-curtain-track-spacing-calculator",
-    ),
-  },
-};
+  path: "/tools/double-curtain-track-spacing-calculator",
+});
 
 const faqs = [
   {

@@ -2,13 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import SiteHeader from "@/components/site/SiteHeader";
 import { TrackLengthCalculator } from "@/components/tools/TrackLengthCalculator";
-import { absoluteUrl } from "@/lib/seo/site-config";
+import { createMetadata } from "@/lib/seo/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createMetadata({
   title: "Curtain Track Length Calculator | TrackFit",
   description: "Calculate a recommended curtain track length from your opening width and preferred side extension.",
-  alternates: { canonical: absoluteUrl("/tools/curtain-track-length-calculator") },
-};
+  path: "/tools/curtain-track-length-calculator",
+});
 
 const faqs = [
   {

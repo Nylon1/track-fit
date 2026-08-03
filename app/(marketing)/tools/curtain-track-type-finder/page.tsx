@@ -3,16 +3,14 @@ import Link from "next/link";
 
 import SiteHeader from "@/components/site/SiteHeader";
 import { TrackTypeFinder } from "@/components/tools/TrackTypeFinder";
-import { absoluteUrl } from "@/lib/seo/site-config";
+import { createMetadata } from "@/lib/seo/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createMetadata({
   title: "Curtain Track Type Finder | TrackFit",
   description:
     "Choose the right curtain track type for windows, doors, bay windows, room dividers and different curtain headings.",
-  alternates: {
-    canonical: absoluteUrl("/tools/curtain-track-type-finder"),
-  },
-};
+  path: "/tools/curtain-track-type-finder",
+});
 
 const faqs = [
   {

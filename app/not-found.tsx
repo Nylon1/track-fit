@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function NotFound() {
   return (
     <main
@@ -42,7 +44,7 @@ export default function NotFound() {
           The page you are looking for does not exist.
         </p>
 
-        <a
+        <Link
           href="/"
           style={{
             display: "inline-block",
@@ -56,7 +58,7 @@ export default function NotFound() {
           }}
         >
           Return home
-        </a>
+        </Link>
       </div>
     </main>
   );

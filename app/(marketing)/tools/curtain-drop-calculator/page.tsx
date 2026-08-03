@@ -2,13 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import SiteHeader from "@/components/site/SiteHeader";
 import { CurtainDropCalculator } from "@/components/tools/CurtainDropCalculator";
-import { absoluteUrl } from "@/lib/seo/site-config";
+import { createMetadata } from "@/lib/seo/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createMetadata({
   title: "Curtain Drop Calculator | TrackFit",
   description: "Calculate a recommended finished curtain drop from your measurement, finish style and curtain heading.",
-  alternates: { canonical: absoluteUrl("/tools/curtain-drop-calculator") },
-};
+  path: "/tools/curtain-drop-calculator",
+});
 
 const faqs = [
   { question: "Should curtains touch the floor?", answer: "Touching the floor gives a clean full-length finish. A small hover is often more practical where floors are uneven or easy cleaning matters." },

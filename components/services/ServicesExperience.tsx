@@ -127,9 +127,9 @@ export default function ServicesExperience() {
       </div>
     </section>
 
-    <section className="border-y border-white/10 bg-white/[0.018]">
+    <section aria-labelledby="services-catalogue-heading" className="border-y border-white/10 bg-white/[0.018]">
       <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:px-10 lg:py-24">
-       
+        <h2 id="services-catalogue-heading" className="sr-only">All TrackFit services</h2>
         <div className="mt-9 flex gap-3 overflow-x-auto pb-3">{categories.map((category) => <button key={category.id} type="button" onClick={() => setActive(category.id)} className={`shrink-0 rounded-full border px-5 py-3 text-sm font-semibold transition ${active === category.id ? "border-[#B8F23D] bg-[#B8F23D] text-[#080A09]" : "border-white/10 bg-white/[0.035] text-white/65 hover:border-white/25 hover:text-white"}`}>{category.label} <span className="ml-2 opacity-55">{category.count}</span></button>)}</div>
 
         <motion.div layout className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">

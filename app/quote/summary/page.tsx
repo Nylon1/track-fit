@@ -229,6 +229,8 @@ export default function SummaryPage() {
       }
     }
 
+    // Quote data exists only in browser session storage after hydration.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setSummary({
       postcode:
         window.sessionStorage.getItem(

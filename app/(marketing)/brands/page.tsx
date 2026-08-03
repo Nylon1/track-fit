@@ -3,14 +3,14 @@ import Link from "next/link";
 
 import SiteHeader from "@/components/site/SiteHeader";
 import { brandContent } from "@/lib/brands/data";
-import { absoluteUrl } from "@/lib/seo/site-config";
+import { createMetadata } from "@/lib/seo/metadata";
 import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
-export const metadata: Metadata = {
+export const metadata: Metadata = createMetadata({
   title: "Curtain Track Brand Centre | TrackFit",
   description:
     "Independent installation guides for recognised curtain-track brands and selected manual and cord-operated systems.",
-  alternates: { canonical: absoluteUrl("/brands") },
-};
+  path: "/brands",
+});
 
 export default function BrandsPage() {
  return (

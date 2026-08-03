@@ -8,6 +8,7 @@ import {
   caseStudies,
   getCaseStudy,
 } from "@/lib/case-studies/data";
+import { createMetadata } from "@/lib/seo/metadata";
 import { absoluteUrl } from "@/lib/seo/site-config";
 
 type Props = {
@@ -32,17 +33,13 @@ export async function generateMetadata({
     return {};
   }
 
-  return {
+  return createMetadata({
     title: study.title,
     description: study.summary,
-    alternates: {
-      canonical: absoluteUrl(`/case-studies/${study.slug}`),
-    },
-    robots: {
-      index: study.verified,
-      follow: true,
-    },
-  };
+    path: `/case-studies/${study.slug}`,
+    type: "article",
+    noIndex: !study.verified,
+  });
 }
 
 export default async function CaseStudyPage({

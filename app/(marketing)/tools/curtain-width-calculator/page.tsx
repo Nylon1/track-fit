@@ -3,16 +3,14 @@ import Link from "next/link";
 
 import SiteHeader from "@/components/site/SiteHeader";
 import { CurtainWidthCalculator } from "@/components/tools/CurtainWidthCalculator";
-import { absoluteUrl } from "@/lib/seo/site-config";
+import { createMetadata } from "@/lib/seo/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createMetadata({
   title: "Curtain Width Calculator | TrackFit",
   description:
     "Calculate the finished curtain width needed from your track or pole width, heading and fullness.",
-  alternates: {
-    canonical: absoluteUrl("/tools/curtain-width-calculator"),
-  },
-};
+  path: "/tools/curtain-width-calculator",
+});
 
 const faqs = [
   {

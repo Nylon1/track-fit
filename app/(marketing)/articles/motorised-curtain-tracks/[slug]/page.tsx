@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 import SiteHeader from "@/components/site/SiteHeader";
 import { motorisedArticles } from "@/lib/motorised/data";
+import { createMetadata } from "@/lib/seo/metadata";
 import { absoluteUrl } from "@/lib/seo/site-config";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -24,12 +25,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const article = getArticle(slug);
   if (!article) return {};
   const [, title, summary] = article;
-  return {
+  return createMetadata({
     title: `${title} | TrackFit Guide`,
     description: summary,
-    alternates: { canonical: absoluteUrl(`/articles/motorised-curtain-tracks/${slug}`) },
-    openGraph: { title, description: summary, type: "article", url: absoluteUrl(`/articles/motorised-curtain-tracks/${slug}`) },
-  };
+    path: `/articles/motorised-curtain-tracks/${slug}`,
+    type: "article",
+  });
 }
 
 const articleDetails: Record<string, { intro: string; sections: { title: string; text: string }[]; related: string[] }> = {
