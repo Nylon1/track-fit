@@ -5,7 +5,7 @@ type SampleAreaReviewProps = {
 };
 
 export default function SampleAreaReview({ review }: SampleAreaReviewProps) {
-  if (process.env.SHOW_SAMPLE_AREA_REVIEWS === "false" || !review) {
+  if (process.env.SHOW_SAMPLE_AREA_REVIEWS === "true" || !review) {
     return null;
   }
 
