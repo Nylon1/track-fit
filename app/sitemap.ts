@@ -9,7 +9,7 @@ import { absoluteUrl, siteConfig } from "@/lib/seo/site-config";
 import { tools } from "@/lib/tools/data";
 import { tradeSectors } from "@/lib/trade/data";
 
-const updated = new Date("2026-07-31");
+const updated = new Date("2026-08-04");
 
 const routes = [
   { path: "/", priority: 1, changeFrequency: "weekly" as const },

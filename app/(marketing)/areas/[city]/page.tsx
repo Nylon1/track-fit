@@ -2,8 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import SampleAreaReview from "@/components/areas/SampleAreaReview";
 import SiteHeader from "@/components/site/SiteHeader";
 import { areaServicePages, areas, getArea } from "@/lib/areas/data";
+import { getSampleAreaReview } from "@/lib/areas/reviews";
+import { getGuide } from "@/lib/guides/data";
 import { createMetadata } from "@/lib/seo/metadata";
 import { absoluteUrl } from "@/lib/seo/site-config";
 
@@ -31,8 +34,12 @@ export async function generateMetadata({
 
   return createMetadata({
     title: `Curtain Track Installation in ${area.name} | TrackFit`,
-    description: area.intro,
+    description: area.metaDescription,
     path: `/areas/${area.slug}`,
+    keywords: [
+      `curtain track installation ${area.name}`,
+      `curtain track fitters ${area.name}`,
+    ],
   });
 }
 
@@ -47,6 +54,15 @@ export default async function AreaPage({ params }: PageProps) {
   const services = areaServicePages.filter(
     (page) => page.citySlug === area.slug,
   );
+  const relatedAreas = area.relatedAreaSlugs.flatMap((slug) => {
+    const relatedArea = getArea(slug);
+    return relatedArea ? [relatedArea] : [];
+  });
+  const relatedGuides = area.guideSlugs.flatMap((slug) => {
+    const guide = getGuide(slug);
+    return guide ? [guide] : [];
+  });
+  const sampleReview = getSampleAreaReview(area.slug);
 
   const faqSchema = {
     "@context": "https://schema.org",
@@ -190,6 +206,8 @@ export default async function AreaPage({ params }: PageProps) {
             </p>
           </div>
 
+          <SampleAreaReview review={sampleReview} />
+
           <section className="mt-16">
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#B8F23D]">
               Nearby coverage
@@ -209,6 +227,25 @@ export default async function AreaPage({ params }: PageProps) {
                 </span>
               ))}
             </div>
+
+            {relatedAreas.length > 0 && (
+              <div className="mt-8">
+                <h3 className="text-lg font-semibold">
+                  Nearby TrackFit city guides
+                </h3>
+                <div className="mt-4 flex flex-wrap gap-3">
+                  {relatedAreas.map((relatedArea) => (
+                    <Link
+                      key={relatedArea.slug}
+                      href={`/areas/${relatedArea.slug}`}
+                      className="rounded-full border border-[#B8F23D]/25 px-4 py-2 text-sm font-semibold text-[#D8D7CF] transition hover:border-[#B8F23D] hover:text-white"
+                    >
+                      {relatedArea.name}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )}
           </section>
 
           {services.length > 0 && (
@@ -273,6 +310,40 @@ export default async function AreaPage({ params }: PageProps) {
                   className="rounded-[24px] border border-white/10 bg-white/[0.035] p-5 font-semibold transition hover:border-[#B8F23D]/45"
                 >
                   {title} →
+                </Link>
+              ))}
+            </div>
+          </section>
+
+          <section className="mt-16">
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#B8F23D]">
+              Installation guidance
+            </p>
+
+            <h2 className="mt-3 text-3xl font-semibold">
+              Relevant services and guides
+            </h2>
+
+            <div className="mt-7 grid gap-5 md:grid-cols-2">
+              <Link
+                href="/services/residential-curtain-track-installation"
+                className="rounded-[24px] border border-white/10 bg-white/[0.035] p-5 font-semibold transition hover:border-[#B8F23D]/45"
+              >
+                Residential curtain-track installation →
+              </Link>
+              <Link
+                href="/services/commercial-curtain-track-installation"
+                className="rounded-[24px] border border-white/10 bg-white/[0.035] p-5 font-semibold transition hover:border-[#B8F23D]/45"
+              >
+                Commercial curtain-track installation →
+              </Link>
+              {relatedGuides.map((guide) => (
+                <Link
+                  key={guide.slug}
+                  href={`/guides/${guide.slug}`}
+                  className="rounded-[24px] border border-white/10 bg-white/[0.035] p-5 font-semibold transition hover:border-[#B8F23D]/45"
+                >
+                  {guide.title} →
                 </Link>
               ))}
             </div>

@@ -92,20 +92,20 @@ const featuredAreas = [
     href: "/areas/manchester",
   },
   {
-    label: "Blackburn",
-    href: "/areas/blackburn",
+    label: "Brighton & Hove",
+    href: "/areas/brighton-and-hove",
   },
   {
-    label: "Liverpool",
-    href: "/areas/liverpool",
+    label: "Reading",
+    href: "/areas/reading",
   },
   {
     label: "Birmingham",
     href: "/areas/birmingham",
   },
   {
-    label: "Leeds",
-    href: "/areas/leeds",
+    label: "Bristol",
+    href: "/areas/bristol",
   },
 ];
 
