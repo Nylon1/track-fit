@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
+import QuoteAttribution from "@/components/quote/QuoteAttribution";
 
 export const metadata: Metadata = {
   robots: {
@@ -15,5 +16,5 @@ export const metadata: Metadata = {
 export default function QuoteLayout({
   children,
 }: Readonly<{ children: ReactNode }>) {
-  return children;
+  return <><QuoteAttribution />{children}</>;
 }

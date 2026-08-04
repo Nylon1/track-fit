@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { createClient } from "@supabase/supabase-js";
+import { createSupabaseAdminClient } from "@/lib/supabase/admin";
 
 export const runtime = "nodejs";
 
@@ -15,15 +15,6 @@ type UploadRequest = {
   fileName?: string;
   contentType?: string;
 };
-
-function cleanEnvironmentValue(
-  value: string | undefined
-) {
-  return value
-    ?.trim()
-    .replace(/^["']|["']$/g, "")
-    .replace(/\/+$/, "");
-}
 
 function createSafeFileName(fileName: string) {
   const extension =
@@ -41,65 +32,8 @@ function createSafeFileName(fileName: string) {
   return `${crypto.randomUUID()}.${safeExtension}`;
 }
 
-function isValidSupabaseUrl(value: string) {
-  try {
-    const url = new URL(value);
-
-    return (
-      url.protocol === "https:" &&
-      url.hostname.endsWith(".supabase.co")
-    );
-  } catch {
-    return false;
-  }
-}
-
 export async function POST(request: Request) {
   try {
-    const supabaseUrl = cleanEnvironmentValue(
-      process.env.NEXT_PUBLIC_SUPABASE_URL
-    );
-
-    const serviceRoleKey =
-      process.env.SUPABASE_SERVICE_ROLE_KEY
-        ?.trim()
-        .replace(/^["']|["']$/g, "");
-
-    if (!supabaseUrl || !serviceRoleKey) {
-      console.error(
-        "Supabase photo storage credentials are missing."
-      );
-
-      return NextResponse.json(
-        {
-          success: false,
-          error:
-            "Photo storage is not configured.",
-        },
-        {
-          status: 500,
-        }
-      );
-    }
-
-    if (!isValidSupabaseUrl(supabaseUrl)) {
-      console.error(
-        "Invalid NEXT_PUBLIC_SUPABASE_URL:",
-        supabaseUrl
-      );
-
-      return NextResponse.json(
-        {
-          success: false,
-          error:
-            "The Supabase project URL is invalid.",
-        },
-        {
-          status: 500,
-        }
-      );
-    }
-
     const body =
       (await request.json()) as UploadRequest;
 
@@ -120,17 +54,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const supabase = createClient(
-      supabaseUrl,
-      serviceRoleKey,
-      {
-        auth: {
-          autoRefreshToken: false,
-          persistSession: false,
-          detectSessionInUrl: false,
-        },
-      }
-    );
+    const supabase = createSupabaseAdminClient();
 
     const now = new Date();
 

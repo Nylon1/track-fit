@@ -1,0 +1,4 @@
+"use client";
+/* eslint-disable @next/next/no-img-element */
+import { useEffect,useState } from "react"; import type { PhotoRecord } from "@/types/admin";
+export default function LeadPhotos({id,photos}:{id:string;photos:PhotoRecord[]}){const[urls,setUrls]=useState<Record<string,string>>({});useEffect(()=>{if(!photos.length)return;fetch(`/api/admin/leads/${id}/photos`).then(r=>r.ok?r.json():Promise.reject()).then(x=>setUrls(x.urls)).catch(()=>{});},[id,photos.length]);if(!photos.length)return <p className="admin-empty">No photographs submitted.</p>;return <div className="photo-grid">{photos.map((p,i)=><a href={urls[p.path]||"#"} target="_blank" rel="noreferrer" key={p.path}><div>{urls[p.path]?<img src={urls[p.path]} alt={`Customer installation ${i+1}`}/>:<span className="skeleton"/>}</div><small>{p.fileName}</small></a>)}</div>}

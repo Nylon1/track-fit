@@ -47,6 +47,8 @@ type SubmissionResult = {
   error?: string;
   emailId?: string;
   photoLinksCreated?: number;
+  referenceNumber?: string;
+  enquiryId?: string;
 };
 
 type SubmissionStatus =
@@ -308,13 +310,18 @@ export default function SummaryPage() {
     setSubmitError("");
     setStatus("validating");
 
-    const reference = createReference();
+    const clientSubmissionId = getClientSubmissionId();
     const submittedAt = new Date().toISOString();
 
     const enquiry = {
       ...summary,
       contact: summary.contact,
-      reference,
+      clientSubmissionId,
+      source: "website_quote",
+      landingPage: window.sessionStorage.getItem("trackfit-landing-page") || window.location.href,
+      utmSource: window.sessionStorage.getItem("trackfit-utm-source") || undefined,
+      utmMedium: window.sessionStorage.getItem("trackfit-utm-medium") || undefined,
+      utmCampaign: window.sessionStorage.getItem("trackfit-utm-campaign") || undefined,
       submittedAt,
     };
 
@@ -362,13 +369,15 @@ export default function SummaryPage() {
 
       window.sessionStorage.setItem(
         "trackfit-reference",
-        reference
+        result.referenceNumber || "Reference pending"
       );
 
       window.sessionStorage.setItem(
         "trackfit-submitted-quote",
         JSON.stringify({
           ...enquiry,
+          reference: result.referenceNumber,
+          enquiryId: result.enquiryId,
           emailId: result.emailId,
           photoLinksCreated:
             result.photoLinksCreated ?? 0,
@@ -1446,14 +1455,13 @@ function formatFileSize(size: number) {
   ).toFixed(1)} MB`;
 }
 
-function createReference() {
-  const year = new Date().getFullYear();
-
-  const random = Math.floor(
-    100000 + Math.random() * 900000
-  );
-
-  return `TF-${year}-${random}`;
+function getClientSubmissionId() {
+  const key = "trackfit-client-submission-id";
+  const existing = window.sessionStorage.getItem(key);
+  if (existing) return existing;
+  const id = crypto.randomUUID();
+  window.sessionStorage.setItem(key, id);
+  return id;
 }
 
 function wait(milliseconds: number) {

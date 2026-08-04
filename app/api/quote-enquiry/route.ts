@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
-import { createClient } from "@supabase/supabase-js";
+import { createSupabaseAdminClient } from "@/lib/supabase/admin";
 
 export const runtime = "nodejs";
 
@@ -23,7 +23,7 @@ type StoredPhoto = {
 };
 
 type QuoteEnquiry = {
-  reference: string;
+  clientSubmissionId: string;
   postcode: string;
   property: string;
   trackType: string;
@@ -32,6 +32,11 @@ type QuoteEnquiry = {
   photos: StoredPhoto[];
   contact: ContactDetails;
   submittedAt: string;
+  source?: string;
+  utmSource?: string;
+  utmMedium?: string;
+  utmCampaign?: string;
+  landingPage?: string;
 };
 
 type EmailPhoto = StoredPhoto & {
@@ -137,8 +142,8 @@ function validateEnquiry(
       enquiry.photos.every(validatePhoto));
 
   return Boolean(
-    typeof enquiry.reference === "string" &&
-      enquiry.reference.length > 0 &&
+    typeof enquiry.clientSubmissionId === "string" &&
+      /^[0-9a-f-]{36}$/i.test(enquiry.clientSubmissionId) &&
       typeof enquiry.postcode === "string" &&
       enquiry.postcode.length > 0 &&
       typeof enquiry.property === "string" &&
@@ -238,44 +243,6 @@ export async function POST(request: Request) {
     const resendApiKey =
       process.env.RESEND_API_KEY;
 
-    const supabaseUrl =
-      process.env.NEXT_PUBLIC_SUPABASE_URL;
-
-    const serviceRoleKey =
-      process.env.SUPABASE_SERVICE_ROLE_KEY;
-
-    if (!resendApiKey) {
-      console.error(
-        "RESEND_API_KEY is not configured."
-      );
-
-      return NextResponse.json(
-        {
-          success: false,
-          error: "Email service is not configured.",
-        },
-        {
-          status: 500,
-        }
-      );
-    }
-
-    if (!supabaseUrl || !serviceRoleKey) {
-      console.error(
-        "Supabase server credentials are not configured."
-      );
-
-      return NextResponse.json(
-        {
-          success: false,
-          error: "Photo storage is not configured.",
-        },
-        {
-          status: 500,
-        }
-      );
-    }
-
     const body: unknown = await request.json();
 
     if (!validateEnquiry(body)) {
@@ -291,21 +258,37 @@ export async function POST(request: Request) {
       );
     }
 
-    const resend = new Resend(resendApiKey);
-
-    const supabase = createClient(
-      supabaseUrl,
-      serviceRoleKey,
-      {
-        auth: {
-          autoRefreshToken: false,
-          persistSession: false,
-          detectSessionInUrl: false,
-        },
-      }
-    );
+    const supabase = createSupabaseAdminClient();
 
     const storedPhotos = body.photos || [];
+    const insert = {
+      client_submission_id: body.clientSubmissionId,
+      postcode: body.postcode.trim().toUpperCase(), property_type: body.property,
+      track_type: body.trackType, track_quantity: body.quantity,
+      full_name: body.contact.fullName.trim(), email: body.contact.email.trim().toLowerCase(),
+      phone: body.contact.phone.trim(), preferred_contact: body.contact.preferredContact,
+      customer_notes: body.contact.notes?.trim() || null, photo_paths: storedPhotos,
+      source: body.source?.slice(0, 100) || "website_quote",
+      utm_source: body.utmSource?.slice(0, 200) || null, utm_medium: body.utmMedium?.slice(0, 200) || null,
+      utm_campaign: body.utmCampaign?.slice(0, 200) || null, landing_page: body.landingPage?.slice(0, 1000) || null,
+    };
+    const { data: enquiryRecord, error: insertError } = await supabase.from("trackfit_enquiries")
+      .insert(insert).select("id, reference_number").single();
+    if (insertError) {
+      if (insertError.code === "23505") {
+        const { data: existing } = await supabase.from("trackfit_enquiries").select("id, reference_number")
+          .eq("client_submission_id", body.clientSubmissionId).maybeSingle();
+        if (existing) return NextResponse.json({ success: true, enquiryId: existing.id, referenceNumber: existing.reference_number, duplicate: true });
+      }
+      console.error("TrackFit enquiry insert error:", insertError);
+      return NextResponse.json({ success: false, error: "Your enquiry could not be saved. Please try again." }, { status: 500 });
+    }
+    await supabase.from("trackfit_enquiry_activity").insert({ enquiry_id: enquiryRecord.id, activity_type: "created", description: "Enquiry received from the TrackFit website", changes: { source: insert.source } });
+    if (!resendApiKey) {
+      console.error("RESEND_API_KEY is not configured; enquiry was saved.");
+      return NextResponse.json({ success: true, enquiryId: enquiryRecord.id, referenceNumber: enquiryRecord.reference_number, emailSent: false });
+    }
+    const resend = new Resend(resendApiKey);
     const emailPhotos: EmailPhoto[] = [];
 
     for (const photo of storedPhotos) {
@@ -366,7 +349,7 @@ export async function POST(request: Request) {
     const photoHtml =
       createPhotoHtml(emailPhotos);
 
-    const { data, error } =
+    const emailResult =
       await resend.emails.send({
         from:
           "TrackFit Enquiries <onboarding@resend.dev>",
@@ -378,7 +361,7 @@ export async function POST(request: Request) {
         replyTo: body.contact.email,
 
         subject:
-          `${body.reference}- New TrackFit enquiry from ${body.contact.fullName}`,
+          `${enquiryRecord.reference_number}- New TrackFit enquiry from ${body.contact.fullName}`,
 
         html: `
           <!doctype html>
@@ -436,7 +419,7 @@ export async function POST(request: Request) {
                       line-height:1.2;
                     "
                   >
-                    ${escapeHtml(body.reference)}
+                    ${escapeHtml(enquiryRecord.reference_number)}
                   </h1>
 
                   <p
@@ -782,7 +765,9 @@ export async function POST(request: Request) {
             </body>
           </html>
         `,
-      });
+      }).catch((emailError: unknown) => ({ data: null, error: emailError }));
+
+    const { data, error } = emailResult;
 
     if (error) {
       console.error(
@@ -790,20 +775,14 @@ export async function POST(request: Request) {
         error
       );
 
-      return NextResponse.json(
-        {
-          success: false,
-          error:
-            "The enquiry email could not be sent.",
-        },
-        {
-          status: 502,
-        }
-      );
+      return NextResponse.json({ success: true, enquiryId: enquiryRecord.id, referenceNumber: enquiryRecord.reference_number, emailSent: false, photoLinksCreated: emailPhotos.length });
     }
 
     return NextResponse.json({
       success: true,
+      enquiryId: enquiryRecord.id,
+      referenceNumber: enquiryRecord.reference_number,
+      emailSent: true,
       emailId: data?.id,
       photoLinksCreated: emailPhotos.length,
     });
