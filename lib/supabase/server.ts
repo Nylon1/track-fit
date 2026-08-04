@@ -3,6 +3,7 @@ import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { getSupabaseConfig } from "./config";
+import { isTrackfitAdminUser } from "@/lib/admin/auth";
 
 export async function createSupabaseServerClient() {
   const cookieStore = await cookies();
@@ -10,11 +11,12 @@ export async function createSupabaseServerClient() {
   return createServerClient(url, anonKey, { cookies: { getAll: () => cookieStore.getAll(), setAll: (items) => { try { items.forEach(({ name, value, options }) => cookieStore.set(name, value, options)); } catch {} } } });
 }
 
-export async function requireTrackfitAdmin() {
+export async function requireTrackfitAdmin(path = "/admin") {
   const supabase = await createSupabaseServerClient();
   const { data: { user } } = await supabase.auth.getUser();
-  const isAdmin = user?.app_metadata?.trackfit_admin === true;
-  if (process.env.NODE_ENV === "development") console.info("[TrackFit admin auth]", { hasUser: Boolean(user), isAdmin, destination: isAdmin ? "/admin" : "/admin/login" });
-  if (!user || !isAdmin) redirect("/admin/login");
+  const isAdmin = isTrackfitAdminUser(user);
+  if (process.env.NODE_ENV === "development") console.info("[TrackFit Admin Auth]", JSON.stringify({ path, userExists: Boolean(user), userEmail: user?.email, trackfitAdmin: isAdmin, redirectDestination: isAdmin ? path : isAdmin === false && user ? "/admin/login?error=unauthorised" : "/admin/login" }));
+  if (!user) redirect("/admin/login");
+  if (!isAdmin) redirect("/admin/login?error=unauthorised");
   return { supabase, user };
 }

@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useEffect, useState, type FormEvent } from "react";
 import { safeAdminRedirect } from "@/lib/admin/redirect";
+import { isTrackfitAdminUser } from "@/lib/admin/auth";
 import { getSupabaseBrowserClient } from "@/lib/supabase/client";
 import "../../../admin/admin.css";
 
@@ -15,10 +16,11 @@ export default function AdminLoginPage() {
   useEffect(() => {
     let active = true;
     async function checkExistingSession() {
+      if (new URLSearchParams(window.location.search).get("error") === "unauthorised") setError(unauthorisedMessage);
       const supabase = getSupabaseBrowserClient();
       const { data } = await supabase.auth.refreshSession();
       if (!active || !data.user) return;
-      if (data.user.app_metadata?.trackfit_admin === true) {
+      if (isTrackfitAdminUser(data.user)) {
         window.location.replace(getDestination());
         return;
       }
@@ -47,7 +49,7 @@ export default function AdminLoginPage() {
 
     const { data, error: refreshError } = await supabase.auth.refreshSession();
     const user = data.user;
-    const isAdmin = user?.app_metadata?.trackfit_admin === true;
+    const isAdmin = isTrackfitAdminUser(user);
     if (refreshError || !user || !isAdmin) {
       await supabase.auth.signOut();
       setError(unauthorisedMessage);
