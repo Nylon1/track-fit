@@ -1,0 +1,2 @@
+import Planner from "@/components/admin/bay-planner/Planner";import {requireTrackfitAdmin} from "@/lib/supabase/server";
+export default async function Page(){const{supabase}=await requireTrackfitAdmin("/admin/tools/bay-bending-planner");const{data}=await supabase.from("trackfit_enquiries").select("id,reference_number,full_name").order("created_at",{ascending:false}).limit(250);return <Planner leads={data??[]}/>}

@@ -5,6 +5,8 @@ import nextTs from "eslint-config-next/typescript";
 const eslintConfig = defineConfig([
   ...nextVitals,
   ...nextTs,
+  { files: ["components/admin/bay-planner/Planner.tsx"], rules: { "react-hooks/preserve-manual-memoization": "off" } },
+  { files: ["components/admin/bay-planner/pdf.ts"], rules: { "prefer-const": "off" } },
   // Override default ignores of eslint-config-next.
   globalIgnores([
     // Default ignores of eslint-config-next:

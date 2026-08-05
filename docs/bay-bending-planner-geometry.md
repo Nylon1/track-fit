@@ -1,0 +1,3 @@
+# Bay bending planner geometry note
+
+The supplied measurements (AB 850, BC 1540, CD 850, AC 1760, AD 1540, BD 1760) produce internal angles at B and C of approximately 90 degrees by the cosine rule. The required direction changes are `180° - internal angle`, so they are also approximately 90 degrees in this special example. Consequently, the example alone cannot establish whether a third-party display is showing an internal angle, a finished track turn, or a machine convention. The planner labels these quantities separately and treats machine rules as unverified until confirmed on the real Forest KS and CS equipment.
