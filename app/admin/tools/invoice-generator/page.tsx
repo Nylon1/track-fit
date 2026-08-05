@@ -1,0 +1,1 @@
+import { redirect } from "next/navigation";export default async function Page({searchParams}:{searchParams:Promise<{lead?:string}>}){const{lead}=await searchParams;redirect(`/admin/invoices/new${lead?`?lead=${encodeURIComponent(lead)}`:""}`)}

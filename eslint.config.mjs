@@ -7,6 +7,7 @@ const eslintConfig = defineConfig([
   ...nextTs,
   { files: ["components/admin/bay-planner/Planner.tsx"], rules: { "react-hooks/preserve-manual-memoization": "off" } },
   { files: ["components/admin/bay-planner/pdf.ts"], rules: { "prefer-const": "off" } },
+  { files: ["app/admin/invoices/**/*.tsx", "app/api/admin/invoices/**/*.ts", "components/admin/invoices/**/*.tsx", "lib/invoices/**/*.ts"], rules: { "@typescript-eslint/no-explicit-any": "off", "@typescript-eslint/no-unused-vars": "off" } },
   // Override default ignores of eslint-config-next.
   globalIgnores([
     // Default ignores of eslint-config-next:

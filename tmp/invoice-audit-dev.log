@@ -1,0 +1,26 @@
+
+> trackfit-cinematic@0.1.0 dev
+> next dev
+
+⚠ Port 3000 is in use by process 30916, using available port 3001 instead.
+▲ Next.js 16.2.10 (Turbopack)
+- Local:         http://localhost:3001
+- Network:       http://192.168.0.81:3001
+- Environments: .env.local
+✓ Ready in 3.3s
+⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of C:\Users\hamza\package-lock.json as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * C:\Users\hamza\Downloads\trackfit-cinematic\package-lock.json
+
+⨯ Another next dev server is already running.
+
+- Local:        http://localhost:3000
+- PID:          30916
+- Dir:          C:\Users\hamza\Downloads\trackfit-cinematic
+- Log:          .next\dev\logs\next-development.log
+
+Run taskkill /PID 30916 /F to stop it.
+[?25h
