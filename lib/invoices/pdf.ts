@@ -90,9 +90,8 @@ export function invoicePdf(inv: any, items: any[], s: InvoiceSettings) {
     doc.rect(16, y, 178, 8, "F");
     doc.setFont("helvetica", "bold");
     doc.text("Description", 18, y + 5.5);
-    doc.text("Qty", 112, y + 5.5, { align: "right" });
-    doc.text("Unit price", 140, y + 5.5, { align: "right" });
-    doc.text("Discount", 167, y + 5.5, { align: "right" });
+    doc.text("Qty", 122, y + 5.5, { align: "right" });
+    doc.text("Unit price", 154, y + 5.5, { align: "right" });
     doc.text("Line total", 192, y + 5.5, { align: "right" });
     y += 11;
   };
@@ -106,15 +105,10 @@ export function invoicePdf(inv: any, items: any[], s: InvoiceSettings) {
       tableHead();
     }
     doc.text(lines, 18, y + 4);
-    doc.text((i.quantity_milli / 1000).toString(), 112, y + 4, {
+    doc.text((i.quantity_milli / 1000).toString(), 122, y + 4, {
       align: "right",
     });
-    doc.text(formatGBP(i.unit_price_pence), 140, y + 4, { align: "right" });
-    const gross = Math.round((i.quantity_milli * i.unit_price_pence) / 1000),
-      discount = Math.max(0, gross - i.line_subtotal_pence);
-    doc.text(discount ? `-${formatGBP(discount)}` : "—", 167, y + 4, {
-      align: "right",
-    });
+    doc.text(formatGBP(i.unit_price_pence), 154, y + 4, { align: "right" });
     doc.text(formatGBP(i.line_subtotal_pence), 192, y + 4, { align: "right" });
     doc.line(16, y + h, 194, y + h);
     y += h;
@@ -128,8 +122,6 @@ export function invoicePdf(inv: any, items: any[], s: InvoiceSettings) {
     y += 7;
   };
   total("Subtotal", inv.subtotal_pence);
-  total("Discount", -inv.discount_pence);
-  total("Net after discount", inv.subtotal_pence - inv.discount_pence);
   total("Total", inv.total_pence, true);
   total("Amount paid", -inv.amount_paid_pence);
   total("BALANCE DUE", inv.balance_due_pence, true);

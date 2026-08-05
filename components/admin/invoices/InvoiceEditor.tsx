@@ -14,9 +14,6 @@ const blank = (): InvoiceItem => ({
   quantityMilli: 1000,
   unit: "item",
   unitPricePence: 0,
-  discountType: "none",
-  discountValue: 0,
-  vatRateBps: 0,
   position: 0,
 });
 export default function InvoiceEditor({
@@ -55,18 +52,12 @@ export default function InvoiceEditor({
       paymentMethod: "",
       amountPaidPence: 0,
       depositRequiredPence: 0,
-      discountType: "none",
-      discountValue: 0,
       items: [blank()],
     },
   );
   const totals = useMemo(
-    () =>
-      calculateTotals(form.items, form.amountPaidPence, {
-        type: form.discountType,
-        value: form.discountValue,
-      }),
-    [form.items, form.amountPaidPence, form.discountType, form.discountValue],
+    () => calculateTotals(form.items, form.amountPaidPence),
+    [form.items, form.amountPaidPence],
   );
   const set = (key: string, value: any) =>
     setForm((x) => ({ ...x, [key]: value }));
@@ -74,16 +65,6 @@ export default function InvoiceEditor({
     setForm((x) => ({
       ...x,
       items: x.items.map((r, n) => (n === i ? { ...r, [key]: value } : r)),
-    }));
-  const setDiscountType = (
-    index: number,
-    discountType: InvoiceItem["discountType"],
-  ) =>
-    setForm((current) => ({
-      ...current,
-      items: current.items.map((row, rowIndex) =>
-        rowIndex === index ? { ...row, discountType, discountValue: 0 } : row,
-      ),
     }));
   const save = async () => {
     setBusy(true);
@@ -313,56 +294,8 @@ export default function InvoiceEditor({
                   } catch {}
                 }}
               />
-              <select
-                aria-label="Discount type"
-                value={r.discountType}
-                onChange={(e) =>
-                  setDiscountType(
-                    i,
-                    e.currentTarget.value as InvoiceItem["discountType"],
-                  )
-                }
-              >
-                <option value="none">No discount</option>
-                <option value="percentage">% discount</option>
-                <option value="fixed">Fixed £</option>
-              </select>
-              <input
-                aria-label="Discount"
-                type="number"
-                min="0"
-                max={r.discountType === "percentage" ? "100" : undefined}
-                step="0.01"
-                disabled={r.discountType === "none"}
-                placeholder={
-                  r.discountType === "percentage" ? "Percent" : "GBP"
-                }
-                value={
-                  r.discountType === "percentage"
-                    ? r.discountValue / 100
-                    : r.discountType === "fixed"
-                      ? r.discountValue / 100
-                      : 0
-                }
-                onChange={(e) => {
-                  if (r.discountType === "percentage")
-                    item(
-                      i,
-                      "discountValue",
-                      Math.round(Number(e.target.value) * 100),
-                    );
-                  else if (r.discountType === "fixed") {
-                    try {
-                      item(i, "discountValue", parseMoney(e.target.value));
-                    } catch {}
-                  }
-                }}
-              />
               <output className="line-total" aria-label="Line total">
-                {lineAmounts(r).discount > 0 && (
-                  <small>−{formatGBP(lineAmounts(r).discount)}</small>
-                )}
-                {formatGBP(lineAmounts(r).net)}
+                {formatGBP(lineAmounts(r).total)}
               </output>
               <button
                 aria-label="Move up"
@@ -457,67 +390,10 @@ export default function InvoiceEditor({
         </section>
         <section className="admin-panel invoice-totals">
           <h2>Totals</h2>
-          <div className="invoice-discount">
-            <label>
-              Invoice discount
-              <select
-                value={form.discountType}
-                onChange={(e) =>
-                  setForm((current) => ({
-                    ...current,
-                    discountType: e.currentTarget
-                      .value as InvoiceInput["discountType"],
-                    discountValue: 0,
-                  }))
-                }
-              >
-                <option value="none">No discount</option>
-                <option value="fixed">Fixed £</option>
-                <option value="percentage">Percentage</option>
-              </select>
-            </label>
-            <label>
-              {form.discountType === "percentage"
-                ? "Discount %"
-                : "Discount amount"}
-              <input
-                type="number"
-                min="0"
-                max={form.discountType === "percentage" ? 100 : undefined}
-                step="0.01"
-                disabled={form.discountType === "none"}
-                value={
-                  form.discountType === "percentage"
-                    ? form.discountValue / 100
-                    : form.discountValue / 100
-                }
-                onChange={(e) => {
-                  if (form.discountType === "percentage")
-                    set(
-                      "discountValue",
-                      Math.round(Number(e.currentTarget.value) * 100),
-                    );
-                  else if (form.discountType === "fixed") {
-                    try {
-                      set("discountValue", parseMoney(e.currentTarget.value));
-                    } catch {}
-                  }
-                }}
-              />
-            </label>
-          </div>
           <dl>
             <div>
               <dt>Subtotal</dt>
               <dd>{formatGBP(totals.subtotalPence)}</dd>
-            </div>
-            <div>
-              <dt>Discount</dt>
-              <dd>−{formatGBP(totals.discountPence)}</dd>
-            </div>
-            <div>
-              <dt>Net</dt>
-              <dd>{formatGBP(totals.netPence)}</dd>
             </div>
             <div>
               <dt>Total</dt>

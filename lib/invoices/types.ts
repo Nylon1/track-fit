@@ -30,9 +30,6 @@ export type InvoiceItem = {
   quantityMilli: number;
   unit: string;
   unitPricePence: number;
-  discountType: "none" | "percentage" | "fixed";
-  discountValue: number;
-  vatRateBps: number;
   position: number;
 };
 export type InvoiceInput = {
@@ -58,17 +55,10 @@ export type InvoiceInput = {
   paymentMethod?: string;
   amountPaidPence: number;
   depositRequiredPence: number;
-  discountType: "none" | "percentage" | "fixed";
-  discountValue: number;
-  globalVatRateBps?: number | null;
   items: InvoiceItem[];
 };
-export type InvoiceDiscount={type:"none"|"percentage"|"fixed";value:number};
 export type Totals = {
   subtotalPence: number;
-  discountPence: number;
-  netPence: number;
-  vatPence: number;
   totalPence: number;
   amountPaidPence: number;
   balanceDuePence: number;

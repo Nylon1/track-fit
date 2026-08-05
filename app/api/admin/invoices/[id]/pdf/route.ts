@@ -16,11 +16,7 @@ export async function GET(
   const { id } = await params;
   const [{ data: inv }, { data: items }, { data: settings }] =
     await Promise.all([
-      ctx.supabase
-        .from("trackfit_invoices")
-        .select("*")
-        .eq("id", id)
-        .single(),
+      ctx.supabase.from("trackfit_invoices").select("*").eq("id", id).single(),
       ctx.supabase
         .from("trackfit_invoice_items")
         .select("*")
@@ -42,9 +38,6 @@ export async function GET(
     quantityMilli: Number(item.quantity_milli),
     unit: item.unit,
     unitPricePence: Number(item.unit_price_pence),
-    discountType: item.discount_type,
-    discountValue: Number(item.discount_value),
-    vatRateBps: Number(item.vat_rate_bps || 0),
     position: Number(item.position || 0),
   }));
 
@@ -52,23 +45,27 @@ export async function GET(
   const totals = calculateTotals(
     calculationItems,
     Number(inv.amount_paid_pence || 0),
-    { type: "none", value: 0 },
   );
 
+  const itemsForPdf = (items || []).map((item) => ({
+    ...item,
+    discount_type: "none",
+    discount_value: 0,
+    line_subtotal_pence: Math.round(
+      (Number(item.quantity_milli) * Number(item.unit_price_pence)) / 1000,
+    ),
+  }));
   const invoiceForPdf = {
     ...inv,
-    invoice_discount_type: "none",
-    invoice_discount_value: 0,
     subtotal_pence: totals.subtotalPence,
     discount_pence: 0,
-    vat_pence: totals.vatPence,
-    total_pence: totals.subtotalPence + totals.vatPence,
+    vat_pence: 0,
+    total_pence: totals.totalPence,
     amount_paid_pence: totals.amountPaidPence,
-    balance_due_pence:
-      totals.subtotalPence + totals.vatPence - totals.amountPaidPence,
+    balance_due_pence: totals.balanceDuePence,
   };
 
-  const pdf = invoicePdf(invoiceForPdf, items || [], settings as any);
+  const pdf = invoicePdf(invoiceForPdf, itemsForPdf, settings as any);
 
   await ctx.supabase.from("trackfit_invoice_activity").insert({
     invoice_id: id,

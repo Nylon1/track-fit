@@ -13,10 +13,7 @@ export async function POST(req: Request) {
       { status: 400 },
     );
   const input = parsed.data,
-    totals = calculateTotals(input.items, input.amountPaidPence, {
-      type: input.discountType,
-      value: input.discountValue,
-    });
+    totals = calculateTotals(input.items, input.amountPaidPence);
   const { data: number, error: nerr } = await ctx.supabase.rpc(
     "next_trackfit_invoice_number",
   );
@@ -45,10 +42,10 @@ export async function POST(req: Request) {
       quantity_milli: x.quantityMilli,
       unit: x.unit,
       unit_price_pence: x.unitPricePence,
-      discount_type: x.discountType,
-      discount_value: x.discountValue,
-      vat_rate_bps: x.vatRateBps,
-      line_subtotal_pence: l.net,
+      discount_type: "none",
+      discount_value: 0,
+      vat_rate_bps: 0,
+      line_subtotal_pence: l.subtotal,
     };
   });
   const { error: ie } = await ctx.supabase

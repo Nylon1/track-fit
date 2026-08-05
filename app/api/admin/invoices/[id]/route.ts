@@ -30,10 +30,7 @@ export async function PATCH(
       { error: "Invalid invoice", issues: p.error.issues },
       { status: 400 },
     );
-  const totals = calculateTotals(p.data.items, p.data.amountPaidPence, {
-    type: p.data.discountType,
-    value: p.data.discountValue,
-  });
+  const totals = calculateTotals(p.data.items, p.data.amountPaidPence);
   const { error } = await ctx.supabase
     .from("trackfit_invoices")
     .update(dbInvoice(p.data, totals))
@@ -52,10 +49,10 @@ export async function PATCH(
       quantity_milli: x.quantityMilli,
       unit: x.unit,
       unit_price_pence: x.unitPricePence,
-      discount_type: x.discountType,
-      discount_value: x.discountValue,
-      vat_rate_bps: x.vatRateBps,
-      line_subtotal_pence: lineAmounts(x).net,
+      discount_type: "none",
+      discount_value: 0,
+      vat_rate_bps: 0,
+      line_subtotal_pence: lineAmounts(x).subtotal,
     })),
   );
   await ctx.supabase.from("trackfit_invoice_activity").insert({

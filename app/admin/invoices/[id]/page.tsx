@@ -3,7 +3,7 @@ import Link from "next/link";
 import { requireTrackfitAdmin } from "@/lib/supabase/server";
 import InvoiceEditor from "@/components/admin/invoices/InvoiceEditor";
 import InvoiceActions from "@/components/admin/invoices/InvoiceActions";
-import { formatGBP } from "@/lib/invoices/money";
+import { calculateTotals, formatGBP } from "@/lib/invoices/money";
 export default async function Page({
   params,
 }: {
@@ -51,19 +51,18 @@ export default async function Page({
     depositRequiredPence: Number(
       inv.payment_details?.deposit_required_pence || 0,
     ),
-    discountType: inv.invoice_discount_type || "none",
-    discountValue: Number(inv.invoice_discount_value || 0),
     items: (items || []).map((x: any) => ({
       description: x.description,
       quantityMilli: x.quantity_milli,
       unit: x.unit,
       unitPricePence: Number(x.unit_price_pence),
-      discountType: x.discount_type,
-      discountValue: x.discount_value,
-      vatRateBps: x.vat_rate_bps,
       position: x.position,
     })),
   };
+  const displayedTotals = calculateTotals(
+    initial.items,
+    initial.amountPaidPence,
+  );
   return (
     <>
       <header className="admin-header">
@@ -75,7 +74,7 @@ export default async function Page({
           <h1>{inv.invoice_number}</h1>
         </div>
         <div>
-          <strong>{formatGBP(inv.balance_due_pence)}</strong>
+          <strong>{formatGBP(displayedTotals.balanceDuePence)}</strong>
           <small> balance due</small>
         </div>
       </header>
