@@ -37,8 +37,6 @@ export async function GET(
     return NextResponse.json({ error: "Not found" }, { status: 404 });
   }
 
-  // Rebuild totals from the persisted invoice items and invoice-level discount.
-  // This prevents the PDF from displaying stale totals after a draft is edited.
   const calculationItems: InvoiceItem[] = (items || []).map((item) => ({
     description: item.description,
     quantityMilli: Number(item.quantity_milli),
@@ -50,23 +48,24 @@ export async function GET(
     position: Number(item.position || 0),
   }));
 
+  // Invoice-level discounts are temporarily disabled.
   const totals = calculateTotals(
     calculationItems,
     Number(inv.amount_paid_pence || 0),
-    {
-      type: inv.invoice_discount_type || "none",
-      value: Number(inv.invoice_discount_value || 0),
-    },
+    { type: "none", value: 0 },
   );
 
   const invoiceForPdf = {
     ...inv,
+    invoice_discount_type: "none",
+    invoice_discount_value: 0,
     subtotal_pence: totals.subtotalPence,
-    discount_pence: totals.discountPence,
+    discount_pence: 0,
     vat_pence: totals.vatPence,
-    total_pence: totals.totalPence,
+    total_pence: totals.subtotalPence + totals.vatPence,
     amount_paid_pence: totals.amountPaidPence,
-    balance_due_pence: totals.balanceDuePence,
+    balance_due_pence:
+      totals.subtotalPence + totals.vatPence - totals.amountPaidPence,
   };
 
   const pdf = invoicePdf(invoiceForPdf, items || [], settings as any);
