@@ -3,6 +3,7 @@ import Link from "next/link";
 import { requireTrackfitAdmin } from "@/lib/supabase/server";
 import LeadEditor from "@/components/admin/LeadEditor";
 import LeadPhotos from "@/components/admin/LeadPhotos";
+import CustomerOutreach from "@/components/admin/CustomerOutreach";
 import type { Activity, TrackfitEnquiry } from "@/types/admin";
 const label = (x: string) => x.replaceAll("_", " ");
 const date = (x: string | null) =>
@@ -19,15 +20,24 @@ export default async function LeadPage({
 }) {
   const { id } = await params;
   const { supabase } = await requireTrackfitAdmin();
-  const [{ data }, { data: activity = [] },{data:invoices=[]}] = await Promise.all([
-    supabase.from("trackfit_enquiries").select("*").eq("id", id).maybeSingle(),
-    supabase
-      .from("trackfit_enquiry_activity")
-      .select("*")
-      .eq("enquiry_id", id)
-      .order("created_at", { ascending: false }),
-    supabase.from("trackfit_invoices").select("id,invoice_number,status,total_pence").eq("lead_id",id).order("created_at",{ascending:false}),
-  ]);
+  const [{ data }, { data: activity = [] }, { data: invoices = [] }] =
+    await Promise.all([
+      supabase
+        .from("trackfit_enquiries")
+        .select("*")
+        .eq("id", id)
+        .maybeSingle(),
+      supabase
+        .from("trackfit_enquiry_activity")
+        .select("*")
+        .eq("enquiry_id", id)
+        .order("created_at", { ascending: false }),
+      supabase
+        .from("trackfit_invoices")
+        .select("id,invoice_number,status,total_pence")
+        .eq("lead_id", id)
+        .order("created_at", { ascending: false }),
+    ]);
   if (!data) notFound();
   const lead = data as TrackfitEnquiry;
   const details = [
@@ -48,6 +58,9 @@ export default async function LeadPage({
     ["Landing page", lead.landing_page || "—"],
   ];
   const activities = (activity || []) as Activity[];
+  const contactAttempts = activities.filter(
+    (item) => item.activity_type === "customer_email",
+  ).length;
   return (
     <>
       <header className="admin-header">
@@ -92,7 +105,41 @@ export default async function LeadPage({
               </div>
             )}
           </section>
-          <section className="admin-panel"><div className="panel-head"><h2>Invoices</h2><Link href={`/admin/invoices/new?lead=${lead.id}`}>Create invoice</Link></div><div className="latest-list">{(invoices||[]).map((invoice)=><Link key={invoice.id} href={`/admin/invoices/${invoice.id}`}><div><strong>{invoice.invoice_number}</strong><span>{invoice.status.replaceAll("_"," ")}</span></div><strong>{new Intl.NumberFormat("en-GB",{style:"currency",currency:"GBP"}).format(Number(invoice.total_pence)/100)}</strong></Link>)}{!invoices?.length&&<p className="admin-empty">No invoices for this lead.</p>}</div></section>
+          <CustomerOutreach
+            leadId={lead.id}
+            lead={lead}
+            lastContacted={
+              lead.last_contacted_at ? date(lead.last_contacted_at) : null
+            }
+            contactAttempts={contactAttempts}
+          />
+          <section className="admin-panel">
+            <div className="panel-head">
+              <h2>Invoices</h2>
+              <Link href={`/admin/invoices/new?lead=${lead.id}`}>
+                Create invoice
+              </Link>
+            </div>
+            <div className="latest-list">
+              {(invoices || []).map((invoice) => (
+                <Link key={invoice.id} href={`/admin/invoices/${invoice.id}`}>
+                  <div>
+                    <strong>{invoice.invoice_number}</strong>
+                    <span>{invoice.status.replaceAll("_", " ")}</span>
+                  </div>
+                  <strong>
+                    {new Intl.NumberFormat("en-GB", {
+                      style: "currency",
+                      currency: "GBP",
+                    }).format(Number(invoice.total_pence) / 100)}
+                  </strong>
+                </Link>
+              ))}
+              {!invoices?.length && (
+                <p className="admin-empty">No invoices for this lead.</p>
+              )}
+            </div>
+          </section>
           <section className="admin-panel">
             <h2>Submitted photographs</h2>
             <LeadPhotos id={lead.id} photos={lead.photo_paths || []} />

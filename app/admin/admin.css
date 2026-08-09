@@ -339,6 +339,114 @@
   font-size: 11px;
   margin-top: 5px;
 }
+
+.outreach-panel .panel-head {
+  align-items: flex-start;
+  gap: 20px;
+}
+.outreach-panel .panel-head p,
+.outreach-stats {
+  color: var(--admin-muted);
+  font-size: 13px;
+}
+.outreach-stats {
+  display: grid;
+  gap: 5px;
+  text-align: right;
+}
+.outreach-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+.outreach-actions button,
+.outreach-dialog button {
+  border: 1px solid var(--admin-line);
+  border-radius: 9px;
+  background: #171b16;
+  color: #fff;
+  padding: 10px 13px;
+  cursor: pointer;
+}
+.outreach-actions button:hover:not(:disabled) {
+  border-color: var(--admin-lime);
+}
+.outreach-actions button:disabled,
+.outreach-dialog button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+.outreach-warning {
+  color: #ffbd74;
+  margin-top: 16px;
+}
+.outreach-feedback {
+  color: var(--admin-lime);
+  margin-top: 14px;
+}
+.outreach-backdrop {
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: #050605d9;
+}
+.outreach-dialog {
+  width: min(720px, 100%);
+  max-height: calc(100vh - 40px);
+  overflow: auto;
+  border: 1px solid var(--admin-line);
+  border-radius: 16px;
+  background: var(--admin-panel);
+  padding: 24px;
+  box-shadow: 0 24px 70px #000a;
+}
+.outreach-dialog label {
+  display: grid;
+  gap: 7px;
+  margin-top: 16px;
+  color: var(--admin-muted);
+  font-size: 13px;
+}
+.outreach-dialog input,
+.outreach-dialog textarea {
+  width: 100%;
+  border: 1px solid var(--admin-line);
+  border-radius: 9px;
+  background: #0c0f0c;
+  color: #fff;
+  padding: 11px 12px;
+  font: inherit;
+}
+.outreach-dialog textarea {
+  resize: vertical;
+}
+.outreach-dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+.outreach-dialog-actions .admin-primary {
+  background: var(--admin-lime);
+  color: #0b0d0a;
+}
+.contact-indicator {
+  width: max-content;
+  margin-top: 5px;
+  border-radius: 999px;
+  padding: 2px 7px;
+  background: #ffffff0c;
+}
+.contact-contacted {
+  color: var(--admin-lime) !important;
+}
+.contact-follow-up-due {
+  color: #ffbd74 !important;
+}
 .admin-toast {
   position: fixed;
   right: 24px;
@@ -486,6 +594,18 @@
   .editor .wide {
     grid-column: auto;
   }
+  .outreach-panel .panel-head {
+    display: grid;
+  }
+  .outreach-stats {
+    text-align: left;
+  }
+  .outreach-actions button {
+    width: 100%;
+  }
+  .outreach-dialog {
+    padding: 18px;
+  }
 }
 /* Invoice generator */
 .invoice-toolbar {
@@ -542,7 +662,7 @@
 }
 .invoice-item {
   display: grid;
-  grid-template-columns: 28px minmax(220px,3fr) .7fr .8fr 1fr 1fr 34px 34px;
+  grid-template-columns: 28px minmax(220px, 3fr) 0.7fr 0.8fr 1fr 1fr 34px 34px;
   gap: 7px;
   align-items: end;
   margin-bottom: 8px;
