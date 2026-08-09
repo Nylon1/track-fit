@@ -4,6 +4,10 @@ import { requireTrackfitAdmin } from "@/lib/supabase/server";
 import LeadEditor from "@/components/admin/LeadEditor";
 import LeadPhotos from "@/components/admin/LeadPhotos";
 import CustomerOutreach from "@/components/admin/CustomerOutreach";
+import LeadEmailConversation, {
+  type ConversationItem,
+} from "@/components/admin/inbox/LeadEmailConversation";
+import { fetchMessagesFromSender } from "@/lib/email/ionos-imap";
 import type { Activity, TrackfitEnquiry } from "@/types/admin";
 const label = (x: string) => x.replaceAll("_", " ");
 const date = (x: string | null) =>
@@ -61,6 +65,42 @@ export default async function LeadPage({
   const contactAttempts = activities.filter(
     (item) => item.activity_type === "customer_email",
   ).length;
+  let inboundUnavailable = false;
+  const inbound = lead.email
+    ? await fetchMessagesFromSender(lead.email, 20).catch((error) => {
+        inboundUnavailable = true;
+        console.error(
+          "[TrackFit IMAP] Lead conversation unavailable:",
+          error instanceof Error ? error.message : "Unknown error",
+        );
+        return [];
+      })
+    : [];
+  const outboundConversation: ConversationItem[] = activities
+    .filter(
+      (item) =>
+        item.activity_type === "customer_email" &&
+        item.changes?.status === "success",
+    )
+    .map((item) => ({
+      id: item.id,
+      direction: "outbound",
+      subject: String(item.changes?.subject || "Customer email sent"),
+      timestamp: item.created_at,
+    }));
+  const conversation: ConversationItem[] = [
+    ...outboundConversation,
+    ...inbound.map((message) => ({
+      id: `inbound-${message.uid}`,
+      direction: "inbound" as const,
+      subject: message.subject,
+      timestamp: message.receivedAt,
+      inboxUid: message.uid,
+    })),
+  ].sort(
+    (left, right) =>
+      new Date(left.timestamp).getTime() - new Date(right.timestamp).getTime(),
+  );
   return (
     <>
       <header className="admin-header">
@@ -112,6 +152,10 @@ export default async function LeadPage({
               lead.last_contacted_at ? date(lead.last_contacted_at) : null
             }
             contactAttempts={contactAttempts}
+          />
+          <LeadEmailConversation
+            items={conversation}
+            unavailable={inboundUnavailable}
           />
           <section className="admin-panel">
             <div className="panel-head">

@@ -51,6 +51,7 @@ export async function POST(
 
   const baseChanges = {
     email_type: input.type,
+    direction: "outbound",
     recipient,
     subject: input.subject,
     status: "processing",
