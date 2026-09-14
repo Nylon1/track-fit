@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
+import GalleryExplorer from "@/components/gallery/GalleryExplorer";
 import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 import SiteHeader from "@/components/site/SiteHeader";
 import { galleryImages } from "@/lib/gallery/data";
@@ -23,16 +24,6 @@ export const metadata: Metadata = createMetadata({
   ],
 });
 
-const categories = [
-  "Residential",
-  "Bay and curved",
-  "Wave curtains",
-  "Motorised",
-  "Hospitality",
-  "Commercial",
-  "System detail",
-];
-
 export default function GalleryPage() {
   return (
     <>
@@ -51,13 +42,7 @@ export default function GalleryPage() {
               <p className="mt-7 max-w-2xl text-lg leading-8 text-white/62">
                 Explore discreet tracks, shaped systems, wave headings, layered curtains and motorised finishes across homes, hotels and commercial spaces.
               </p>
-              <div className="mt-8 flex flex-wrap gap-2">
-                {categories.map((category) => (
-                  <a key={category} href={`#${category.toLowerCase().replaceAll(" ", "-")}`} className="rounded-full border border-white/12 bg-white/[0.035] px-4 py-2 text-xs font-semibold text-white/65 transition hover:border-[#B8F23D]/40 hover:text-white">
-                    {category}
-                  </a>
-                ))}
-              </div>
+              <a href="#gallery-explorer" className="mt-8 inline-flex min-h-12 items-center rounded-full bg-[#B8F23D] px-7 font-bold text-[#101310]">Explore the collection ↓</a>
             </div>
 
             <div className="grid grid-cols-2 gap-3">
@@ -85,31 +70,7 @@ export default function GalleryPage() {
               <p className="mt-5 text-base leading-7 text-black/58">Use these examples to identify the shape, finish and level of concealment you prefer. TrackFit will match the idea to the correct track, curtain load and fixing surface.</p>
             </div>
 
-            <div className="mt-12 grid auto-rows-[210px] gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              {galleryImages.map((item, index) => (
-                <figure
-                  id={index === galleryImages.findIndex((image) => image.category === item.category) ? item.category.toLowerCase().replaceAll(" ", "-") : undefined}
-                  key={`${item.src}-${item.title}`}
-                  className={`group relative overflow-hidden rounded-[26px] bg-[#D9D7CF] shadow-[0_16px_45px_rgba(0,0,0,0.09)] ${item.format === "wide" ? "sm:col-span-2" : ""} ${item.format === "tall" ? "row-span-2" : ""}`}
-                >
-                  <Image src={item.src} alt={item.alt} fill sizes={item.format === "wide" ? "(min-width: 1024px) 48vw, 94vw" : "(min-width: 1024px) 24vw, (min-width: 640px) 48vw, 94vw"} className="object-cover transition duration-700 group-hover:scale-[1.035]" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/82 via-black/5 to-transparent" />
-                  <figcaption className="absolute inset-x-0 bottom-0 p-5 text-white">
-                    <span className="text-[10px] font-bold uppercase tracking-[0.16em] text-[#B8F23D]">{item.category}</span>
-                    <strong className="mt-1 block text-base">{item.title}</strong>
-                    {item.credit ? (
-                      item.sourceUrl ? (
-                        <a href={item.sourceUrl} target="_blank" rel="noreferrer" className="mt-1 inline-block text-[11px] text-white/65 underline decoration-white/25 underline-offset-2 transition hover:text-white">
-                          {item.credit}
-                        </a>
-                      ) : (
-                        <span className="mt-1 block text-[11px] text-white/65">{item.credit}</span>
-                      )
-                    ) : null}
-                  </figcaption>
-                </figure>
-              ))}
-            </div>
+            <GalleryExplorer images={galleryImages} />
 
             <p className="mt-6 text-sm leading-6 text-black/48">Manufacturer, supplier and interior specialist imagery is shown for design reference, with original source credits on each relevant image. TrackFit is an independent installation specialist.</p>
           </div>

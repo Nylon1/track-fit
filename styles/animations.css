@@ -111,7 +111,7 @@
 }
 
 .tf-marketing-surface main:not(.tf-welcome-page) {
-  animation: tf-page-arrival 520ms var(--tf-ease-entry) both;
+  animation: tf-page-arrival 520ms var(--tf-ease-entry);
 }
 
 .tf-marketing-surface main section[id] {
@@ -124,7 +124,7 @@
   transition:
     opacity 820ms var(--tf-ease-entry) var(--tf-reveal-delay, 0ms),
     transform 920ms var(--tf-ease-standard) var(--tf-reveal-delay, 0ms);
-  will-change: opacity, transform;
+
 }
 
 .tf-scroll-reveal:is(h1, h2) {
@@ -138,20 +138,20 @@
   will-change: auto;
 }
 
-.tf-marketing-surface header {
+.tf-marketing-surface [data-site-header] {
   transition:
     background-color 300ms ease,
     border-color 300ms ease,
     box-shadow 300ms ease;
 }
 
-html[data-tf-scrolled] .tf-marketing-surface header {
+html[data-tf-scrolled] .tf-marketing-surface [data-site-header] {
   border-color: rgba(184, 242, 61, 0.13);
   background: rgba(7, 9, 8, 0.985);
   box-shadow: 0 16px 55px rgba(0, 0, 0, 0.38);
 }
 
-.tf-marketing-surface main :is(article, figure, a.group) {
+.tf-marketing-surface main :is(article, figure, a.group):not(.tf-scroll-reveal) {
   backface-visibility: hidden;
   transition-property: transform, border-color, background-color, box-shadow;
   transition-duration: 420ms;
@@ -198,3 +198,17 @@ html[data-tf-scrolled] .tf-marketing-surface header {
     transform: none;
   }
 }
+
+@media (prefers-reduced-motion: no-preference) and (hover: hover) {
+  .tf-marketing-surface main figure img { transition: transform 800ms cubic-bezier(.22,.61,.36,1); }
+  .tf-marketing-surface main figure:hover img { transform: scale(1.035); }
+}
+@media print { .tf-scroll-reveal { opacity: 1 !important; transform: none !important; } .tf-scroll-progress { display: none; } }
+
+.tf-gallery-dialog { max-height: 94dvh; }
+.tf-gallery-dialog::backdrop { background: rgb(0 0 0 / 85%); backdrop-filter: blur(10px); }
+@media (prefers-reduced-motion: no-preference) {
+  .tf-gallery-grid { animation: tf-gallery-appear 320ms ease-out; }
+  .tf-gallery-dialog[open] { animation: tf-gallery-appear 200ms ease-out; }
+}
+@keyframes tf-gallery-appear { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }

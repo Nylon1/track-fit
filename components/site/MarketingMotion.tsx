@@ -19,6 +19,8 @@ export default function MarketingMotion() {
     const surface = document.getElementById("trackfit-marketing-surface");
     if (!surface || pathname === "/welcome") return;
 
+    const main = surface.querySelector("main");
+    if (main) { main.id = "trackfit-content"; main.tabIndex = -1; }
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
@@ -52,7 +54,7 @@ export default function MarketingMotion() {
     const candidates = Array.from(
       surface.querySelectorAll<HTMLElement>(revealSelector),
     ).filter((element, index, elements) => {
-      if (element.closest("header, footer, [data-no-reveal]")) return false;
+      if (element.closest("[data-site-header], footer, [data-no-reveal]")) return false;
 
       return !elements.some(
         (parent, parentIndex) =>
@@ -92,6 +94,8 @@ export default function MarketingMotion() {
       const siblingIndex = siblings.indexOf(element);
       const delay = siblingIndex >= 0 ? Math.min(siblingIndex % 4, 3) * 70 : 0;
 
+      // Leave the first screen and restored scroll positions visible immediately.
+      if (element.getBoundingClientRect().top < window.innerHeight) return;
       element.classList.add("tf-scroll-reveal");
       element.style.setProperty("--tf-reveal-delay", `${delay}ms`);
       observer.observe(element);
@@ -99,6 +103,7 @@ export default function MarketingMotion() {
 
     return () => {
       observer.disconnect();
+      candidates.forEach((element) => { element.classList.remove("tf-scroll-reveal", "is-visible"); element.style.removeProperty("--tf-reveal-delay"); });
       window.removeEventListener("scroll", queueProgressUpdate);
       window.removeEventListener("resize", queueProgressUpdate);
       if (frame) window.cancelAnimationFrame(frame);

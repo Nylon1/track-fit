@@ -277,6 +277,7 @@ function Chevron({ open }: { open: boolean }) {
 
 export default function SiteHeader() {
   const pathname = usePathnameSafe();
+  const menuToggleRef = useRef<HTMLButtonElement>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
   const [isResourcesOpen, setIsResourcesOpen] = useState(false);
@@ -288,10 +289,21 @@ export default function SiteHeader() {
   }
 
   useEffect(() => {
-    document.body.style.overflow = isMenuOpen ? "hidden" : "";
+    if (!isMenuOpen) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const escape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") { setIsMenuOpen(false); menuToggleRef.current?.focus(); }
+    };
+    const desktop = window.matchMedia("(min-width: 1280px)");
+    const resize = () => { if (desktop.matches) setIsMenuOpen(false); };
+    document.addEventListener("keydown", escape);
+    desktop.addEventListener("change", resize);
 
     return () => {
-      document.body.style.overflow = "";
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener("keydown", escape);
+      desktop.removeEventListener("change", resize);
     };
   }, [isMenuOpen]);
 
@@ -313,7 +325,8 @@ export default function SiteHeader() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 border-b border-white/10 bg-[#070908]/95 text-[#F4F1E8] shadow-[0_12px_45px_rgba(0,0,0,0.2)] backdrop-blur-2xl">
+    <header data-site-header className="sticky top-0 z-50 border-b border-white/10 bg-[#070908]/95 text-[#F4F1E8] shadow-[0_12px_45px_rgba(0,0,0,0.2)] backdrop-blur-2xl">
+      <a href="#trackfit-content" className="tf-skip-link">Skip to content</a>
       <div className="hidden border-b border-white/[0.07] bg-[#0D100E] md:block">
         <div className="mx-auto flex h-8 max-w-[1440px] items-center justify-between px-8 text-[10px] font-bold uppercase tracking-[0.15em]">
           <div className="flex items-center gap-5 text-white/42">
@@ -442,6 +455,7 @@ export default function SiteHeader() {
 
           <button
             type="button"
+            ref={menuToggleRef}
             aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
             aria-expanded={isMenuOpen}
             aria-controls="trackfit-mobile-menu"
@@ -475,6 +489,7 @@ export default function SiteHeader() {
 
       <div
         id="trackfit-mobile-menu"
+        inert={!isMenuOpen}
         className={[
           "overflow-y-auto border-t bg-[#090C0A] transition-all duration-300 xl:hidden",
           isMenuOpen
@@ -527,6 +542,7 @@ export default function SiteHeader() {
             </button>
 
             <div
+              inert={!isServicesOpen}
               className={[
                 "grid overflow-hidden transition-all duration-300",
                 isServicesOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]",
@@ -569,6 +585,7 @@ export default function SiteHeader() {
             </button>
 
             <div
+              inert={!isResourcesOpen}
               className={[
                 "grid overflow-hidden transition-all duration-300",
                 isResourcesOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]",
