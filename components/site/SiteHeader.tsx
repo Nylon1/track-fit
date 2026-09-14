@@ -34,6 +34,11 @@ const serviceNavigation = [
 
 const resourceNavigation = [
   {
+    label: "Pricing Guide",
+    href: "/pricing",
+    description: "Typical project ranges before you enquire",
+  },
+  {
     label: "TrackFit Guide",
     href: "/guides",
     description: "Planning and installation advice",
@@ -181,6 +186,13 @@ export default function SiteHeader() {
           />
 
           <Link
+            href="/pricing"
+            className="whitespace-nowrap text-sm font-semibold text-white/75 transition hover:text-[#B8F23D]"
+          >
+            Pricing
+          </Link>
+
+          <Link
             href="/motorised-curtain-tracks"
             className="whitespace-nowrap text-sm font-semibold text-white/75 transition hover:text-[#B8F23D]"
           >
@@ -276,6 +288,11 @@ export default function SiteHeader() {
 
             <Link href="/motorised-curtain-tracks" onClick={closeMenu} className="flex min-h-13 items-center justify-between rounded-[16px] px-4 py-3 font-semibold text-white transition hover:bg-white/[0.05]">
               Motorised
+              <span aria-hidden="true" className="text-white/35">→</span>
+            </Link>
+
+            <Link href="/pricing" onClick={closeMenu} className="flex min-h-13 items-center justify-between rounded-[16px] px-4 py-3 font-semibold text-white transition hover:bg-white/[0.05]">
+              Pricing guide
               <span aria-hidden="true" className="text-white/35">→</span>
             </Link>
 

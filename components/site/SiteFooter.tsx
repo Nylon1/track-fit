@@ -34,6 +34,10 @@ const serviceLinks = [
 
 const resourceLinks = [
   {
+    label: "Pricing Guide",
+    href: "/pricing",
+  },
+  {
     label: "Tools & Calculators",
     href: "/tools",
   },

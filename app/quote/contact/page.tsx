@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import {
   AnimatePresence,
   motion,
@@ -20,6 +21,7 @@ type ContactForm = {
   email: string;
   phone: string;
   preferredContact: "phone" | "email" | "either";
+  contactWindow: "morning" | "afternoon" | "evening" | "anytime";
   notes: string;
 };
 
@@ -27,14 +29,12 @@ type ContactErrors = Partial<
   Record<keyof ContactForm, string>
 >;
 
-type ContactPreference =
-  ContactForm["preferredContact"];
-
 const initialForm: ContactForm = {
   fullName: "",
   email: "",
   phone: "",
   preferredContact: "either",
+  contactWindow: "anytime",
   notes: "",
 };
 
@@ -390,6 +390,20 @@ export default function ContactPage() {
           </motion.div>
         </motion.div>
 
+        <motion.aside
+          className="tf-contact-price-guide"
+          variants={revealVariants}
+        >
+          <div>
+            <span>Plan your budget first</span>
+            <strong>Installation from £145 · supply &amp; fit from £295</strong>
+            <p>These are guide prices for a typical single straight track. We confirm the exact scope before booking.</p>
+          </div>
+          <Link href="/pricing" target="_blank">
+            Open pricing guide ↗
+          </Link>
+        </motion.aside>
+
         <motion.form
           className="tf-contact-form tf-contact-form-cinematic"
           onSubmit={handleSubmit}
@@ -509,6 +523,36 @@ export default function ContactPage() {
                     "either"
                   )
                 }
+              />
+            </div>
+          </motion.fieldset>
+
+          <motion.fieldset
+            className="tf-contact-preference"
+            variants={fieldVariants}
+          >
+            <legend>When is it easiest to reach you?</legend>
+
+            <div className="tf-contact-options tf-contact-options-four">
+              <ContactOption
+                label="Morning"
+                selected={form.contactWindow === "morning"}
+                onSelect={() => updateField("contactWindow", "morning")}
+              />
+              <ContactOption
+                label="Afternoon"
+                selected={form.contactWindow === "afternoon"}
+                onSelect={() => updateField("contactWindow", "afternoon")}
+              />
+              <ContactOption
+                label="Evening"
+                selected={form.contactWindow === "evening"}
+                onSelect={() => updateField("contactWindow", "evening")}
+              />
+              <ContactOption
+                label="Any time"
+                selected={form.contactWindow === "anytime"}
+                onSelect={() => updateField("contactWindow", "anytime")}
               />
             </div>
           </motion.fieldset>

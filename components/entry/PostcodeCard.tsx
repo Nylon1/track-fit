@@ -161,13 +161,16 @@ export default function PostcodeCard({
           <ArrowIcon />
 </button>
 
-<Link
-  href="/services"
-  className="tf-home-learn-more"
->
-  Learn more about TrackFit
-  <span aria-hidden="true">→</span>
-</Link>
+        <div className="tf-home-secondary-links">
+          <Link href="/pricing" className="tf-home-learn-more">
+            View guide prices
+            <span aria-hidden="true">→</span>
+          </Link>
+          <Link href="/services" className="tf-home-learn-more">
+            Explore services
+            <span aria-hidden="true">→</span>
+          </Link>
+        </div>
 </form>
     </CardReveal>
   );

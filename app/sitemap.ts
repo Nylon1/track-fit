@@ -9,11 +9,12 @@ import { absoluteUrl, siteConfig } from "@/lib/seo/site-config";
 import { tools } from "@/lib/tools/data";
 import { tradeSectors } from "@/lib/trade/data";
 
-const updated = new Date("2026-08-04");
+const updated = new Date("2026-09-14");
 
 const routes = [
   { path: "/", priority: 1, changeFrequency: "weekly" as const },
   { path: "/services", priority: 0.9, changeFrequency: "weekly" as const },
+  { path: "/pricing", priority: 0.96, changeFrequency: "monthly" as const },
   { path: "/about", priority: 0.65, changeFrequency: "monthly" as const },
   { path: "/contact", priority: 0.7, changeFrequency: "monthly" as const },
   { path: "/guides", priority: 0.91, changeFrequency: "weekly" as const },

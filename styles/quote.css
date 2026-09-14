@@ -1117,6 +1117,54 @@ cursor:not-allowed;
   max-width: 62rem;
 }
 
+.tf-contact-price-guide {
+  display: flex;
+  max-width: 62rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 1.6rem;
+  border: 1px solid rgba(184, 242, 61, 0.28);
+  border-radius: var(--tf-radius-md);
+  background: linear-gradient(120deg, rgba(184, 242, 61, 0.11), rgba(255, 255, 255, 0.035));
+  padding: 1.15rem 1.3rem;
+}
+
+.tf-contact-price-guide span,
+.tf-contact-price-guide strong,
+.tf-contact-price-guide p {
+  display: block;
+}
+
+.tf-contact-price-guide span {
+  color: var(--tf-lime);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.tf-contact-price-guide strong {
+  margin-top: 0.35rem;
+  color: var(--tf-text-primary);
+  font-size: 1rem;
+}
+
+.tf-contact-price-guide p {
+  margin: 0.35rem 0 0;
+  color: var(--tf-text-muted);
+  font-size: 0.75rem;
+  line-height: 1.55;
+}
+
+.tf-contact-price-guide a {
+  flex: 0 0 auto;
+  color: var(--tf-lime);
+  font-size: 0.8rem;
+  font-weight: 750;
+  text-decoration: none;
+}
+
 .tf-contact-grid {
   display: grid;
   grid-template-columns:
@@ -1241,6 +1289,10 @@ cursor:not-allowed;
   gap: 0.8rem;
 }
 
+.tf-contact-options-four {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
 .tf-contact-option {
   display: flex;
   min-height: 4.5rem;
@@ -1330,6 +1382,11 @@ cursor:not-allowed;
 
   .tf-contact-field.is-wide {
     grid-column: auto;
+  }
+
+  .tf-contact-price-guide {
+    align-items: flex-start;
+    flex-direction: column;
   }
 }
 

@@ -22,6 +22,7 @@ type ContactDetails = {
   email: string;
   phone: string;
   preferredContact: "phone" | "email" | "either";
+  contactWindow: "morning" | "afternoon" | "evening" | "anytime";
   notes: string;
 };
 
@@ -862,6 +863,11 @@ export default function SummaryPage() {
                     )}
                   </dd>
                 </div>
+
+                <div>
+                  <dt>Best time</dt>
+                  <dd>{formatContactWindow(summary.contact?.contactWindow)}</dd>
+                </div>
               </dl>
 
               {summary.contact?.notes && (
@@ -1403,6 +1409,19 @@ function formatPreferredContact(
   }
 
   return "Telephone or email";
+}
+
+function formatContactWindow(
+  value?: ContactDetails["contactWindow"]
+) {
+  const labels = {
+    morning: "Morning · 8am–12pm",
+    afternoon: "Afternoon · 12pm–5pm",
+    evening: "Evening · 5pm–7pm",
+    anytime: "Any time",
+  };
+
+  return value ? labels[value] : "Any time";
 }
 
 function formatQuantity(value: string) {

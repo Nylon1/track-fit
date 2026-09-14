@@ -12,6 +12,7 @@ type ContactDetails = {
   email: string;
   phone: string;
   preferredContact: "phone" | "email" | "either";
+  contactWindow: "morning" | "afternoon" | "evening" | "anytime";
   notes: string;
 };
 
@@ -81,6 +82,19 @@ function formatPreferredContact(
   }
 
   return "Telephone or email";
+}
+
+function formatContactWindow(
+  value?: ContactDetails["contactWindow"]
+) {
+  const labels = {
+    morning: "Morning (8am–12pm)",
+    afternoon: "Afternoon (12pm–5pm)",
+    evening: "Evening (5pm–7pm)",
+    anytime: "Any time",
+  };
+
+  return value ? labels[value] : "Any time";
 }
 
 function formatQuantity(value: string) {
@@ -267,7 +281,10 @@ export async function POST(request: Request) {
       track_type: body.trackType, track_quantity: body.quantity,
       full_name: body.contact.fullName.trim(), email: body.contact.email.trim().toLowerCase(),
       phone: body.contact.phone.trim(), preferred_contact: body.contact.preferredContact,
-      customer_notes: body.contact.notes?.trim() || null, photo_paths: storedPhotos,
+      customer_notes: [
+        `Best contact time: ${formatContactWindow(body.contact.contactWindow)}`,
+        body.contact.notes?.trim(),
+      ].filter(Boolean).join("\n\n"), photo_paths: storedPhotos,
       source: body.source?.slice(0, 100) || "website_quote",
       utm_source: body.utmSource?.slice(0, 200) || null, utm_medium: body.utmMedium?.slice(0, 200) || null,
       utm_campaign: body.utmCampaign?.slice(0, 200) || null, landing_page: body.landingPage?.slice(0, 1000) || null,
@@ -551,6 +568,13 @@ export async function POST(request: Request) {
                         ${formatPreferredContact(
                           body.contact.preferredContact
                         )}
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td style="padding:10px 0;color:#697069;">Best time</td>
+                      <td style="padding:10px 0;text-align:right;font-weight:700;">
+                        ${formatContactWindow(body.contact.contactWindow)}
                       </td>
                     </tr>
                   </table>
