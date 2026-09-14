@@ -1,3 +1,4 @@
+import { AreaPhoto } from "@/components/areas/AreaPhoto";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -149,6 +150,7 @@ export default async function AreaPage({ params }: PageProps) {
                 Use our planning tools
               </Link>
             </div>
+            <AreaPhoto slug={area.slug} />
           </div>
         </section>
 

@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import Image from "next/image";
+import { areaImages } from "@/lib/areas/images";
 import Link from "next/link";
 
 import SiteHeader from "@/components/site/SiteHeader";
@@ -22,8 +24,10 @@ export default function AreasPage() {
       <SiteHeader />
 
       <main className="min-h-screen bg-[#080A09] text-[#F4F1E8]">
-        <section className="border-b border-white/10">
-          <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:px-10 lg:py-24">
+        <section className="relative isolate overflow-hidden border-b border-white/10">
+          {areaImages.london && <Image src={areaImages.london.src} alt={areaImages.london.alt} fill priority sizes="100vw" className="object-cover" />}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#080A09]/95 via-[#080A09]/80 to-[#080A09]/30" />
+          <div className="relative mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:px-10 lg:py-24">
             <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#B8F23D]">
               Nationwide coverage
             </p>
@@ -73,8 +77,10 @@ export default function AreasPage() {
                       <Link
                         key={area.slug}
                         href={`/areas/${area.slug}`}
-                        className="group rounded-[28px] border border-white/10 bg-white/[0.035] p-6 transition hover:border-[#B8F23D]/45 hover:bg-white/[0.055]"
+                        className="group overflow-hidden rounded-[28px] border border-white/10 bg-white/[0.035] transition hover:border-[#B8F23D]/45 hover:bg-white/[0.055]"
                       >
+                        {areaImages[area.slug] && <div className="relative aspect-[16/10] overflow-hidden bg-white/5"><Image src={areaImages[area.slug].src} alt={areaImages[area.slug].alt} fill sizes="(min-width:1280px) 33vw, (min-width:768px) 50vw, 100vw" className="object-cover transition-transform duration-700 motion-safe:group-hover:scale-105" /></div>}
+                        <div className="p-6">
                         <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#B8F23D]">
                           {area.region}
                         </p>
@@ -90,6 +96,7 @@ export default function AreasPage() {
                         <span className="mt-7 inline-flex font-semibold text-[#F4F1E8] transition group-hover:text-[#B8F23D]">
                           View local guidance →
                         </span>
+                        </div>
                       </Link>
                     ))}
                   </div>
@@ -98,6 +105,11 @@ export default function AreasPage() {
             })}
           </div>
         </section>
+        <details className="mx-auto mb-16 max-w-7xl rounded-2xl border border-white/10 px-6 py-4 text-xs text-white/60">
+          <summary className="flex items-center text-sm font-semibold text-white">Location photography credits</summary>
+          <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{areas.map(area => { const photo = areaImages[area.slug]; return photo ? <p key={area.slug}><strong className="text-white/80">{area.name}</strong><br /><a className="underline" href={photo.sourceUrl} target="_blank" rel="noreferrer">{photo.author}</a>{" · "}<a className="underline" href={photo.licenseUrl || photo.sourceUrl} target="_blank" rel="noreferrer">{photo.license}</a></p> : null; })}</div>
+          <p className="mt-5">Images resized and cropped for display.</p>
+        </details>
       </main>
     </>
   );

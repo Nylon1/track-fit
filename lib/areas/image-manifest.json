@@ -1,0 +1,515 @@
+{
+  "london": {
+    "src": "/images/areas/london.webp",
+    "alt": "London architecture and local landmarks",
+    "place": "London",
+    "author": "Ilya Grigorik",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:London_Skyline_(125508655).jpeg"
+  },
+  "central-london": {
+    "src": "/images/areas/central-london.webp",
+    "alt": "Westminster architecture and local landmarks",
+    "place": "Westminster",
+    "author": "Colin",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Westminster_from_the_dome_on_Methodist_Central_Hall.jpg"
+  },
+  "north-london": {
+    "src": "/images/areas/north-london.webp",
+    "alt": "Camden Town architecture and local landmarks",
+    "place": "Camden Town",
+    "author": "Georgia Pinaud, Lille, France.",
+    "license": "Public domain",
+    "licenseUrl": "https://commons.wikimedia.org/wiki/Help:Public_domain",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Camden_Town_9.jpg"
+  },
+  "south-london": {
+    "src": "/images/areas/south-london.webp",
+    "alt": "Greenwich architecture and local landmarks",
+    "place": "Greenwich",
+    "author": "Steve F-E-Cameron",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:312SFEC_LONDON-20070917.JPG"
+  },
+  "east-london": {
+    "src": "/images/areas/east-london.webp",
+    "alt": "Canary Wharf architecture and local landmarks",
+    "place": "Canary Wharf",
+    "author": "The wub",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Canary_Wharf_from_entrance_to_Limehouse_Basin_-_2022-04-03.jpg"
+  },
+  "west-london": {
+    "src": "/images/areas/west-london.webp",
+    "alt": "Kensington architecture and local landmarks",
+    "place": "Kensington",
+    "author": "CVB",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Kensington_High_Street_2_Londres.jpg"
+  },
+  "reading": {
+    "src": "/images/areas/reading.webp",
+    "alt": "Reading, Berkshire architecture and local landmarks",
+    "place": "Reading, Berkshire",
+    "author": "Smuconlaw .",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Reading_Town_Hall,_UK_-_20150707.jpg"
+  },
+  "oxford": {
+    "src": "/images/areas/oxford.webp",
+    "alt": "Oxford architecture and local landmarks",
+    "place": "Oxford",
+    "author": "Tony Hisgett from Birmingham, UK",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Museum_of_Oxford_(5652685943).jpg"
+  },
+  "cambridge": {
+    "src": "/images/areas/cambridge.webp",
+    "alt": "Cambridge architecture and local landmarks",
+    "place": "Cambridge",
+    "author": "Jean-Christophe BENOIST",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cambridge_-_Kings_College_vue_des_backs.jpg"
+  },
+  "brighton-and-hove": {
+    "src": "/images/areas/brighton-and-hove.webp",
+    "alt": "Brighton and Hove architecture and local landmarks",
+    "place": "Brighton and Hove",
+    "author": "Arild Vågen",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Palace_Pier_April_2018_01.jpg"
+  },
+  "canterbury": {
+    "src": "/images/areas/canterbury.webp",
+    "alt": "Canterbury architecture and local landmarks",
+    "place": "Canterbury",
+    "author": "Antony McCallum: Who is the uploader, photographer, full copyright owner and proprietor of WyrdLight.com",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Canterbury-cathedral-wyrdlight.jpg"
+  },
+  "chichester": {
+    "src": "/images/areas/chichester.webp",
+    "alt": "Chichester architecture and local landmarks",
+    "place": "Chichester",
+    "author": "Tilman2007",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:The_Market_Cross_Chichester_1026826_20230815_0001.jpg"
+  },
+  "crawley": {
+    "src": "/images/areas/crawley.webp",
+    "alt": "Crawley architecture and local landmarks",
+    "place": "Crawley",
+    "author": "Stephen McKay",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Queens_Square,_Crawley_(geograph_5814836).jpg"
+  },
+  "eastbourne": {
+    "src": "/images/areas/eastbourne.webp",
+    "alt": "Eastbourne architecture and local landmarks",
+    "place": "Eastbourne",
+    "author": "Paul Gillett",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Beach_huts_-_Eastbourne_-_geograph.org.uk_-_2375843.jpg"
+  },
+  "guildford": {
+    "src": "/images/areas/guildford.webp",
+    "alt": "Guildford architecture and local landmarks",
+    "place": "Guildford",
+    "author": "Himar Santana Hernández",
+    "license": "Public domain",
+    "licenseUrl": "https://commons.wikimedia.org/wiki/Help:Public_domain",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Guildford_%26_Cathedral_of_Surrey.JPG"
+  },
+  "maidstone": {
+    "src": "/images/areas/maidstone.webp",
+    "alt": "Maidstone architecture and local landmarks",
+    "place": "Maidstone",
+    "author": "Rodney Burton , John Stratford , Penny Mayes , Diliff and Stacey Harris",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Maidstone,_Kent_montage.jpg"
+  },
+  "royal-tunbridge-wells": {
+    "src": "/images/areas/royal-tunbridge-wells.webp",
+    "alt": "Royal Tunbridge Wells architecture and local landmarks",
+    "place": "Royal Tunbridge Wells",
+    "author": "Paul Collins",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:The_Pantiles,_Royal_Tunbridge_Wells_-_geograph.org.uk_-_530188.jpg"
+  },
+  "slough": {
+    "src": "/images/areas/slough.webp",
+    "alt": "Slough architecture and local landmarks",
+    "place": "Slough",
+    "author": "alwye",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Slough_town_centre.png"
+  },
+  "southampton": {
+    "src": "/images/areas/southampton.webp",
+    "alt": "Southampton architecture and local landmarks",
+    "place": "Southampton",
+    "author": "David Martin",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:View_across_Ocean_Village_Marina_(geograph_5432669).jpg"
+  },
+  "portsmouth": {
+    "src": "/images/areas/portsmouth.webp",
+    "alt": "Portsmouth architecture and local landmarks",
+    "place": "Portsmouth",
+    "author": "Mike Faherty",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Portsmouth_Guildhall_-_geograph.org.uk_-_5431834.jpg"
+  },
+  "winchester": {
+    "src": "/images/areas/winchester.webp",
+    "alt": "Winchester architecture and local landmarks",
+    "place": "Winchester",
+    "author": "This file also contains one or more files hosted on Wikimedia Commons . The licensing of these files are the following: File:Winchester Cathedral-November 2020-35.jpg : Bellminsterboy (CC BY-SA 4.0) File:Great Minster Street, Winchester - geograph.org.uk - 1316306.jpg : Peter Trimming (CC BY-SA 2.0) File:1351065-Great Hall, Winchester Castle (2).jpg : Johan Bakker (CC BY-SA 3.0) File:180509-0928 23C3414 (42076135012).jpg : David Pearson (CC BY-SA 2.0)",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Winchester_Montage.jpg"
+  },
+  "woking": {
+    "src": "/images/areas/woking.webp",
+    "alt": "Woking architecture and local landmarks",
+    "place": "Woking",
+    "author": "Mertbiol",
+    "license": "Public domain",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Woking_town_centre_from_the_west_(cropped).jpg"
+  },
+  "worthing": {
+    "src": "/images/areas/worthing.webp",
+    "alt": "Worthing architecture and local landmarks",
+    "place": "Worthing",
+    "author": "Katharine Oakeshott",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Worthing_sea_front_from_the_pier_-_geograph.org.uk_-_413383.jpg"
+  },
+  "st-albans": {
+    "src": "/images/areas/st-albans.webp",
+    "alt": "St Albans architecture and local landmarks",
+    "place": "St Albans",
+    "author": "Ruth Hartnup from Vancouver, Canada",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:St_Albans_market_from_the_Clock_Tower_(164240202).jpg"
+  },
+  "watford": {
+    "src": "/images/areas/watford.webp",
+    "alt": "Watford architecture and local landmarks",
+    "place": "Watford",
+    "author": "Nigel Cox",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Watford,_Market_Street_and_High_Street_-_geograph.org.uk_-_116645.jpg"
+  },
+  "hemel-hempstead": {
+    "src": "/images/areas/hemel-hempstead.webp",
+    "alt": "Hemel Hempstead architecture and local landmarks",
+    "place": "Hemel Hempstead",
+    "author": "Peter O'Connor aka anemoneprojectors",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:GOC_Hemel_Hempstead_113_Plough_Roundabout,_Hemel_Hempstead_(48726958143).jpg"
+  },
+  "high-wycombe": {
+    "src": "/images/areas/high-wycombe.webp",
+    "alt": "High Wycombe architecture and local landmarks",
+    "place": "High Wycombe",
+    "author": "Peter Trimming",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:High_Wycombe_-_geograph.org.uk_-_4879468.jpg"
+  },
+  "aylesbury": {
+    "src": "/images/areas/aylesbury.webp",
+    "alt": "Aylesbury architecture and local landmarks",
+    "place": "Aylesbury",
+    "author": "Mark Cox",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Buckinghamshire_County_Hall,_Aylesbury.jpg"
+  },
+  "milton-keynes": {
+    "src": "/images/areas/milton-keynes.webp",
+    "alt": "Milton Keynes architecture and local landmarks",
+    "place": "Milton Keynes",
+    "author": "Cnyborg",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:MiltonKeynesChristtheCornerstone01.jpg"
+  },
+  "bedford": {
+    "src": "/images/areas/bedford.webp",
+    "alt": "Bedford architecture and local landmarks",
+    "place": "Bedford",
+    "author": "Gary Houston",
+    "license": "Public domain",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Shire-Hall-Bedford-20050921-003.jpg"
+  },
+  "luton": {
+    "src": "/images/areas/luton.webp",
+    "alt": "Luton architecture and local landmarks",
+    "place": "Luton",
+    "author": "Doyle of London",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Luton_Town_Hall_and_War_Memorial_(01).jpg"
+  },
+  "chelmsford": {
+    "src": "/images/areas/chelmsford.webp",
+    "alt": "Chelmsford architecture and local landmarks",
+    "place": "Chelmsford",
+    "author": "Diliff",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Chelmsford_Cathedral_Exterior,_Essex,_UK_-_Diliff.jpg"
+  },
+  "colchester": {
+    "src": "/images/areas/colchester.webp",
+    "alt": "Colchester architecture and local landmarks",
+    "place": "Colchester",
+    "author": "Dr Neil Clifton",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Colchester_Castle_(geograph_4444025).jpg"
+  },
+  "basildon": {
+    "src": "/images/areas/basildon.webp",
+    "alt": "Basildon architecture and local landmarks",
+    "place": "Basildon",
+    "author": "GaryReggae",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Basildon_Precinct_-_geograph.org.uk_-_261332.jpg"
+  },
+  "southend-on-sea": {
+    "src": "/images/areas/southend-on-sea.webp",
+    "alt": "Southend-on-Sea architecture and local landmarks",
+    "place": "Southend-on-Sea",
+    "author": "Colin Park",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:View_north_along_Southend_High_Street_(geograph_7675871).jpg"
+  },
+  "bristol": {
+    "src": "/images/areas/bristol.webp",
+    "alt": "Bristol architecture and local landmarks",
+    "place": "Bristol",
+    "author": "Chris Lathom-Sharp",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Clifton_Suspension_Bridge_and_the_Observatory_in_Bristol,_England.jpg"
+  },
+  "bath": {
+    "src": "/images/areas/bath.webp",
+    "alt": "Bath, Somerset architecture and local landmarks",
+    "place": "Bath, Somerset",
+    "author": "Diliff",
+    "license": "CC BY 2.5",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.5",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Roman_Baths_in_Bath_Spa,_England_-_July_2006.jpg"
+  },
+  "bournemouth": {
+    "src": "/images/areas/bournemouth.webp",
+    "alt": "Bournemouth architecture and local landmarks",
+    "place": "Bournemouth",
+    "author": "Pierre Terre",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bournemouth_-_Seafront_-_geograph.org.uk_-_838983.jpg"
+  },
+  "poole": {
+    "src": "/images/areas/poole.webp",
+    "alt": "Poole architecture and local landmarks",
+    "place": "Poole",
+    "author": "Chris Downer",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Poole,_central_span_of_the_Twin_Sails_bridge_-_geograph.org.uk_-_2682004.jpg"
+  },
+  "exeter": {
+    "src": "/images/areas/exeter.webp",
+    "alt": "Exeter architecture and local landmarks",
+    "place": "Exeter",
+    "author": "Simon Burchell",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Exeter_Cathedral,_Devon_213.jpg"
+  },
+  "plymouth": {
+    "src": "/images/areas/plymouth.webp",
+    "alt": "Plymouth architecture and local landmarks",
+    "place": "Plymouth",
+    "author": "Jabarney",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Plymouth_City.JPG"
+  },
+  "salisbury": {
+    "src": "/images/areas/salisbury.webp",
+    "alt": "Salisbury architecture and local landmarks",
+    "place": "Salisbury",
+    "author": "Andrew Dunn",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:The_Wardrobe,_Salisbury.jpg"
+  },
+  "swindon": {
+    "src": "/images/areas/swindon.webp",
+    "alt": "Swindon architecture and local landmarks",
+    "place": "Swindon",
+    "author": "Chris Brown",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:The_David_Murray_John_tower_-_geograph.org.uk_-_5742836.jpg"
+  },
+  "gloucester": {
+    "src": "/images/areas/gloucester.webp",
+    "alt": "Gloucester architecture and local landmarks",
+    "place": "Gloucester",
+    "author": "Saffron Blaze",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Gloucester_Docks_at_Night.jpeg"
+  },
+  "cheltenham": {
+    "src": "/images/areas/cheltenham.webp",
+    "alt": "Cheltenham architecture and local landmarks",
+    "place": "Cheltenham",
+    "author": "Arpingstone",
+    "license": "Public domain",
+    "licenseUrl": "https://commons.wikimedia.org/wiki/Help:Public_domain",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cheltenham.town.hall.arp.jpg"
+  },
+  "taunton": {
+    "src": "/images/areas/taunton.webp",
+    "alt": "Taunton architecture and local landmarks",
+    "place": "Taunton",
+    "author": "Nick Chipchase",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:St._Mary%27s,_Taunton_-_geograph.org.uk_-_1217534.jpg"
+  },
+  "torquay": {
+    "src": "/images/areas/torquay.webp",
+    "alt": "Torquay architecture and local landmarks",
+    "place": "Torquay",
+    "author": "User:ianmacm",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Torquay_harbour_october_2012.jpg"
+  },
+  "blackburn": {
+    "src": "/images/areas/blackburn.webp",
+    "alt": "Blackburn architecture and local landmarks",
+    "place": "Blackburn",
+    "author": "Stephen Craven",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Blackburn_Cathedral_from_the_south-east_-_geograph.org.uk_-_7895067.jpg"
+  },
+  "manchester": {
+    "src": "/images/areas/manchester.webp",
+    "alt": "Manchester architecture and local landmarks",
+    "place": "Manchester",
+    "author": "David Dixon",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tower_Blocks_over_Knott_Mill,_geograph_6866152_by_David_Dixon.jpg"
+  },
+  "birmingham": {
+    "src": "/images/areas/birmingham.webp",
+    "alt": "Birmingham architecture and local landmarks",
+    "place": "Birmingham",
+    "author": "Stephen JG",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Birmingham_Skyline_from_the_West.jpg"
+  },
+  "leeds": {
+    "src": "/images/areas/leeds.webp",
+    "alt": "Leeds architecture and local landmarks",
+    "place": "Leeds",
+    "author": "Lad 2011",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Leeds_CBD_at_night.jpg"
+  },
+  "liverpool": {
+    "src": "/images/areas/liverpool.webp",
+    "alt": "Liverpool architecture and local landmarks",
+    "place": "Liverpool",
+    "author": "Peter Tarleton",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pier_Head,_Liverpool_-_geograph.org.uk_-_3059094.jpg"
+  },
+  "sheffield": {
+    "src": "/images/areas/sheffield.webp",
+    "alt": "Sheffield architecture and local landmarks",
+    "place": "Sheffield",
+    "author": "Nbfreeh",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Sheffield_16-Sep-22-2.jpg"
+  },
+  "nottingham": {
+    "src": "/images/areas/nottingham.webp",
+    "alt": "Nottingham architecture and local landmarks",
+    "place": "Nottingham",
+    "author": "John Sutton",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Nottingham_Council_House_on_Coronation_Day_-_geograph.org.uk_-_7477109.jpg"
+  },
+  "leicester": {
+    "src": "/images/areas/leicester.webp",
+    "alt": "Leicester architecture and local landmarks",
+    "place": "Leicester",
+    "author": "NotFromUtrecht",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Leicester_Clock_Tower_wide_view.jpg"
+  },
+  "newcastle": {
+    "src": "/images/areas/newcastle.webp",
+    "alt": "Newcastle upon Tyne architecture and local landmarks",
+    "place": "Newcastle upon Tyne",
+    "author": "JimmyGuano",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Newcastle-upon-Tyne-bridges-and-skyline_cropped.jpg"
+  },
+  "york": {
+    "src": "/images/areas/york.webp",
+    "alt": "York architecture and local landmarks",
+    "place": "York",
+    "author": "FEGreene",
+    "license": "Public domain",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:York_Minster_(2797690).jpg"
+  }
+}
