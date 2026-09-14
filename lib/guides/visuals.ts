@@ -16,6 +16,6 @@ const entries: Record<string, ManifestEntry> = manifest as Record<string, Manife
 export function getGuideVisual(guide: Pick<Guide, "slug" | "category">): GuideVisual {
   const entry = entries[guide.slug];
   if (entry?.src && entry.alt && entry.title) return entry as GuideVisual;
-  const image = galleryImages.find((item) => item.src.endsWith(entry?.existing ?? "black-track-interior.webp")) ?? galleryImages[0];
+  const image = galleryImages.find((item) => item.src.split("/").pop() === (entry?.existing ?? "black-track-interior.webp")) ?? galleryImages[0];
   return { ...image, fit: image.category === "System detail" ? "contain" : "cover" };
 }
