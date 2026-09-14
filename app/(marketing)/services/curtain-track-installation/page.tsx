@@ -6,6 +6,7 @@ import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 import ServiceSchema from "@/components/seo/ServiceSchema";
 import { createMetadata } from "@/lib/seo/metadata";
 import SiteHeader from "@/components/site/SiteHeader";
+import VisualProjectStrip, { type VisualStoryItem } from "@/components/site/VisualProjectStrip";
 const pageTitle =
   "Professional Curtain Track Installation UK";
 
@@ -19,6 +20,7 @@ export const metadata: Metadata = createMetadata({
   title: pageTitle,
   description: pageDescription,
   path: pagePath,
+  image: "/images/gallery/forest/cs-hotel.webp",
 
   keywords: [
     "professional curtain track installation",
@@ -79,6 +81,32 @@ const process = [
     number: "04",
     title: "Quotation and installation",
     text: "You receive the proposed scope, quotation and next available installation arrangements.",
+  },
+];
+
+const installationImages: VisualStoryItem[] = [
+  {
+    src: "/images/gallery/forest/cs-hotel.webp",
+    alt: "Full height curtains installed across wide glazing in a modern living room",
+    label: "Finished room",
+    title: "The track should support the curtains without distracting from the interior",
+    credit: "Product imagery courtesy of Forest Group",
+    sourceUrl: "https://www.forestgroup.com/uk/",
+  },
+  {
+    src: "/images/gallery/bay-windows/sanmar-curved-window-curtains.webp",
+    alt: "Sheer curtains fitted around a broad curved window",
+    label: "Shaped installation",
+    title: "Continuous movement around a curved window line",
+    credit: "Image source: Cortinas Sanmar",
+  },
+  {
+    src: "/images/gallery/bay-windows/bridges-bespoke-bay.webp",
+    alt: "Neutral curtains fitted around a traditional bay window",
+    label: "Residential fitting",
+    title: "Accurate positioning keeps the whole bay usable",
+    credit: "Image source: Bridges Interiors",
+    sourceUrl: "https://bridgesinteriors.com/curtains",
   },
 ];
 
@@ -162,8 +190,8 @@ export default function CurtainTrackInstallationPage() {
 
           <div className="tf-service-hero-media">
             <Image
-              src="/images/hero/trackfit-entry-poster.jpeg"
-              alt="Curtain track installation being completed"
+              src="/images/gallery/forest/cs-hotel.webp"
+              alt="Professionally fitted full height curtains in a modern room"
               width={900}
               height={1100}
               priority
@@ -204,6 +232,14 @@ export default function CurtainTrackInstallationPage() {
             </p>
           </div>
         </section>
+
+        <VisualProjectStrip
+          id="installation-gallery"
+          eyebrow="Installation inspiration"
+          title="See how the right track completes the room."
+          description="The installation route changes with the window shape, fixing surface, curtain weight and the way the finished curtains need to move and stack."
+          items={installationImages}
+        />
 
         <section
           id="installation-options"

@@ -6,6 +6,7 @@ import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 import ServiceSchema from "@/components/seo/ServiceSchema";
 import { createMetadata } from "@/lib/seo/metadata";
 import SiteHeader from "@/components/site/SiteHeader";
+import VisualProjectStrip, { type VisualStoryItem } from "@/components/site/VisualProjectStrip";
 const pageTitle =
   "Wave Curtain Track Installation UK";
 
@@ -19,6 +20,7 @@ export const metadata: Metadata = createMetadata({
   title: pageTitle,
   description: pageDescription,
   path: pagePath,
+  image: "/images/gallery/bay-windows/gardinskinner-white-wave-bay.webp",
   keywords: [
     "wave curtain track installation",
     "wave curtain track fitter",
@@ -143,6 +145,32 @@ const faqItems = [
   },
 ];
 
+const waveImages: VisualStoryItem[] = [
+  {
+    src: "/images/gallery/bay-windows/gardinskinner-white-wave-bay.webp",
+    alt: "White wave pleat curtains following a rounded bay window",
+    label: "Wave heading",
+    title: "Even folds following the shape of the window",
+    credit: "Image source: Gardinskinner.dk",
+    sourceUrl: "https://gardinskinner.dk/blogs/guides-gardinsyning-gardinskinner/bukket-gardinskinner-til-karnap",
+  },
+  {
+    src: "/images/gallery/bay-windows/gardinskinner-blue-wave-bay.webp",
+    alt: "Blue wave curtains hung from a shaped ceiling track",
+    label: "Ceiling fitted",
+    title: "A discreet track keeps the wave pattern visually clean",
+    credit: "Image source: Gardinskinner.dk",
+    sourceUrl: "https://gardinskinner.dk/blogs/guides-gardinsyning-gardinskinner/bukket-gardinskinner-til-karnap",
+  },
+  {
+    src: "/images/gallery/bay-windows/sanmar-curved-window-curtains.webp",
+    alt: "Soft full height curtains forming regular folds across a curved room",
+    label: "Full height finish",
+    title: "Wave curtains create a calm rhythm across large glazing",
+    credit: "Image source: Cortinas Sanmar",
+  },
+];
+
 export default function WaveCurtainTrackInstallationPage() {
   return (
     <>
@@ -221,8 +249,8 @@ export default function WaveCurtainTrackInstallationPage() {
 
           <div className="tf-service-hero-media">
             <Image
-              src="/images/hero/trackfit-entry-poster.jpeg"
-              alt="Installer preparing a wave curtain track"
+              src="/images/gallery/bay-windows/gardinskinner-white-wave-bay.webp"
+              alt="White wave pleat curtains following a curved ceiling track"
               width={900}
               height={1100}
               priority
@@ -262,6 +290,14 @@ export default function WaveCurtainTrackInstallationPage() {
             </p>
           </div>
         </section>
+
+        <VisualProjectStrip
+          id="wave-gallery"
+          eyebrow="Wave curtain inspiration"
+          title="Wave curtains depend on spacing as much as style."
+          description="The track position, runner spacing, curtain depth and stack-back allowance work together to create smooth, consistent folds."
+          items={waveImages}
+        />
 
         <section
           id="wave-guide"

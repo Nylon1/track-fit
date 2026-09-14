@@ -6,6 +6,7 @@ import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 import ServiceSchema from "@/components/seo/ServiceSchema";
 import { createMetadata } from "@/lib/seo/metadata";
 import SiteHeader from "@/components/site/SiteHeader";
+import VisualProjectStrip, { type VisualStoryItem } from "@/components/site/VisualProjectStrip";
 const pageTitle =
   "Bay Window Curtain Track Installation UK";
 
@@ -19,6 +20,7 @@ export const metadata: Metadata = createMetadata({
   title: pageTitle,
   description: pageDescription,
   path: pagePath,
+  image: "/images/gallery/bay-windows/bridges-bespoke-bay.webp",
   keywords: [
     "bay window curtain track installation",
     "bay window curtain track fitter",
@@ -143,6 +145,32 @@ const faqItems = [
   },
 ];
 
+const bayImages: VisualStoryItem[] = [
+  {
+    src: "/images/gallery/bay-windows/bridges-bespoke-bay.webp",
+    alt: "Neutral curtains fitted around a large curved residential bay",
+    label: "Curved bay",
+    title: "A shaped track preserves the proportions of the window",
+    credit: "Image source: Bridges Interiors",
+    sourceUrl: "https://bridgesinteriors.com/curtains",
+  },
+  {
+    src: "/images/gallery/bay-windows/eze-square-bay-curtains.webp",
+    alt: "Pinch pleat curtains arranged around a square bay window",
+    label: "Square bay",
+    title: "Corner movement and curtain stack planned together",
+    credit: "Image source: Ezecurtains",
+    sourceUrl: "https://ezecurtains.co.uk/best-curtain-tracks-for-bay-windows/bay-window-curtain-tracks/",
+  },
+  {
+    src: "/images/gallery/bay-windows/nustyle-pinch-pleat-bay.webp",
+    alt: "Pinch pleat curtains following an angled bay window",
+    label: "Angled bay",
+    title: "Accurate bends keep every section of the bay accessible",
+    credit: "Image source: Nu-Style Shutters",
+  },
+];
+
 export default function BayWindowCurtainTrackPage() {
   return (
     <>
@@ -222,8 +250,8 @@ export default function BayWindowCurtainTrackPage() {
 
           <div className="tf-service-hero-media">
             <Image
-              src="/images/hero/trackfit-entry-poster.jpeg"
-              alt="Specialist curtain track installation for a bay window"
+              src="/images/gallery/bay-windows/bridges-bespoke-bay.webp"
+              alt="Full length curtains fitted around a large curved bay window"
               width={900}
               height={1100}
               priority
@@ -264,6 +292,14 @@ export default function BayWindowCurtainTrackPage() {
             </p>
           </div>
         </section>
+
+        <VisualProjectStrip
+          id="bay-gallery"
+          eyebrow="Bay window inspiration"
+          title="Every bay needs its own track plan."
+          description="Curves, angles, corner movement, fixing support and curtain stack all need to be resolved before the track is shaped and installed."
+          items={bayImages}
+        />
 
         <section
           id="bay-guide"

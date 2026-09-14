@@ -6,6 +6,7 @@ import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 import ServiceSchema from "@/components/seo/ServiceSchema";
 import { createMetadata } from "@/lib/seo/metadata";
 import SiteHeader from "@/components/site/SiteHeader";
+import VisualProjectStrip, { type VisualStoryItem } from "@/components/site/VisualProjectStrip";
 const pageTitle =
   "Wall-Mounted Curtain Track Installation UK";
 
@@ -19,6 +20,7 @@ export const metadata: Metadata = createMetadata({
   title: pageTitle,
   description: pageDescription,
   path: pagePath,
+  image: "/images/gallery/forest/black-track-interior.webp",
   keywords: [
     "wall mounted curtain track installation",
     "wall curtain track fitter",
@@ -143,6 +145,32 @@ const faqItems = [
   },
 ];
 
+const wallImages: VisualStoryItem[] = [
+  {
+    src: "/images/gallery/forest/black-track-interior.webp",
+    alt: "Dark curtain track positioned neatly above a modern window",
+    label: "Wall fixed track",
+    title: "Track height and projection are planned around the window",
+    credit: "Product imagery courtesy of Forest Group",
+    sourceUrl: "https://www.forestgroup.com/uk/",
+  },
+  {
+    src: "/images/gallery/bay-windows/eze-square-bay-curtains.webp",
+    alt: "Curtains fitted above and around a square residential bay window",
+    label: "Residential fitting",
+    title: "Secure brackets keep the curtain clear of the window",
+    credit: "Image source: Ezecurtains",
+    sourceUrl: "https://ezecurtains.co.uk/best-curtain-tracks-for-bay-windows/bay-window-curtain-tracks/",
+  },
+  {
+    src: "/images/gallery/bay-windows/nustyle-pinch-pleat-bay.webp",
+    alt: "Pinch pleat curtains fitted above a wide angled bay window",
+    label: "Wide window",
+    title: "Bracket spacing is matched to the track run and curtain weight",
+    credit: "Image source: Nu-Style Shutters",
+  },
+];
+
 export default function WallMountedCurtainTrackPage() {
   return (
     <>
@@ -222,8 +250,8 @@ export default function WallMountedCurtainTrackPage() {
 
           <div className="tf-service-hero-media">
             <Image
-              src="/images/hero/trackfit-entry-poster.jpeg"
-              alt="Professional wall-mounted curtain track installation"
+              src="/images/gallery/forest/black-track-interior.webp"
+              alt="Modern curtain track installed neatly above a window"
               width={900}
               height={1100}
               priority
@@ -262,6 +290,14 @@ export default function WallMountedCurtainTrackPage() {
             </p>
           </div>
         </section>
+
+        <VisualProjectStrip
+          id="wall-gallery"
+          eyebrow="Wall track inspiration"
+          title="The correct projection keeps curtains moving freely."
+          description="Wall construction, bracket spacing, track height and clearance from handles, radiators and window reveals determine the finished result."
+          items={wallImages}
+        />
 
         <section
           id="wall-guide"

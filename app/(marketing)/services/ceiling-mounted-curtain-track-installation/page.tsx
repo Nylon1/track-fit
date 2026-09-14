@@ -6,6 +6,7 @@ import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 import ServiceSchema from "@/components/seo/ServiceSchema";
 import { createMetadata } from "@/lib/seo/metadata";
 import SiteHeader from "@/components/site/SiteHeader";
+import VisualProjectStrip, { type VisualStoryItem } from "@/components/site/VisualProjectStrip";
 const pageTitle =
   "Ceiling-Mounted Curtain Track Installation UK";
 
@@ -19,6 +20,7 @@ export const metadata: Metadata = createMetadata({
   title: pageTitle,
   description: pageDescription,
   path: pagePath,
+  image: "/images/gallery/bay-windows/etikk-ceiling-curved-track.webp",
   keywords: [
     "ceiling mounted curtain track installation",
     "ceiling curtain track fitter",
@@ -143,6 +145,31 @@ const faqItems = [
   },
 ];
 
+const ceilingImages: VisualStoryItem[] = [
+  {
+    src: "/images/gallery/bay-windows/etikk-ceiling-curved-track.webp",
+    alt: "White curved curtain track fixed directly to the ceiling above a bay",
+    label: "Direct ceiling fix",
+    title: "A close ceiling line creates a discreet architectural finish",
+    credit: "Image source: Etikk",
+  },
+  {
+    src: "/images/gallery/bay-windows/gardinskinner-white-wave-bay.webp",
+    alt: "Full height curtains suspended from a curved ceiling track",
+    label: "Full height curtains",
+    title: "Ceiling mounting lets the curtains begin at the top of the room",
+    credit: "Image source: Gardinskinner.dk",
+    sourceUrl: "https://gardinskinner.dk/blogs/guides-gardinsyning-gardinskinner/bukket-gardinskinner-til-karnap",
+  },
+  {
+    src: "/images/gallery/bay-windows/gordon-smith-curved-track.webp",
+    alt: "Curved white curtain track mounted around a ceiling corner",
+    label: "Curved track detail",
+    title: "Support and fixing positions matter throughout every bend",
+    credit: "Image source: Gordon Smith Malvern",
+  },
+];
+
 export default function CeilingMountedCurtainTrackPage() {
   return (
     <>
@@ -222,8 +249,8 @@ export default function CeilingMountedCurtainTrackPage() {
 
           <div className="tf-service-hero-media">
             <Image
-              src="/images/hero/trackfit-entry-poster.jpeg"
-              alt="Professional ceiling-mounted curtain track installation"
+              src="/images/gallery/bay-windows/etikk-ceiling-curved-track.webp"
+              alt="Curved curtain track installed directly against the ceiling"
               width={900}
               height={1100}
               priority
@@ -262,6 +289,14 @@ export default function CeilingMountedCurtainTrackPage() {
             </p>
           </div>
         </section>
+
+        <VisualProjectStrip
+          id="ceiling-gallery"
+          eyebrow="Ceiling track inspiration"
+          title="A clean finish starts with secure support above."
+          description="Ceiling construction, fixing positions, curtain load and projection must all be checked before a ceiling-mounted system is installed."
+          items={ceilingImages}
+        />
 
         <section
           id="ceiling-guide"
