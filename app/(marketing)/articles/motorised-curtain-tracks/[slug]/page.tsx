@@ -34,7 +34,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 const articleDetails: Record<string, { intro: string; sections: { title: string; text: string }[]; related: string[] }> = {
-  "how-to-choose-a-motorised-curtain-track": { intro: "A reliable motorised curtain system starts with the curtain and room—not the motor name. Work through weight, track route, power, controls and fixing before choosing hardware.", sections: [
+  "how-to-choose-a-motorised-curtain-track": { intro: "A reliable motorised curtain system starts with the curtain and room, not the motor name. Work through weight, track route, power, controls and fixing before choosing hardware.", sections: [
     { title: "Start with the finished curtain", text: "Confirm track width, finished drop, fullness, face-fabric GSM, lining, interlining and heading. The motor moves the complete finished curtain, not just the face fabric." },
     { title: "Map the track route", text: "Record overall length, one-way or centre opening, stack position and every bend. TrackFit uses a preliminary 10% additional motor-load allowance per bend." },
     { title: "Choose power and controls", text: "Decide whether the project needs a wired motor, rechargeable battery, remote, app, voice control, home automation or BMS integration." },

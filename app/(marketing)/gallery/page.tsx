@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 
 import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
-import SiteFooter from "@/components/site/SiteFooter";
 import SiteHeader from "@/components/site/SiteHeader";
 import { galleryImages } from "@/lib/gallery/data";
 import { createMetadata } from "@/lib/seo/metadata";
@@ -129,8 +128,6 @@ export default function GalleryPage() {
           </div>
         </section>
       </main>
-
-      <SiteFooter />
     </>
   );
 }

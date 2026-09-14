@@ -22,8 +22,9 @@ export default function PricingPreview() {
             <p className="text-base leading-7 text-black/62">
               These ranges help you decide whether TrackFit is the right fit. Your written quote is based on measurements, photographs, curtain weight, fixing conditions and access.
             </p>
-            <Link href="/pricing" className="mt-6 inline-flex min-h-12 items-center rounded-full bg-[#111411] px-6 font-bold text-white transition hover:-translate-y-0.5 hover:bg-[#263020]">
-              View the complete pricing guide →
+            <Link href="/pricing" className="mt-6 inline-flex min-h-12 items-center gap-3 rounded-full border border-[#6E9300]/30 bg-[#B8F23D] px-6 font-bold text-[#0B0E0C] shadow-[0_12px_32px_rgba(88,118,0,0.18)] transition hover:-translate-y-0.5 hover:bg-[#C8FF52] hover:shadow-[0_16px_40px_rgba(88,118,0,0.24)]">
+              <span>View the complete pricing guide</span>
+              <span aria-hidden="true">→</span>
             </Link>
           </div>
         </div>
@@ -47,4 +48,3 @@ export default function PricingPreview() {
     </section>
   );
 }
-

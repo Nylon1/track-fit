@@ -61,6 +61,18 @@
   }
 }
 
+@keyframes tf-page-arrival {
+  from {
+    opacity: 0.82;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .tf-fade-in {
   animation: tf-fade-in var(--tf-duration-cinematic)
     var(--tf-ease-entry) both;
@@ -83,6 +95,88 @@
   animation: tf-glider 1.4s ease-in-out infinite;
 }
 
+/* Shared premium motion for the public TrackFit experience. Classes are added
+   after hydration, so content remains fully visible if JavaScript is disabled. */
+.tf-scroll-progress {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 100;
+  height: 2px;
+  pointer-events: none;
+  background: linear-gradient(90deg, #8fc925, #c9ff56);
+  box-shadow: 0 0 18px rgba(184, 242, 61, 0.55);
+  transform: scaleX(var(--tf-scroll-progress, 0));
+  transform-origin: left center;
+  transition: transform 80ms linear;
+}
+
+.tf-marketing-surface main:not(.tf-welcome-page) {
+  animation: tf-page-arrival 520ms var(--tf-ease-entry) both;
+}
+
+.tf-marketing-surface main section[id] {
+  scroll-margin-top: 7.5rem;
+}
+
+.tf-scroll-reveal {
+  opacity: 0.001;
+  transform: translate3d(0, 30px, 0) scale(0.992);
+  transition:
+    opacity 820ms var(--tf-ease-entry) var(--tf-reveal-delay, 0ms),
+    transform 920ms var(--tf-ease-standard) var(--tf-reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+.tf-scroll-reveal:is(h1, h2) {
+  transform: translate3d(0, 38px, 0);
+  transition-duration: 900ms, 1050ms;
+}
+
+.tf-scroll-reveal.is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+  will-change: auto;
+}
+
+.tf-marketing-surface header {
+  transition:
+    background-color 300ms ease,
+    border-color 300ms ease,
+    box-shadow 300ms ease;
+}
+
+html[data-tf-scrolled] .tf-marketing-surface header {
+  border-color: rgba(184, 242, 61, 0.13);
+  background: rgba(7, 9, 8, 0.985);
+  box-shadow: 0 16px 55px rgba(0, 0, 0, 0.38);
+}
+
+.tf-marketing-surface main :is(article, figure, a.group) {
+  backface-visibility: hidden;
+  transition-property: transform, border-color, background-color, box-shadow;
+  transition-duration: 420ms;
+  transition-timing-function: var(--tf-ease-standard);
+}
+
+.tf-marketing-surface main :is(article, figure, a.group):has(img) {
+  isolation: isolate;
+  position: relative;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .tf-marketing-surface main :is(article, figure, a.group):has(img):hover {
+    box-shadow: 0 28px 80px rgba(0, 0, 0, 0.24);
+  }
+}
+
+.tf-marketing-surface :is(a, button) {
+  -webkit-tap-highlight-color: rgba(184, 242, 61, 0.16);
+}
+
+.tf-marketing-surface main :is(a, button):active {
+  transform: scale(0.985);
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -91,5 +185,16 @@
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+
+  .tf-scroll-progress {
+    display: none;
+  }
+
+  .tf-scroll-reveal,
+  .tf-scroll-reveal:is(h1, h2),
+  .tf-scroll-reveal.is-visible {
+    opacity: 1;
+    transform: none;
   }
 }
