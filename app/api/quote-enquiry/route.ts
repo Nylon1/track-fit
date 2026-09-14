@@ -88,9 +88,9 @@ function formatContactWindow(
   value?: ContactDetails["contactWindow"]
 ) {
   const labels = {
-    morning: "Morning (8am–12pm)",
-    afternoon: "Afternoon (12pm–5pm)",
-    evening: "Evening (5pm–7pm)",
+    morning: "Morning (8am to 12pm)",
+    afternoon: "Afternoon (12pm to 5pm)",
+    evening: "Evening (5pm to 7pm)",
     anytime: "Any time",
   };
 

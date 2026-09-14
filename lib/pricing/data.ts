@@ -17,7 +17,7 @@ export const pricingGuides: PricingGuide[] = [
     slug: "installation-only",
     eyebrow: "Installation only",
     title: "Single straight track",
-    price: "£145–£275",
+    price: "£145 to £275",
     unit: "typical project range",
     description:
       "Professional fitting of one suitable customer-supplied straight track in a standard-height room.",
@@ -34,7 +34,7 @@ export const pricingGuides: PricingGuide[] = [
     slug: "forest-ks-supply-fit",
     eyebrow: "Supply and installation",
     title: "Forest KS straight track",
-    price: "£295–£575",
+    price: "£295 to £575",
     unit: "typical project range",
     description:
       "A made-to-measure Forest KS aluminium track supplied, prepared and installed for light to medium curtains.",
@@ -52,7 +52,7 @@ export const pricingGuides: PricingGuide[] = [
     slug: "bay-curved",
     eyebrow: "Specialist shaping",
     title: "Bay or curved track",
-    price: "£475–£950",
+    price: "£475 to £950",
     unit: "typical project range",
     description:
       "A shaped manual aluminium track planned around the bay angles, fixing line and curtain stack.",
@@ -62,14 +62,14 @@ export const pricingGuides: PricingGuide[] = [
       "Installation and full travel test",
     ],
     bestFor: "Three-sided bays, continuous curves and corner windows.",
-    image: "/images/showcase/forest/ks-bay.webp",
-    imageAlt: "Forest KS curtain track shaped around a bay window",
+    image: "/images/gallery/forest/curved-office-divider.webp",
+    imageAlt: "Curved Forest curtain track creating a bright room divider",
   },
   {
     slug: "double-track",
     eyebrow: "Layered curtains",
     title: "Double track system",
-    price: "£575–£1,150",
+    price: "£575 to £1,150",
     unit: "typical project range",
     description:
       "Two coordinated tracks for independently operating voile and main curtains, with suitable spacing and projection.",
@@ -87,7 +87,7 @@ export const pricingGuides: PricingGuide[] = [
     slug: "high-wide",
     eyebrow: "Complex access",
     title: "High or extra-wide installation",
-    price: "£650–£1,800+",
+    price: "£650 to £1,800+",
     unit: "typical project range",
     description:
       "Specialist fitting for tall rooms, long spans, heavy curtains or projects requiring access equipment and additional support.",
@@ -104,7 +104,7 @@ export const pricingGuides: PricingGuide[] = [
     slug: "motorised",
     eyebrow: "Motorised system",
     title: "Forest motorised track",
-    price: "£1,450–£4,500+",
+    price: "£1,450 to £4,500+",
     unit: "typical project range",
     description:
       "A professionally specified Forest motor, track and control package supplied, installed and commissioned.",
@@ -137,4 +137,3 @@ export const priceFactors = [
     text: "Tall rooms, restricted sites, parking, permits and specialist access equipment affect labour and logistics.",
   },
 ];
-

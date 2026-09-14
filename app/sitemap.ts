@@ -15,6 +15,7 @@ const routes = [
   { path: "/", priority: 1, changeFrequency: "weekly" as const },
   { path: "/services", priority: 0.9, changeFrequency: "weekly" as const },
   { path: "/pricing", priority: 0.96, changeFrequency: "monthly" as const },
+  { path: "/gallery", priority: 0.94, changeFrequency: "monthly" as const },
   { path: "/about", priority: 0.65, changeFrequency: "monthly" as const },
   { path: "/contact", priority: 0.7, changeFrequency: "monthly" as const },
   { path: "/guides", priority: 0.91, changeFrequency: "weekly" as const },

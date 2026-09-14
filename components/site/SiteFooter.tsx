@@ -34,6 +34,10 @@ const serviceLinks = [
 
 const resourceLinks = [
   {
+    label: "Gallery",
+    href: "/gallery",
+  },
+  {
     label: "Pricing Guide",
     href: "/pricing",
   },

@@ -34,6 +34,11 @@ const serviceNavigation = [
 
 const resourceNavigation = [
   {
+    label: "Gallery",
+    href: "/gallery",
+    description: "Tracks and curtains in finished settings",
+  },
+  {
     label: "Pricing Guide",
     href: "/pricing",
     description: "Typical project ranges before you enquire",
@@ -193,6 +198,13 @@ export default function SiteHeader() {
           </Link>
 
           <Link
+            href="/gallery"
+            className="whitespace-nowrap text-sm font-semibold text-white/75 transition hover:text-[#B8F23D]"
+          >
+            Gallery
+          </Link>
+
+          <Link
             href="/motorised-curtain-tracks"
             className="whitespace-nowrap text-sm font-semibold text-white/75 transition hover:text-[#B8F23D]"
           >
@@ -293,6 +305,11 @@ export default function SiteHeader() {
 
             <Link href="/pricing" onClick={closeMenu} className="flex min-h-13 items-center justify-between rounded-[16px] px-4 py-3 font-semibold text-white transition hover:bg-white/[0.05]">
               Pricing guide
+              <span aria-hidden="true" className="text-white/35">→</span>
+            </Link>
+
+            <Link href="/gallery" onClick={closeMenu} className="flex min-h-13 items-center justify-between rounded-[16px] px-4 py-3 font-semibold text-white transition hover:bg-white/[0.05]">
+              Gallery
               <span aria-hidden="true" className="text-white/35">→</span>
             </Link>
 

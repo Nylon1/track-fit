@@ -162,6 +162,10 @@ export default function PostcodeCard({
 </button>
 
         <div className="tf-home-secondary-links">
+          <Link href="/gallery" className="tf-home-learn-more tf-home-gallery-link">
+            Explore the gallery
+            <span aria-hidden="true">→</span>
+          </Link>
           <Link href="/pricing" className="tf-home-learn-more">
             View guide prices
             <span aria-hidden="true">→</span>
