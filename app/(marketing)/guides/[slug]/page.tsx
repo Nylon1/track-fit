@@ -174,9 +174,11 @@ export default async function GuidePage({ params }: PageProps) {
             <div className="mt-12">
               <GuideHeroVisual
                 title={guide.title}
-                image={guide.heroImage || visual.src}
+                image={visual.src}
+                alt={visual.alt}
+                fit={visual.fit}
               />
-              <p className="mt-3 text-xs text-white/55">Design reference{visual.credit ? ` · ${visual.credit}` : " · Curtain and track inspiration"}. <Link href="/gallery" className="underline underline-offset-4">View image sources in the gallery</Link></p>
+              <p className="mt-3 text-xs leading-6 text-white/55">Illustrative design reference. {visual.sourceUrl ? <a href={visual.sourceUrl} target="_blank" rel="noreferrer" className="underline underline-offset-4">Image: {visual.credit || "Original source"}</a> : <Link href="/gallery" className="underline underline-offset-4">View our inspiration gallery</Link>}</p>
             </div>
           </div>
         </header>

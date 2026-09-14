@@ -3,21 +3,25 @@ import Image from "next/image";
 type GuideHeroVisualProps = {
   title: string;
   image?: string;
+  alt?: string;
+  fit?: "contain" | "cover";
 };
 
 export function GuideHeroVisual({
   title,
   image,
+  alt,
+  fit,
 }: GuideHeroVisualProps) {
   if (image) {
     return (
-      <div className="relative aspect-[16/8] overflow-hidden rounded-[32px] border border-white/10">
+      <div className={`relative aspect-[16/8] overflow-hidden rounded-[32px] border border-white/10 ${fit === "contain" ? "bg-[#E9E8E3]" : ""}`}>
         <Image
           src={image}
-          alt={title}
+          alt={alt || title}
           fill
           priority
-          className="object-cover"
+          className={fit === "contain" ? "object-contain p-8" : "object-cover"}
           sizes="(min-width: 1280px) 1100px, 100vw"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#080A09]/60 via-transparent to-transparent" />
