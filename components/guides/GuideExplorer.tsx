@@ -40,7 +40,14 @@ export function GuideExplorer({
   }, [category, guides, query]);
 
   return (
-    <section id="all-guides" className="scroll-mt-24">
+    <section data-no-reveal id="all-guides" className="scroll-mt-24">
+      <div className="mb-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-4" aria-label="Guide subjects">
+        {categories.map((item, index) => <button key={item.slug} type="button" aria-pressed={category === item.slug} onClick={() => { setCategory(category === item.slug ? "all" : item.slug); setQuery(""); }} className={`rounded-2xl border p-5 text-left transition-colors ${category === item.slug ? "border-[#B8F23D] bg-[#B8F23D]/10" : "border-white/15 bg-white/[0.03] hover:bg-white/10"}`}>
+          <span className="text-xs font-bold text-[#B8F23D]">0{index + 1} · {guides.filter(g => g.category === item.slug).length} guides</span>
+          <strong className="mt-3 block text-lg">{item.title}</strong>
+          <span className="mt-2 block text-sm leading-6 text-white/60">{item.description}</span>
+        </button>)}
+      </div>
       <div className="rounded-[30px] border border-white/10 bg-white/[0.035] p-5 sm:p-7">
         <label
           htmlFor="guide-search"
@@ -81,7 +88,7 @@ export function GuideExplorer({
       </div>
 
       {filteredGuides.length ? (
-        <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+        <div key={category} className="tf-gallery-grid mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
           {filteredGuides.map((guide) => (
             <div className="relative" key={guide.slug}>
               <GuideCard guide={guide} />

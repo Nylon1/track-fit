@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import Image from "next/image";
+import { TrackPlanningVisual } from "@/components/guides/TrackPlanningVisual";
 import Link from "next/link";
 import { GuideCTA } from "@/components/guides/GuideCTA";
 import { GuideExplorer } from "@/components/guides/GuideExplorer";
@@ -18,8 +20,10 @@ export default function GuidesPage() {
     <>
       <SiteHeader />
     <main className="min-h-screen bg-[#080A09] text-[#F4F1E8]">
-      <section className="border-b border-white/10">
-        <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:px-10 lg:py-28">
+      <section className="relative isolate overflow-hidden border-b border-white/10">
+        <Image src="/images/gallery/bay-windows/bridges-bespoke-bay.webp" alt="Full length curtains following a bright curved bay window" fill priority sizes="100vw" className="object-cover" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#080A09]/95 via-[#080A09]/80 to-[#080A09]/35" />
+        <div className="relative mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:px-10 lg:py-28">
           <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#B8F23D]">
             TrackFit knowledge centre
           </p>
@@ -50,44 +54,10 @@ export default function GuidesPage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:px-10 lg:py-20">
-        <div className="mb-8 max-w-3xl">
-          <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#B8F23D]">
-            Browse by subject
-          </p>
-          <h2 className="mt-3 text-3xl font-semibold sm:text-4xl">
-            Start with the problem you are trying to solve
-          </h2>
-        </div>
-
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {guideCategories.map((category) => {
-            const count = guides.filter(
-              (guide) => guide.category === category.slug,
-            ).length;
-
-            return (
-              <button
-                key={category.slug}
-                type="button"
-                onClick={undefined}
-                className="cursor-default rounded-[26px] border border-white/10 bg-white/[0.035] p-6 text-left"
-              >
-                <div className="flex items-start justify-between gap-5">
-                  <h3 className="text-xl font-semibold">{category.title}</h3>
-                  <span className="rounded-full bg-[#B8F23D]/15 px-3 py-1 text-xs font-semibold text-[#B8F23D]">
-                    {count}
-                  </span>
-                </div>
-                <p className="mt-3 leading-7 text-[#C8C8C1]">
-                  {category.description}
-                </p>
-              </button>
-            );
-          })}
-        </div>
+      <section className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:px-10">
+        <TrackPlanningVisual />
+        <div className="mb-8 mt-16"><p className="text-xs font-bold uppercase tracking-[0.2em] text-[#B8F23D]">Your guide library</p><h2 className="mt-4 text-4xl font-semibold">Find the answer for your room.</h2></div>
       </section>
-
       <section className="mx-auto max-w-7xl px-5 pb-20 sm:px-8 lg:px-10 lg:pb-28">
         <GuideExplorer guides={guides} categories={guideCategories} />
       </section>

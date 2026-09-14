@@ -1,3 +1,5 @@
+import { getGuideVisual } from "@/lib/guides/visuals";
+import { TrackPlanningVisual } from "@/components/guides/TrackPlanningVisual";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -47,6 +49,7 @@ export default async function GuidePage({ params }: PageProps) {
 
   if (!guide) notFound();
 
+  const visual = getGuideVisual(guide);
   const relatedGuides = getRelatedGuides(guide.relatedGuides);
 
   const articleSchema = {
@@ -171,14 +174,15 @@ export default async function GuidePage({ params }: PageProps) {
             <div className="mt-12">
               <GuideHeroVisual
                 title={guide.title}
-                image={guide.heroImage}
+                image={guide.heroImage || visual.src}
               />
+              <p className="mt-3 text-xs text-white/55">Design reference{visual.credit ? ` · ${visual.credit}` : " · Curtain and track inspiration"}. <Link href="/gallery" className="underline underline-offset-4">View image sources in the gallery</Link></p>
             </div>
           </div>
         </header>
 
         <div className="mx-auto grid max-w-7xl gap-12 px-5 py-14 sm:px-8 lg:grid-cols-[240px_minmax(0,1fr)] lg:px-10 lg:py-20">
-          <aside className="hidden lg:block">
+          <aside className="block">
             <div className="sticky top-28">
               <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#B8F23D]">
                 In this guide
@@ -221,13 +225,15 @@ export default async function GuidePage({ params }: PageProps) {
               </InstallerInsight>
             </div>
 
+            {["choosing", "measuring", "windows", "installation"].includes(guide.category) && <div className="mt-10"><TrackPlanningVisual /></div>}
             <div className="mt-14 space-y-14">
-              {guide.sections.map((section) => (
+              {guide.sections.map((section, index) => (
                 <section
                   key={section.id}
                   id={section.id}
-                  className="scroll-mt-28"
+                  className="scroll-mt-28 border-t border-white/10 pt-8"
                 >
+                  <p className="mb-3 text-xs font-bold tracking-[0.2em] text-[#B8F23D]">SECTION {String(index + 1).padStart(2, "0")}</p>
                   <h2 className="text-3xl font-semibold tracking-[-0.025em] sm:text-4xl">
                     {section.title}
                   </h2>
