@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { useMemo, useState } from "react";
@@ -13,6 +14,8 @@ type Service = {
   category: Category;
   label: string;
   icon: string;
+  image: string;
+  alt: string;
   featured?: boolean;
 };
 
@@ -27,21 +30,21 @@ const categories: { id: Category; label: string; count: string }[] = [
 ];
 
 const services: Service[] = [
-  { title: "Residential Curtain Track Installation", description: "Precision fitting for bedrooms, living rooms, patio doors, apartments and whole-home projects.", href: "/services/residential-curtain-track-installation", category: "residential", label: "Home", icon: "home", featured: true },
-  { title: "Curtain Track Installation", description: "Professional fitting for straight, shaped, ceiling-mounted and wall-mounted systems.", href: "/services/curtain-track-installation", category: "residential", label: "Core", icon: "track" },
-  { title: "Ceiling-Mounted Tracks", description: "Clean ceiling-fixed installations planned around structure, load, access and clearance.", href: "/services/ceiling-mounted-curtain-track-installation", category: "residential", label: "Ceiling", icon: "ceiling" },
-  { title: "Wall-Mounted Tracks", description: "Correct projection, bracket spacing and secure fixing for wall-mounted curtain tracks.", href: "/services/wall-mounted-curtain-track-installation", category: "residential", label: "Wall", icon: "wall" },
-  { title: "Bay Window Curtain Tracks", description: "Measuring, bending and fitting for angled, curved, square and unusual bay windows.", href: "/services/bay-window-curtain-track-installation", category: "specialist", label: "Shaped", icon: "bay", featured: true },
-  { title: "Wave Curtain Track Installation", description: "Track positioning and carrier spacing for smooth, consistent wave curtain folds.", href: "/services/wave-curtain-track-installation", category: "specialist", label: "Wave", icon: "wave" },
-  { title: "Double Curtain Track Installation", description: "Layered systems for voiles, blackout curtains and decorative curtains with planned spacing.", href: "/services/double-curtain-tracks", category: "specialist", label: "Layered", icon: "double" },
-  { title: "Motorised Curtain Track Installation", description: "Battery, mains and smart-home curtain systems with motor, controls and track planning.", href: "/motorised-curtain-tracks", category: "motorised", label: "Smart", icon: "motor", featured: true },
-  { title: "Commercial Curtain Track Installation", description: "Hotels, offices, developers, landlords and multi-room contract installations.", href: "/services/commercial-curtain-track-installation", category: "commercial", label: "Contract", icon: "building", featured: true },
-  { title: "Healthcare Curtain Track Installation", description: "Privacy, separation and medical curtain-track systems for care environments.", href: "/services/healthcare-curtain-track-installation", category: "healthcare", label: "Clinical", icon: "health", featured: true },
-  { title: "Planning Tools", description: "Measure track length, projection, bracket positions, bay layouts and double-track spacing.", href: "/tools", category: "resources", label: "Tools", icon: "calculator" },
-  { title: "Track Brands", description: "Explore Forest Group, Silent Gliss, Goelst and individual track-system guides.", href: "/brands", category: "resources", label: "Brands", icon: "brand" },
-  { title: "Trade Centre", description: "Support for curtain makers, designers, contractors, developers and facilities teams.", href: "/trade", category: "resources", label: "Trade", icon: "trade" },
-  { title: "Areas We Cover", description: "Find TrackFit service coverage across cities and regions throughout England.", href: "/areas", category: "resources", label: "Areas", icon: "pin" },
-  { title: "Case Studies", description: "See completed-project knowledge across different rooms, systems and locations.", href: "/case-studies", category: "resources", label: "Projects", icon: "case" },
+  { title: "Residential Curtain Track Installation", description: "Precision fitting for bedrooms, living rooms, patio doors, apartments and whole-home projects.", href: "/services/residential-curtain-track-installation", category: "residential", label: "Home", icon: "home", image: "/images/gallery/bay-windows/bridges-bespoke-bay.webp", alt: "Full length curtains fitted around a bright residential bay window", featured: true },
+  { title: "Curtain Track Installation", description: "Professional fitting for straight, shaped, ceiling-mounted and wall-mounted systems.", href: "/services/curtain-track-installation", category: "residential", label: "Core", icon: "track", image: "/images/gallery/bay-windows/sanmar-curved-window-curtains.webp", alt: "Full height curtains installed across a curved room window" },
+  { title: "Ceiling-Mounted Tracks", description: "Clean ceiling-fixed installations planned around structure, load, access and clearance.", href: "/services/ceiling-mounted-curtain-track-installation", category: "residential", label: "Ceiling", icon: "ceiling", image: "/images/gallery/bay-windows/etikk-ceiling-curved-track.webp", alt: "Curved white curtain track fixed directly to a ceiling" },
+  { title: "Wall-Mounted Tracks", description: "Correct projection, bracket spacing and secure fixing for wall-mounted curtain tracks.", href: "/services/wall-mounted-curtain-track-installation", category: "residential", label: "Wall", icon: "wall", image: "/images/gallery/forest/black-track-interior.webp", alt: "Dark curtain track installed neatly above a contemporary window" },
+  { title: "Bay Window Curtain Tracks", description: "Measuring, bending and fitting for angled, curved, square and unusual bay windows.", href: "/services/bay-window-curtain-track-installation", category: "specialist", label: "Shaped", icon: "bay", image: "/images/gallery/bay-windows/eze-square-bay-curtains.webp", alt: "Curtains fitted around an angled square bay window", featured: true },
+  { title: "Wave Curtain Track Installation", description: "Track positioning and carrier spacing for smooth, consistent wave curtain folds.", href: "/services/wave-curtain-track-installation", category: "specialist", label: "Wave", icon: "wave", image: "/images/gallery/bay-windows/gardinskinner-white-wave-bay.webp", alt: "White wave curtains following a curved ceiling track" },
+  { title: "Double Curtain Track Installation", description: "Layered systems for voiles, blackout curtains and decorative curtains with planned spacing.", href: "/services/double-curtain-tracks", category: "specialist", label: "Layered", icon: "double", image: "/images/gallery/forest/mcs-hotel.webp", alt: "Layered sheer and main curtains installed in a refined room" },
+  { title: "Motorised Curtain Track Installation", description: "Battery, mains and smart-home curtain systems with motor, controls and track planning.", href: "/motorised-curtain-tracks", category: "motorised", label: "Smart", icon: "motor", image: "/images/gallery/forest/shuttle-hotel.webp", alt: "Motorised curtain system controlled from a modern living room", featured: true },
+  { title: "Commercial Curtain Track Installation", description: "Hotels, offices, developers, landlords and multi-room contract installations.", href: "/services/commercial-curtain-track-installation", category: "commercial", label: "Contract", icon: "building", image: "/images/showcase/forest/office-curtains.webp", alt: "Full height curtain system creating flexible areas in a commercial interior", featured: true },
+  { title: "Healthcare Curtain Track Installation", description: "Privacy, separation and medical curtain-track systems for care environments.", href: "/services/healthcare-curtain-track-installation", category: "healthcare", label: "Clinical", icon: "health", image: "/images/gallery/forest/acoustic-panel-track.webp", alt: "Ceiling track and curtain panels used to divide an interior space", featured: true },
+  { title: "Planning Tools", description: "Measure track length, projection, bracket positions, bay layouts and double-track spacing.", href: "/tools", category: "resources", label: "Tools", icon: "calculator", image: "/images/gallery/bay-windows/gordon-smith-curved-track.webp", alt: "Close view of a curved curtain track ready for accurate planning" },
+  { title: "Track Brands", description: "Explore Forest Group, Silent Gliss, Goelst and individual track-system guides.", href: "/brands", category: "resources", label: "Brands", icon: "brand", image: "/images/gallery/forest/cs-black-track.webp", alt: "Forest Group black curtain track system and component detail" },
+  { title: "Trade Centre", description: "Support for curtain makers, designers, contractors, developers and facilities teams.", href: "/trade", category: "resources", label: "Trade", icon: "trade", image: "/images/gallery/forest/curved-office-divider.webp", alt: "Curved track and curtain divider installed in a commercial project" },
+  { title: "Areas We Cover", description: "Find TrackFit service coverage across cities and regions throughout England.", href: "/areas", category: "resources", label: "Areas", icon: "pin", image: "/images/gallery/bay-windows/nustyle-pinch-pleat-bay.webp", alt: "Pinch pleat curtains fitted around a residential bay window" },
+  { title: "Case Studies", description: "See completed-project knowledge across different rooms, systems and locations.", href: "/case-studies", category: "resources", label: "Projects", icon: "case", image: "/images/gallery/bay-windows/silent-gliss-bay-curtains.webp", alt: "Completed curved bay curtain installation in a light interior" },
 ];
 
 const iconPaths: Record<string, React.ReactNode> = {
@@ -134,10 +137,21 @@ export default function ServicesExperience() {
 
         <motion.div layout className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
           <AnimatePresence mode="popLayout">{filtered.map((service, index) => <motion.div key={service.href} layout initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, scale: 0.96 }} transition={{ duration: 0.25, delay: index * 0.025 }}>
-            <Link href={service.href} className={`group relative flex min-h-[320px] h-full flex-col justify-between overflow-hidden rounded-[30px] border p-7 transition hover:-translate-y-1 ${service.featured ? "border-[#B8F23D]/25 bg-[#B8F23D]/[0.065]" : "border-white/10 bg-white/[0.03] hover:border-[#B8F23D]/30"}`}>
-              <div className="absolute -right-16 -top-16 h-40 w-40 rounded-full bg-[#B8F23D]/0 blur-3xl transition group-hover:bg-[#B8F23D]/10" />
-              <div className="relative"><div className="flex items-start justify-between"><div className="grid h-14 w-14 place-items-center rounded-2xl border border-[#B8F23D]/25 bg-[#B8F23D]/10 text-[#B8F23D] transition group-hover:scale-110 group-hover:rotate-2"><Icon name={service.icon} /></div><span className="rounded-full border border-white/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.14em] text-white/45">{service.label}</span></div><h3 className="mt-8 text-2xl font-semibold leading-tight">{service.title}</h3><p className="mt-4 leading-7 text-white/52">{service.description}</p></div>
-              <div className="relative mt-8 flex items-center justify-between font-semibold"><span className="transition group-hover:text-[#B8F23D]">Explore service</span><span className="grid h-10 w-10 place-items-center rounded-full border border-white/10 transition group-hover:translate-x-1 group-hover:border-[#B8F23D]/40 group-hover:text-[#B8F23D]">→</span></div>
+            <Link href={service.href} className={`group relative flex min-h-[480px] h-full flex-col overflow-hidden rounded-[30px] border transition hover:-translate-y-1 ${service.featured ? "border-[#B8F23D]/25 bg-[#B8F23D]/[0.065]" : "border-white/10 bg-white/[0.03] hover:border-[#B8F23D]/30"}`}>
+              <div className="relative h-52 overflow-hidden border-b border-white/10">
+                <Image src={service.image} alt={service.alt} fill sizes="(max-width: 767px) 100vw, (max-width: 1279px) 50vw, 33vw" className="object-cover transition duration-500 group-hover:scale-[1.035]" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0C0F0D]/80 via-transparent to-black/10" />
+                <div className="absolute inset-x-5 top-5 flex items-start justify-between">
+                  <div className="grid h-14 w-14 place-items-center rounded-2xl border border-[#B8F23D]/30 bg-[#0A0D0B]/75 text-[#B8F23D] backdrop-blur-xl transition group-hover:scale-110 group-hover:rotate-2"><Icon name={service.icon} /></div>
+                  <span className="rounded-full border border-white/20 bg-[#0A0D0B]/70 px-3 py-1 text-xs font-bold uppercase tracking-[0.14em] text-white/75 backdrop-blur-xl">{service.label}</span>
+                </div>
+              </div>
+
+              <div className="relative flex flex-1 flex-col p-7">
+                <h3 className="text-2xl font-semibold leading-tight">{service.title}</h3>
+                <p className="mt-4 leading-7 text-white/52">{service.description}</p>
+                <div className="mt-auto flex items-center justify-between pt-8 font-semibold"><span className="transition group-hover:text-[#B8F23D]">Explore service</span><span className="grid h-10 w-10 place-items-center rounded-full border border-white/10 transition group-hover:translate-x-1 group-hover:border-[#B8F23D]/40 group-hover:text-[#B8F23D]">→</span></div>
+              </div>
             </Link>
           </motion.div>)}</AnimatePresence>
         </motion.div>
