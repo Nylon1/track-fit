@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation";
 import SiteFooter from "@/components/site/SiteFooter";
 
 const hiddenFooterRoutes = [
-  "/",
   "/welcome",
   "/quote",
 ];
