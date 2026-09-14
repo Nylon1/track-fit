@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 
 import SiteHeader from "@/components/site/SiteHeader";
@@ -77,41 +78,57 @@ const rooms = [
     title: "Living rooms",
     description:
       "Straight, bay, ceiling-mounted and wall-mounted tracks for main reception spaces.",
+    image: "/images/gallery/bay-windows/bridges-bespoke-bay.webp",
+    alt: "Full length curtains fitted around a bright living room bay window",
   },
   {
     title: "Bedrooms",
     description:
       "Tracks for blackout curtains, full-height curtains, voiles and layered window treatments.",
+    image: "/images/gallery/forest/fes-hotel.webp",
+    alt: "Layered curtains and voiles fitted across a contemporary bedroom window",
   },
   {
     title: "Dining rooms",
     description:
       "Neat track fitting around feature windows, patio doors and formal room layouts.",
+    image: "/images/gallery/forest/design-series-hotel.webp",
+    alt: "Discreet curtain track fitted above wide glazing in a modern dining space",
   },
   {
     title: "Kitchens and extensions",
     description:
       "Installation around wide glazing, bifold doors, French doors and modern open-plan spaces.",
+    image: "/images/gallery/forest/cs-hotel.webp",
+    alt: "Curtains fitted beside wide glazed doors in a modern open-plan room",
   },
   {
     title: "Nurseries and children’s rooms",
     description:
       "Secure curtain-track fitting with practical positioning around furniture and windows.",
+    image: "/images/gallery/bay-windows/eze-square-bay-curtains.webp",
+    alt: "Warm full length curtains fitted safely around a square bay window",
   },
   {
     title: "Home offices",
     description:
       "Track systems for glare control, privacy and softer residential workspaces.",
+    image: "/images/gallery/bay-windows/sanmar-curved-window-curtains.webp",
+    alt: "Sheer curtains filtering daylight across a curved home office window",
   },
   {
     title: "Dressing rooms",
     description:
       "Tracks for windows, room dividers and selected wardrobe or storage screening applications.",
+    image: "/images/gallery/bay-windows/silent-gliss-bay-curtains.webp",
+    alt: "Lightweight curtains following a compact curved dressing room window",
   },
   {
     title: "Hallways and landings",
     description:
       "Installation for tall windows, stairwell glazing and difficult-access locations.",
+    image: "/images/gallery/bay-windows/etikk-ceiling-curved-track.webp",
+    alt: "Ceiling-mounted curved track installed above tall bay glazing",
   },
 ];
 
@@ -439,11 +456,20 @@ export default function ResidentialCurtainTrackPage() {
             <div className="tf-residential-room-grid">
               {rooms.map((room, index) => (
                 <article key={room.title}>
-                  <span>
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                  <h3>{room.title}</h3>
-                  <p>{room.description}</p>
+                  <Image
+                    src={room.image}
+                    alt={room.alt}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 950px) 50vw, 25vw"
+                  />
+
+                  <div className="tf-residential-room-content">
+                    <span>
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <h3>{room.title}</h3>
+                    <p>{room.description}</p>
+                  </div>
                 </article>
               ))}
             </div>

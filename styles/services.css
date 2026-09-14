@@ -1424,12 +1424,47 @@
 }
 
 .tf-residential-room-grid article {
-  min-height: 15rem;
-  padding-top: 1.3rem;
-  border-top: 1px solid var(--tf-border-strong);
+  position: relative;
+  min-height: 24rem;
+  overflow: hidden;
+  border: 1px solid var(--tf-border-soft);
+  border-radius: 1.35rem;
+  background: #101722;
+  isolation: isolate;
 }
 
-.tf-residential-room-grid article > span {
+.tf-residential-room-grid article::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(5, 10, 18, 0.02) 25%,
+      rgba(5, 10, 18, 0.92) 100%
+    );
+}
+
+.tf-residential-room-grid article > img {
+  z-index: -2;
+  object-fit: cover;
+  transition: transform 450ms ease;
+}
+
+.tf-residential-room-grid article:hover > img {
+  transform: scale(1.035);
+}
+
+.tf-residential-room-content {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1.5rem;
+}
+
+.tf-residential-room-content > span {
   color: var(--tf-lime);
   font-size: 0.68rem;
   font-weight: 750;
@@ -1437,17 +1472,17 @@
 }
 
 .tf-residential-room-grid h3 {
-  margin: 2rem 0 0;
+  margin: 0.65rem 0 0;
   font-family: var(--tf-font-display);
-  font-size: 1.25rem;
+  font-size: 1.4rem;
   letter-spacing: -0.035em;
 }
 
 .tf-residential-room-grid p {
-  margin: 0.8rem 0 0;
-  color: var(--tf-text-muted);
+  margin: 0.55rem 0 0;
+  color: rgba(255, 255, 255, 0.74);
   font-size: 0.84rem;
-  line-height: 1.7;
+  line-height: 1.6;
 }
 
 .tf-residential-window-grid {
@@ -1566,6 +1601,10 @@
 
   .tf-residential-room-grid {
     grid-template-columns: 1fr;
+  }
+
+  .tf-residential-room-grid article {
+    min-height: 22rem;
   }
 
   .tf-residential-window-grid article {
