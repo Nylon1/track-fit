@@ -2,6 +2,7 @@ export type GalleryImage = {
   src: string;
   alt: string;
   title: string;
+  credit?: string;
   category: "Residential" | "Bay and curved" | "Wave curtains" | "Motorised" | "Hospitality" | "Commercial" | "System detail";
   format?: "wide" | "tall" | "square";
 };
@@ -11,6 +12,22 @@ export const galleryImages: GalleryImage[] = [
     src: "/images/gallery/forest/curved-office-divider.webp",
     alt: "Curved ceiling curtain track creating a soft room divider in a bright office",
     title: "Curved room divider",
+    category: "Bay and curved",
+    format: "wide",
+  },
+  {
+    src: "/images/gallery/bay-windows/toby-osborn-bay-window.webp",
+    alt: "Traditional angled bay window framed by full length patterned curtains",
+    title: "Patterned curtains in a bedroom bay",
+    credit: "Photo by Toby Osborn on Unsplash",
+    category: "Bay and curved",
+    format: "wide",
+  },
+  {
+    src: "/images/gallery/bay-windows/phil-hearing-bay-curtains.webp",
+    alt: "Traditional projecting bay window with light curtains following the window shape",
+    title: "Curtains following a traditional bay",
+    credit: "Photo by Phil Hearing on Unsplash",
     category: "Bay and curved",
     format: "wide",
   },

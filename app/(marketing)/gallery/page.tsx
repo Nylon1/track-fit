@@ -70,7 +70,7 @@ export default function GalleryPage() {
                   <Image src="/images/gallery/forest/curved-office-divider.webp" alt="Curved curtain track room divider" fill priority sizes="(min-width: 1024px) 25vw, 45vw" className="object-cover" />
                 </div>
                 <div className="rounded-[24px] border border-[#B8F23D]/25 bg-[#B8F23D]/10 p-5">
-                  <strong className="text-3xl">26</strong>
+                  <strong className="text-3xl">{galleryImages.length}</strong>
                   <span className="mt-1 block text-sm text-white/55">ideas and system details</span>
                 </div>
               </div>
@@ -98,12 +98,13 @@ export default function GalleryPage() {
                   <figcaption className="absolute inset-x-0 bottom-0 p-5 text-white">
                     <span className="text-[10px] font-bold uppercase tracking-[0.16em] text-[#B8F23D]">{item.category}</span>
                     <strong className="mt-1 block text-base">{item.title}</strong>
+                    {item.credit ? <span className="mt-1 block text-[11px] text-white/65">{item.credit}</span> : null}
                   </figcaption>
                 </figure>
               ))}
             </div>
 
-            <p className="mt-6 text-sm leading-6 text-black/48">Inspiration and product imagery courtesy of Forest Group. TrackFit is an independent installation specialist.</p>
+            <p className="mt-6 text-sm leading-6 text-black/48">Forest Group product imagery and credited Unsplash inspiration photography are shown for design reference. TrackFit is an independent installation specialist.</p>
           </div>
         </section>
 
