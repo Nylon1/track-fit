@@ -98,13 +98,21 @@ export default function GalleryPage() {
                   <figcaption className="absolute inset-x-0 bottom-0 p-5 text-white">
                     <span className="text-[10px] font-bold uppercase tracking-[0.16em] text-[#B8F23D]">{item.category}</span>
                     <strong className="mt-1 block text-base">{item.title}</strong>
-                    {item.credit ? <span className="mt-1 block text-[11px] text-white/65">{item.credit}</span> : null}
+                    {item.credit ? (
+                      item.sourceUrl ? (
+                        <a href={item.sourceUrl} target="_blank" rel="noreferrer" className="mt-1 inline-block text-[11px] text-white/65 underline decoration-white/25 underline-offset-2 transition hover:text-white">
+                          {item.credit}
+                        </a>
+                      ) : (
+                        <span className="mt-1 block text-[11px] text-white/65">{item.credit}</span>
+                      )
+                    ) : null}
                   </figcaption>
                 </figure>
               ))}
             </div>
 
-            <p className="mt-6 text-sm leading-6 text-black/48">Forest Group product imagery and credited Unsplash inspiration photography are shown for design reference. TrackFit is an independent installation specialist.</p>
+            <p className="mt-6 text-sm leading-6 text-black/48">Manufacturer, supplier and interior specialist imagery is shown for design reference, with original source credits on each relevant image. TrackFit is an independent installation specialist.</p>
           </div>
         </section>
 
