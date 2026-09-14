@@ -5,6 +5,7 @@ import Link from "next/link";
 import SystemNavigator from "@/components/motorised/SystemNavigator";
 import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 import SiteHeader from "@/components/site/SiteHeader";
+import VisualProjectStrip, { type VisualStoryItem } from "@/components/site/VisualProjectStrip";
 import { motors, motorisedArticles } from "@/lib/motorised/data";
 import { createMetadata } from "@/lib/seo/metadata";
 import { absoluteUrl } from "@/lib/seo/site-config";
@@ -46,6 +47,33 @@ const faqs = [
   { question: "Does TrackFit install complete motorised systems?", answer: "TrackFit can assess, specify, supply, install and commission suitable motorised curtain-track systems after confirming the project conditions." },
 ];
 
+const motorisedSettingImages: VisualStoryItem[] = [
+  {
+    src: "/images/gallery/forest/shuttle-hotel.webp",
+    alt: "Motorised full height curtains installed in a contemporary hotel room",
+    label: "Installed setting",
+    title: "Motor and track concealed behind the finished curtain",
+    credit: "Product imagery courtesy of Forest Group",
+    sourceUrl: "https://www.forestgroup.com/uk/",
+  },
+  {
+    src: "/images/gallery/forest/voice-control-hotel.webp",
+    alt: "Smart controlled curtains in a hospitality bedroom",
+    label: "Smart control",
+    title: "Curtain movement connected to the room control strategy",
+    credit: "Product imagery courtesy of Forest Group",
+    sourceUrl: "https://www.forestgroup.com/uk/",
+  },
+  {
+    src: "/images/gallery/forest/mcs-hotel.webp",
+    alt: "Layered hotel curtains using a multi channel ceiling track",
+    label: "Layered system",
+    title: "Sheer and blackout layers coordinated as one installation",
+    credit: "Product imagery courtesy of Forest Group",
+    sourceUrl: "https://www.forestgroup.com/uk/",
+  },
+];
+
 export default function MotorisedCurtainTracksHub() {
   const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", mainEntity: faqs.map((faq) => ({ "@type": "Question", name: faq.question, acceptedAnswer: { "@type": "Answer", text: faq.answer } })) };
   const serviceSchema = { "@context": "https://schema.org", "@type": "Service", name: "Motorised curtain track supply and installation", serviceType: "Motorised curtain track installation", provider: { "@type": "Organization", name: "TrackFit", url: "https://curtaintrackfitters.com" }, areaServed: { "@type": "Country", name: "United Kingdom" }, url: absoluteUrl(pagePath), description: pageDescription, image: absoluteUrl(heroImage) };
@@ -75,6 +103,14 @@ export default function MotorisedCurtainTracksHub() {
         </section>
 
         <section id="system-navigator" className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:px-10 lg:py-24"><SystemNavigator /></section>
+
+        <VisualProjectStrip
+          id="motorised-settings"
+          eyebrow="Motorised in real rooms"
+          title="See the complete installation, not only the motor."
+          description="A successful motorised curtain system combines the track, moving load, curtain layers, power, controls and access for future servicing."
+          items={motorisedSettingImages}
+        />
 
         <section className="border-y border-white/10 bg-[#0E100F]"><div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:px-10 lg:py-24"><p className="text-xs font-bold uppercase tracking-[0.2em] text-[#B8F23D]">Explore the complete system</p><h2 className="mt-4 max-w-4xl text-4xl font-semibold tracking-[-0.04em] sm:text-5xl">Every major decision, connected.</h2><div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3">{routes.map(([title, href, text]) => <Link key={href} href={href} className="rounded-[28px] border border-white/10 bg-white/[0.035] p-6 transition hover:border-[#B8F23D]/35"><h3 className="text-2xl font-semibold">{title}</h3><p className="mt-4 leading-7 text-[#AAACA4]">{text}</p><span className="mt-7 inline-flex font-semibold text-[#B8F23D]">Open guide →</span></Link>)}</div></div></section>
 

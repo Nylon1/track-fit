@@ -4,6 +4,7 @@ import Link from "next/link";
 import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 import ServicesExperience from "@/components/services/ServicesExperience";
 import SiteHeader from "@/components/site/SiteHeader";
+import VisualProjectStrip, { type VisualStoryItem } from "@/components/site/VisualProjectStrip";
 import { createMetadata } from "@/lib/seo/metadata";
 import Image from "next/image";
 import PricingPreview from "@/components/pricing/PricingPreview";
@@ -16,6 +17,7 @@ export const metadata: Metadata = createMetadata({
   title: pageTitle,
   description: pageDescription,
   path: pagePath,
+  image: "/images/gallery/bay-windows/bridges-bespoke-bay.webp",
   keywords: [
     "curtain track installation services",
     "curtain track fitters UK",
@@ -33,6 +35,33 @@ const projectTypes = [
   ["Motorised", "Motors, controls, power planning, smart-home integration and specialist fitting."],
   ["Commercial", "Hotels, offices, developers, landlords and repeat multi-room installations."],
   ["Specialist", "Bay windows, wave systems, layered tracks and unusual fixing conditions."],
+];
+
+const serviceImages: VisualStoryItem[] = [
+  {
+    src: "/images/gallery/bay-windows/bridges-bespoke-bay.webp",
+    alt: "Full length curtains precisely fitted around a curved residential bay window",
+    label: "Residential",
+    title: "Shaped tracks that respect the window and the finished room",
+    credit: "Image source: Bridges Interiors",
+    sourceUrl: "https://bridgesinteriors.com/curtains",
+  },
+  {
+    src: "/images/showcase/forest/office-curtains.webp",
+    alt: "Full height curtains creating flexible zones in a commercial interior",
+    label: "Commercial",
+    title: "Track systems for flexible working and hospitality spaces",
+    credit: "Product imagery courtesy of Forest Group",
+    sourceUrl: "https://www.forestgroup.com/uk/",
+  },
+  {
+    src: "/images/gallery/forest/voice-control-hotel.webp",
+    alt: "Motorised curtains in a refined hotel room setting",
+    label: "Motorised",
+    title: "Quiet automated curtains planned as one complete system",
+    credit: "Product imagery courtesy of Forest Group",
+    sourceUrl: "https://www.forestgroup.com/uk/",
+  },
 ];
 
 export default function ServicesPage() {
@@ -115,6 +144,14 @@ export default function ServicesPage() {
             </div>
           </div>
         </section>
+
+        <VisualProjectStrip
+          id="service-projects"
+          eyebrow="Installation settings"
+          title="See the service before choosing the route."
+          description="Residential, commercial and motorised installations have different loads, fixing conditions and finishing requirements. These examples make those differences easier to recognise."
+          items={serviceImages}
+        />
 
         <PricingPreview />
 

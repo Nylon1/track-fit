@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import SiteHeader from "@/components/site/SiteHeader";
+import VisualProjectStrip, { type VisualStoryItem } from "@/components/site/VisualProjectStrip";
 import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 import ServiceSchema from "@/components/seo/ServiceSchema";
 import { createMetadata } from "@/lib/seo/metadata";
@@ -19,6 +20,7 @@ export const metadata: Metadata = createMetadata({
   title: pageTitle,
   description: pageDescription,
   path: pagePath,
+  image: "/images/gallery/bay-windows/bridges-bespoke-bay.webp",
   keywords: [
     "residential curtain track installation",
     "home curtain track fitter",
@@ -223,6 +225,33 @@ const faqItems = [
   },
 ];
 
+const residentialImages: VisualStoryItem[] = [
+  {
+    src: "/images/gallery/bay-windows/bridges-bespoke-bay.webp",
+    alt: "Neutral full length curtains fitted around a curved bay window",
+    label: "Curved bay",
+    title: "Curtains divided neatly across a generous curved bay",
+    credit: "Image source: Bridges Interiors",
+    sourceUrl: "https://bridgesinteriors.com/curtains",
+  },
+  {
+    src: "/images/gallery/bay-windows/gardinskinner-white-wave-bay.webp",
+    alt: "White wave curtains following a rounded bay on a ceiling mounted track",
+    label: "Wave curtains",
+    title: "A continuous wave heading following the window line",
+    credit: "Image source: Gardinskinner.dk",
+    sourceUrl: "https://gardinskinner.dk/blogs/guides-gardinsyning-gardinskinner/bukket-gardinskinner-til-karnap",
+  },
+  {
+    src: "/images/gallery/bay-windows/eze-square-bay-curtains.webp",
+    alt: "Pinch pleat curtains stacked at the sides of a square bay window",
+    label: "Square bay",
+    title: "Clear glazing with the curtain stack planned beyond the bay",
+    credit: "Image source: Ezecurtains",
+    sourceUrl: "https://ezecurtains.co.uk/best-curtain-tracks-for-bay-windows/bay-window-curtain-tracks/",
+  },
+];
+
 export default function ResidentialCurtainTrackPage() {
   return (
     <>
@@ -353,6 +382,14 @@ export default function ResidentialCurtainTrackPage() {
             </p>
           </div>
         </section>
+
+        <VisualProjectStrip
+          id="residential-inspiration"
+          eyebrow="Residential inspiration"
+          title="Different homes need different track solutions."
+          description="The strongest installations balance curtain stack, window shape, radiator clearance, heading style and the support available above the finished surface."
+          items={residentialImages}
+        />
 
         <section
           id="property-types"

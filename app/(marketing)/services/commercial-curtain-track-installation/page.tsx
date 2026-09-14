@@ -6,6 +6,7 @@ import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 import ServiceSchema from "@/components/seo/ServiceSchema";
 import { createMetadata } from "@/lib/seo/metadata";
 import SiteHeader from "@/components/site/SiteHeader";
+import VisualProjectStrip, { type VisualStoryItem } from "@/components/site/VisualProjectStrip";
 const pageTitle =
   "Commercial Curtain Track Installation UK";
 
@@ -19,6 +20,7 @@ export const metadata: Metadata = createMetadata({
   title: pageTitle,
   description: pageDescription,
   path: pagePath,
+  image: "/images/showcase/forest/office-curtains.webp",
   keywords: [
     "commercial curtain track installation",
     "commercial curtain track fitter",
@@ -156,6 +158,33 @@ const faqItems = [
   },
 ];
 
+const commercialImages: VisualStoryItem[] = [
+  {
+    src: "/images/showcase/forest/office-curtains.webp",
+    alt: "Curtains creating flexible zones in a contemporary commercial workspace",
+    label: "Workplace",
+    title: "Full height screening for adaptable commercial interiors",
+    credit: "Product imagery courtesy of Forest Group",
+    sourceUrl: "https://www.forestgroup.com/uk/",
+  },
+  {
+    src: "/images/showcase/forest/hotel-curtains.webp",
+    alt: "Layered curtains fitted in a hospitality dining and lounge setting",
+    label: "Hospitality",
+    title: "Layered curtains for privacy, atmosphere and light control",
+    credit: "Product imagery courtesy of Forest Group",
+    sourceUrl: "https://www.forestgroup.com/uk/",
+  },
+  {
+    src: "/images/gallery/forest/acoustic-panel-track.webp",
+    alt: "Curved ceiling track carrying acoustic curtain panels in a commercial space",
+    label: "Specialist",
+    title: "Curved track systems for acoustic and flexible separation",
+    credit: "Product imagery courtesy of Forest Group",
+    sourceUrl: "https://www.forestgroup.com/uk/",
+  },
+];
+
 export default function CommercialCurtainTrackPage() {
   return (
     <>
@@ -236,7 +265,7 @@ export default function CommercialCurtainTrackPage() {
 
           <div className="tf-service-hero-media">
             <Image
-              src="/images/hero/trackfit-entry-poster.jpeg"
+              src="/images/showcase/forest/office-curtains.webp"
               alt="Commercial curtain track installation"
               width={900}
               height={1100}
@@ -280,6 +309,14 @@ export default function CommercialCurtainTrackPage() {
             </p>
           </div>
         </section>
+
+        <VisualProjectStrip
+          id="commercial-settings"
+          eyebrow="Commercial settings"
+          title="Track systems should fit the way the space is used."
+          description="Hotels, offices and specialist interiors place different demands on track strength, curtain layers, acoustic performance, access and day-to-day operation."
+          items={commercialImages}
+        />
 
         <section
           id="commercial-sectors"
